@@ -9,7 +9,7 @@ create table personal_card
   parent_contact varchar,
   address        varchar not null,
   phone_number   varchar,
-  "e-mail"       varchar
+  mail       varchar
 );
 
 alter table personal_card
@@ -38,7 +38,7 @@ create table subject
   id           bigint  not null
     constraint subject_pk
       primary key,
-  subject_name varchar not null
+  name varchar not null
 );
 
 alter table subject
@@ -55,7 +55,7 @@ create table assessment
   session_id bigint  not null
     constraint performance_monitoring_session_id_fk
       references session,
-  assissment integer not null
+  mark integer not null
 );
 
 alter table assessment
@@ -111,7 +111,7 @@ create table lecturer
   name          varchar   not null,
   patronymic    varchar,
   phone_number  varchar,
-  "e-mail"      varchar,
+  mail      varchar,
   id            bigserial not null
     constraint lecturer_pk
       primary key,
