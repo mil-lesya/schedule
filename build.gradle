@@ -1,0 +1,8 @@
+group 'com.gmail.mileshko.lesya'
+version '1.0-SNAPSHOT'
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
