@@ -10,22 +10,18 @@ public class Auditory {
     @Column(name = "id")
     private Long id;
 
-    @JoinColumn(name = "subject_id")
-    private Subject subjectId;
+    @Column(name = "corps")
+    private  Integer corps;
 
-    @JoinColumn(name = "session_id")
-    private Session sessionId;
-
-    @Column(name = "mark")
-    private Integer mark;
+    @Column(name = "auditory_number")
+    private Long auditoryNumber;
 
     public Auditory() {
     }
 
-    public Auditory(Subject subjectId, Session sessionId, Integer mark) {
-        this.subjectId = subjectId;
-        this.sessionId = sessionId;
-        this.mark = mark;
+    public Auditory(Integer corps, Long auditoryNumber) {
+        this.corps = corps;
+        this.auditoryNumber = auditoryNumber;
     }
 
     public Long getId() {
@@ -36,27 +32,19 @@ public class Auditory {
         this.id = id;
     }
 
-    public Subject getSubjectId() {
-        return subjectId;
+    public Integer getCorps() {
+        return corps;
     }
 
-    public void setSubjectId(Subject subjectId) {
-        this.subjectId = subjectId;
+    public void setCorps(Integer corps) {
+        this.corps = corps;
     }
 
-    public Session getSessionId() {
-        return sessionId;
+    public Long getAuditoryNumber() {
+        return auditoryNumber;
     }
 
-    public void setSessionId(Session sessionId) {
-        this.sessionId = sessionId;
-    }
-
-    public Integer getMark() {
-        return mark;
-    }
-
-    public void setMark(Integer mark) {
-        this.mark = mark;
+    public void setAuditoryNumber(Long auditoryNumber) {
+        this.auditoryNumber = auditoryNumber;
     }
 }

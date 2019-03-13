@@ -10,14 +10,17 @@ public class Schedule {
     @Column(name = "id")
     private Long id;
 
+    @ManyToOne
     @JoinColumn(name = "subject_id")
-    private Subject subjectId;
+    private Subject subject;
 
+    @ManyToOne
     @JoinColumn(name = "auditory_id")
-    private Auditory auditoryId;
+    private Auditory auditory;
 
+    @ManyToOne
     @JoinColumn(name = "lecturer_id")
-    private Lecturer lecturerId;
+    private Lecturer lecturer;
 
     @Column(name = "class_number")
     private Integer classNumber;
@@ -31,10 +34,10 @@ public class Schedule {
     public Schedule() {
     }
 
-    public Schedule(Subject subjectId, Auditory auditoryId, Lecturer lecturerId, Integer classNumber, Integer periodicity, String week) {
-        this.subjectId = subjectId;
-        this.auditoryId = auditoryId;
-        this.lecturerId = lecturerId;
+    public Schedule(Subject subject, Auditory auditory, Lecturer lecturer, Integer classNumber, Integer periodicity, String week) {
+        this.subject = subject;
+        this.auditory = auditory;
+        this.lecturer = lecturer;
         this.classNumber = classNumber;
         this.periodicity = periodicity;
         this.week = week;
@@ -48,28 +51,28 @@ public class Schedule {
         this.id = id;
     }
 
-    public Subject getSubjectId() {
-        return subjectId;
+    public Subject getSubject() {
+        return subject;
     }
 
-    public void setSubjectId(Subject subjectId) {
-        this.subjectId = subjectId;
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
 
-    public Auditory getAuditoryId() {
-        return auditoryId;
+    public Auditory getAuditory() {
+        return auditory;
     }
 
-    public void setAuditoryId(Auditory auditoryId) {
-        this.auditoryId = auditoryId;
+    public void setAuditory(Auditory auditory) {
+        this.auditory = auditory;
     }
 
-    public Lecturer getLecturerId() {
-        return lecturerId;
+    public Lecturer getLecturer() {
+        return lecturer;
     }
 
-    public void setLecturerId(Lecturer lecturerId) {
-        this.lecturerId = lecturerId;
+    public void setLecturer(Lecturer lecturer) {
+        this.lecturer = lecturer;
     }
 
     public Integer getClassNumber() {

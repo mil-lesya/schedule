@@ -10,11 +10,13 @@ public class Attendance {
     @Column(name = "id")
     private Long id;
 
+    @OneToOne
     @JoinColumn(name = "student_id")
-    private Student studentId;
+    private Student student;
 
+    @OneToOne
     @JoinColumn(name = "class_id")
-    private Class classId;
+    private Class _class;
 
     @Column(name = "presence")
     private Boolean presence;
@@ -22,9 +24,9 @@ public class Attendance {
     public Attendance() {
     }
 
-    public Attendance(Student studentId, Class classId, Boolean presence) {
-        this.studentId = studentId;
-        this.classId = classId;
+    public Attendance(Student student, Class _class, Boolean presence) {
+        this.student = student;
+        this._class = _class;
         this.presence = presence;
     }
 
@@ -36,20 +38,20 @@ public class Attendance {
         this.id = id;
     }
 
-    public Student getStudentId() {
-        return studentId;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setStudentId(Student studentId) {
-        this.studentId = studentId;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
-    public Class getClassId() {
-        return classId;
+    public Class get_class() {
+        return _class;
     }
 
-    public void setClassId(Class classId) {
-        this.classId = classId;
+    public void set_class(Class _class) {
+        this._class = _class;
     }
 
     public Boolean getPresence() {

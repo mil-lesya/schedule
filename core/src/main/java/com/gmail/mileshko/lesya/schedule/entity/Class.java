@@ -1,6 +1,7 @@
 package com.gmail.mileshko.lesya.schedule.entity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -12,17 +13,18 @@ public class Class {
     private Long id;
 
     @Column(name = "date")
-    private Date date;
+    private LocalDate date;
 
+    @ManyToOne
     @JoinColumn(name = "schedule_id")
-    private Schedule scheduleId;
+    private Schedule schedule;
 
     public Class() {
     }
 
-    public Class(Date date, Schedule scheduleId) {
+    public Class(LocalDate date, Schedule schedule) {
         this.date = date;
-        this.scheduleId = scheduleId;
+        this.schedule = schedule;
     }
 
     public Long getId() {
@@ -33,19 +35,19 @@ public class Class {
         this.id = id;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public Schedule getScheduleId() {
-        return scheduleId;
+    public Schedule getSchedule() {
+        return schedule;
     }
 
-    public void setScheduleId(Schedule scheduleId) {
-        this.scheduleId = scheduleId;
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
     }
 }

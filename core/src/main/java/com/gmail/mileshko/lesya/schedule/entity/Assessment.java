@@ -10,9 +10,11 @@ public class Assessment {
     @Column(name = "id")
     private Long id;
 
+    @ManyToOne
     @JoinColumn(name = "subject_id")
     private Subject subject;
 
+    @ManyToOne
     @JoinColumn(name = "session_id")
     private Session session;
 

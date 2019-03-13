@@ -10,22 +10,25 @@ public class Student {
     @Column(name = "id")
     private Long id;
 
+    @OneToOne
     @JoinColumn(name = "gradebook_id")
-    private Gradebook gradebookId;
+    private Gradebook gradebook;
 
+    @ManyToOne
     @JoinColumn(name = "group_id")
-    private Group groupId;
+    private Group group;
 
+    @OneToOne
     @JoinColumn(name = "personal_card_id")
-    private PersonalCard personalCardId;
+    private PersonalCard personalCard;
 
     public Student() {
     }
 
-    public Student(Gradebook gradebookId, Group groupId, PersonalCard personalCardId) {
-        this.gradebookId = gradebookId;
-        this.groupId = groupId;
-        this.personalCardId = personalCardId;
+    public Student(Gradebook gradebook, Group group, PersonalCard personalCard) {
+        this.gradebook = gradebook;
+        this.group = group;
+        this.personalCard = personalCard;
     }
 
     public Long getId() {
@@ -36,27 +39,27 @@ public class Student {
         this.id = id;
     }
 
-    public Gradebook getGradebookId() {
-        return gradebookId;
+    public Gradebook getGradebook() {
+        return gradebook;
     }
 
-    public void setGradebookId(Gradebook gradebookId) {
-        this.gradebookId = gradebookId;
+    public void setGradebook(Gradebook gradebook) {
+        this.gradebook = gradebook;
     }
 
-    public Group getGroupId() {
-        return groupId;
+    public Group getGroup() {
+        return group;
     }
 
-    public void setGroupId(Group groupId) {
-        this.groupId = groupId;
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
-    public PersonalCard getPersonalCardId() {
-        return personalCardId;
+    public PersonalCard getPersonalCard() {
+        return personalCard;
     }
 
-    public void setPersonalCardId(PersonalCard personalCardId) {
-        this.personalCardId = personalCardId;
+    public void setPersonalCard(PersonalCard personalCard) {
+        this.personalCard = personalCard;
     }
 }

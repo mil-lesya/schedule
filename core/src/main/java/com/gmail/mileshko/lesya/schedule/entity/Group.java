@@ -1,6 +1,7 @@
 package com.gmail.mileshko.lesya.schedule.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "group")
@@ -16,20 +17,30 @@ public class Group {
     @Column(name = "course")
     private Integer course;
 
+    @OneToOne
     @JoinColumn(name = "headman_id")
-    private Student headmanId;
+    private Student headman;
 
+    @OneToOne
     @JoinColumn(name = "curator_id")
-    private Lecturer curatorId;
+    private Lecturer curator;
+
+    @ManyToMany
+    @JoinTable(
+            name = "group_schedule",
+            joinColumns = @JoinColumn(name = "group_id"),
+            inverseJoinColumns = @JoinColumn(name = "schedule_id")
+    )
+    private List<Schedule> scheduleList;
 
     public Group() {
     }
 
-    public Group(Integer groupNumber, Integer course, Student headmanId, Lecturer curatorId) {
+    public Group(Integer groupNumber, Integer course, Student headman, Lecturer curator) {
         this.groupNumber = groupNumber;
         this.course = course;
-        this.headmanId = headmanId;
-        this.curatorId = curatorId;
+        this.headman = headman;
+        this.curator = curator;
     }
 
     public Long getId() {
@@ -56,19 +67,27 @@ public class Group {
         this.course = course;
     }
 
-    public Student getHeadmanId() {
-        return headmanId;
+    public Student getHeadman() {
+        return headman;
     }
 
-    public void setHeadmanId(Student headmanId) {
-        this.headmanId = headmanId;
+    public void setHeadman(Student headman) {
+        this.headman = headman;
     }
 
-    public Lecturer getCuratorId() {
-        return curatorId;
+    public Lecturer getCurator() {
+        return curator;
     }
 
-    public void setCuratorId(Lecturer curatorId) {
-        this.curatorId = curatorId;
+    public List<Schedule> getScheduleList() {
+        return scheduleList;
+    }
+
+    public void setScheduleList(List<Schedule> scheduleList) {
+        this.scheduleList = scheduleList;
+    }
+
+    public void setCurator(Lecturer curator) {
+        this.curator = curator;
     }
 }

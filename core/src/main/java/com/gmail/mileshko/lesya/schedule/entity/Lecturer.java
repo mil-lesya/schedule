@@ -10,8 +10,9 @@ public class Lecturer {
     @Column(name = "id")
     private Long id;
 
+    @ManyToOne
     @JoinColumn(name = "department_id")
-    private Department departmentId;
+    private Department department;
 
     @Column(name = "pass_number")
     private Long passNumber;
@@ -34,8 +35,8 @@ public class Lecturer {
     public Lecturer() {
     }
 
-    public Lecturer(Department departmentId, Long passNumber, String surname, String name, String patronimic, String phoneNumber, String mail) {
-        this.departmentId = departmentId;
+    public Lecturer(Department department, Long passNumber, String surname, String name, String patronimic, String phoneNumber, String mail) {
+        this.department = department;
         this.passNumber = passNumber;
         this.surname = surname;
         this.name = name;
@@ -52,12 +53,12 @@ public class Lecturer {
         this.id = id;
     }
 
-    public Department getDepartmentId() {
-        return departmentId;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setDepartmentId(Department departmentId) {
-        this.departmentId = departmentId;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public Long getPassNumber() {

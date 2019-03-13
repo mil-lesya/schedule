@@ -1,5 +1,7 @@
 package com.gmail.mileshko.lesya.schedule.entity;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,15 +15,16 @@ public class Gradebook {
     @Column(name="gradebook_number")
     private Integer gradebookNumber;
 
+    @OneToMany
     @JoinColumn(name="assessment_id")
-    private  Assessment assessmentId;
+    private List<Assessment> assessment;
 
     public Gradebook() {
     }
 
-    public Gradebook(Integer gradebookNumber, Assessment assessmentId) {
+    public Gradebook(Integer gradebookNumber, List<Assessment> assessment) {
         this.gradebookNumber = gradebookNumber;
-        this.assessmentId = assessmentId;
+        this.assessment = assessment;
     }
 
     public Long getId() {
@@ -40,11 +43,11 @@ public class Gradebook {
         this.gradebookNumber = gradebookNumber;
     }
 
-    public Assessment getAssessmentId() {
-        return assessmentId;
+    public List<Assessment> getAssessment() {
+        return assessment;
     }
 
-    public void setAssessmentId(Assessment assessmentId) {
-        this.assessmentId = assessmentId;
+    public void setAssessment(List<Assessment> assessment) {
+        this.assessment = assessment;
     }
 }

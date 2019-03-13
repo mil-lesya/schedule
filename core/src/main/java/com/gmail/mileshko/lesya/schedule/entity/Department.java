@@ -10,6 +10,7 @@ public class Department {
     @Column(name = "id")
     private Long id;
 
+    @OneToOne
     @JoinColumn(name = "auditory_id")
     private Auditory auditoryId;
 
