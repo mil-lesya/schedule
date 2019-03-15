@@ -32,10 +32,13 @@ public class Lecturer {
     @Column(name = "mail")
     private String mail;
 
+    @Column(name = "password")
+    private String password;
+
     public Lecturer() {
     }
 
-    public Lecturer(Department department, Long passNumber, String surname, String name, String patronimic, String phoneNumber, String mail) {
+    public Lecturer(Department department, Long passNumber, String surname, String name, String patronimic, String phoneNumber, String mail, String password) {
         this.department = department;
         this.passNumber = passNumber;
         this.surname = surname;
@@ -43,6 +46,15 @@ public class Lecturer {
         this.patronimic = patronimic;
         this.phoneNumber = phoneNumber;
         this.mail = mail;
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Long getId() {

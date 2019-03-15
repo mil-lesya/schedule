@@ -9,7 +9,7 @@ create table personal_card
   parent_contact varchar,
   address        varchar not null,
   phone_number   varchar,
-  mail       varchar
+  mail           varchar
 );
 
 alter table personal_card
@@ -35,7 +35,7 @@ create unique index session_id_uindex
 
 create table subject
 (
-  id           bigint  not null
+  id   bigint  not null
     constraint subject_pk
       primary key,
   name varchar not null
@@ -55,7 +55,7 @@ create table assessment
   session_id bigint  not null
     constraint performance_monitoring_session_id_fk
       references session,
-  mark integer not null
+  mark       integer not null
 );
 
 alter table assessment
@@ -75,7 +75,7 @@ create unique index subject_subject_id_uindex
 
 create table auditory
 (
-  auditory_number bigint    not null,
+  auditory_number integer   not null,
   corps           integer   not null,
   id              bigserial not null
     constraint auditory_pk
@@ -85,11 +85,11 @@ create table auditory
 alter table auditory
   owner to postgres;
 
-create unique index audiyory_auditory_number_uindex
-  on auditory (auditory_number);
-
 create unique index auditory_id_uindex
   on auditory (id);
+
+create unique index audiyory_auditory_number_uindex
+  on auditory (auditory_number);
 
 create table department
 (
@@ -111,13 +111,14 @@ create table lecturer
   name          varchar   not null,
   patronymic    varchar,
   phone_number  varchar,
-  mail      varchar,
+  mail          varchar,
   id            bigserial not null
     constraint lecturer_pk
       primary key,
   department_id bigint    not null
     constraint lecturer_department_id_fk
-      references department
+      references department,
+  password      varchar
 );
 
 alter table lecturer
@@ -211,26 +212,27 @@ create table student
   id               bigserial not null
     constraint student_pk
       primary key,
-  gradebook_id     integer   not null
+  gradebook_id     bigint    not null
     constraint student_gradebook_id_fk
       references gradebook,
   group_id         bigint    not null,
   personal_card_id bigint    not null
     constraint student_personal_card_id_fk
-      references personal_card
+      references personal_card,
+  password         varchar
 );
 
 alter table student
   owner to postgres;
-
-create unique index student_gradebook_number_uindex
-  on student (gradebook_id);
 
 create unique index student_group_id_uindex
   on student (group_id);
 
 create unique index student_personal_card_id_uindex
   on student (personal_card_id);
+
+create unique index student_gradebook_number_uindex
+  on student (gradebook_id);
 
 create table "group"
 (
@@ -313,4 +315,38 @@ create unique index group_schedule_gpoup_id_uindex
 
 create unique index group_schedule_shedule_id_uindex
   on group_schedule (shedule_id);
+
+create table student_token
+(
+  id         bigint not null
+    constraint student_token_pk
+      primary key,
+  student_id bigint not null
+    constraint student_token_student_id_fk
+      references student,
+  token      varchar
+);
+
+alter table student_token
+  owner to postgres;
+
+create unique index student_token_student_id_uindex
+  on student_token (student_id);
+
+create table lecturer_token
+(
+  id          bigint not null
+    constraint lecturer_token_pk
+      primary key,
+  lecturer_id bigint not null
+    constraint lecturer_token_lecturer_id_fk
+      references lecturer,
+  token       varchar
+);
+
+alter table lecturer_token
+  owner to postgres;
+
+create unique index lecturer_token_lecturer_id_uindex
+  on lecturer_token (lecturer_id);
 

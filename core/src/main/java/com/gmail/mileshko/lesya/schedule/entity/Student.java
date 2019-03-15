@@ -22,13 +22,25 @@ public class Student {
     @JoinColumn(name = "personal_card_id")
     private PersonalCard personalCard;
 
+    @Column(name = "password")
+    private String password;
+
     public Student() {
     }
 
-    public Student(Gradebook gradebook, Group group, PersonalCard personalCard) {
+    public Student(Gradebook gradebook, Group group, PersonalCard personalCard, String password) {
         this.gradebook = gradebook;
         this.group = group;
         this.personalCard = personalCard;
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Long getId() {

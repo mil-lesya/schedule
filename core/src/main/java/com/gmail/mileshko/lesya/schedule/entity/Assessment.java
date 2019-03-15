@@ -1,6 +1,7 @@
 package com.gmail.mileshko.lesya.schedule.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "assessment")
@@ -14,9 +15,9 @@ public class Assessment {
     @JoinColumn(name = "subject_id")
     private Subject subject;
 
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "session_id")
-    private Session session;
+    private List<Session> session;
 
     @Column(name = "mark")
     private Integer mark;
@@ -24,7 +25,7 @@ public class Assessment {
     public Assessment() {
     }
 
-    public Assessment(Subject subject, Session session, Integer mark) {
+    public Assessment(Subject subject, List<Session> session, Integer mark) {
         this.subject = subject;
         this.session = session;
         this.mark = mark;
@@ -46,11 +47,11 @@ public class Assessment {
         this.subject = subject;
     }
 
-    public Session getSession() {
+    public List<Session> getSession() {
         return session;
     }
 
-    public void setSession(Session session) {
+    public void setSession(List<Session> session) {
         this.session = session;
     }
 
