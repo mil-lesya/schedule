@@ -13,16 +13,24 @@ public class Gradebook {
     private  Long id;
 
     @Column(name="gradebook_number")
-    private Integer gradebookNumber;
+    private String gradebookNumber;
+
+    @OneToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
 
     @OneToMany
-    @JoinColumn(name="assessment_id")
+    @JoinColumn(name="ASSESSMENT_ID")
     private List<Assessment> assessment;
 
     public Gradebook() {
     }
 
-    public Gradebook(Integer gradebookNumber, List<Assessment> assessment) {
+    public Gradebook(String gradebookNumber) {
+        this.gradebookNumber = gradebookNumber;
+    }
+
+    public Gradebook(String gradebookNumber, List<Assessment> assessment) {
         this.gradebookNumber = gradebookNumber;
         this.assessment = assessment;
     }
@@ -35,11 +43,11 @@ public class Gradebook {
         this.id = id;
     }
 
-    public Integer getGradebookNumber() {
+    public String getGradebookNumber() {
         return gradebookNumber;
     }
 
-    public void setGradebookNumber(Integer gradebookNumber) {
+    public void setGradebookNumber(String gradebookNumber) {
         this.gradebookNumber = gradebookNumber;
     }
 
@@ -49,5 +57,13 @@ public class Gradebook {
 
     public void setAssessment(List<Assessment> assessment) {
         this.assessment = assessment;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }

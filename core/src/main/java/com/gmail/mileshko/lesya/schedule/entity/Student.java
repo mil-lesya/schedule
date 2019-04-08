@@ -10,10 +10,6 @@ public class Student {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "gradebook_id")
-    private Gradebook gradebook;
-
     @ManyToOne
     @JoinColumn(name = "group_id")
     private Group group;
@@ -24,6 +20,9 @@ public class Student {
 
     @Column(name = "password")
     private String password;
+
+    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
+    private Gradebook gradebook;
 
     public Student() {
     }

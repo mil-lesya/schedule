@@ -15,7 +15,7 @@ public class Lecturer {
     private Department department;
 
     @Column(name = "pass_number")
-    private Long passNumber;
+    private String passNumber;
 
     @Column(name = "surname")
     private  String surname;
@@ -38,7 +38,7 @@ public class Lecturer {
     public Lecturer() {
     }
 
-    public Lecturer(Department department, Long passNumber, String surname, String name, String patronimic, String phoneNumber, String mail, String password) {
+    public Lecturer(Department department, String passNumber, String surname, String name, String patronimic, String phoneNumber, String mail, String password) {
         this.department = department;
         this.passNumber = passNumber;
         this.surname = surname;
@@ -73,11 +73,11 @@ public class Lecturer {
         this.department = department;
     }
 
-    public Long getPassNumber() {
+    public String getPassNumber() {
         return passNumber;
     }
 
-    public void setPassNumber(Long passNumber) {
+    public void setPassNumber(String passNumber) {
         this.passNumber = passNumber;
     }
 

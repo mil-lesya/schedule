@@ -10,17 +10,13 @@ public class Auditory {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "corps")
-    private  Integer corps;
-
     @Column(name = "auditory_number")
-    private Long auditoryNumber;
+    private Integer auditoryNumber;
 
     public Auditory() {
     }
 
-    public Auditory(Integer corps, Long auditoryNumber) {
-        this.corps = corps;
+    public Auditory(Integer auditoryNumber) {
         this.auditoryNumber = auditoryNumber;
     }
 
@@ -32,19 +28,11 @@ public class Auditory {
         this.id = id;
     }
 
-    public Integer getCorps() {
-        return corps;
-    }
-
-    public void setCorps(Integer corps) {
-        this.corps = corps;
-    }
-
-    public Long getAuditoryNumber() {
+    public Integer getAuditoryNumber() {
         return auditoryNumber;
     }
 
-    public void setAuditoryNumber(Long auditoryNumber) {
+    public void setAuditoryNumber(Integer auditoryNumber) {
         this.auditoryNumber = auditoryNumber;
     }
 }

@@ -36,6 +36,11 @@ public class Group {
     public Group() {
     }
 
+    public Group(Integer groupNumber, Integer course) {
+        this.groupNumber = groupNumber;
+        this.course = course;
+    }
+
     public Group(Integer groupNumber, Integer course, Student headman, Lecturer curator) {
         this.groupNumber = groupNumber;
         this.course = course;

@@ -12,13 +12,13 @@ public class Department {
 
     @OneToOne
     @JoinColumn(name = "auditory_id")
-    private Auditory auditoryId;
+    private Auditory auditory;
 
     public Department() {
     }
 
-    public Department(Auditory auditoryId) {
-        this.auditoryId = auditoryId;
+    public Department(Auditory auditory) {
+        this.auditory = auditory;
     }
 
     public Long getId() {
@@ -29,11 +29,11 @@ public class Department {
         this.id = id;
     }
 
-    public Auditory getAuditoryId() {
-        return auditoryId;
+    public Auditory getAuditory() {
+        return auditory;
     }
 
-    public void setAuditoryId(Auditory auditoryId) {
-        this.auditoryId = auditoryId;
+    public void setAuditory(Auditory auditory) {
+        this.auditory = auditory;
     }
 }
