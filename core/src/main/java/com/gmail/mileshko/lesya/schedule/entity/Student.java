@@ -3,7 +3,7 @@ package com.gmail.mileshko.lesya.schedule.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "personal_card")
+@Table(name = "student")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,8 @@ public class Student {
     @Column(name = "password")
     private String password;
 
-    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(name = "gradebook_id")
     private Gradebook gradebook;
 
     public Student() {

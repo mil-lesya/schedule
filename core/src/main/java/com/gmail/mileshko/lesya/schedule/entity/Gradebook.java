@@ -5,22 +5,21 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name="gradebook")
+@Table(name = "gradebook")
 public class Gradebook {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private  Long id;
+    private Long id;
 
-    @Column(name="gradebook_number")
+    @Column(name = "gradebook_number")
     private String gradebookNumber;
 
-    @OneToOne
-    @JoinColumn(name = "student_id")
+    @OneToOne(mappedBy = "gradebook", cascade = CascadeType.ALL)
     private Student student;
 
     @OneToMany
-    @JoinColumn(name="ASSESSMENT_ID")
+    @JoinColumn(name = "ASSESSMENT_ID")
     private List<Assessment> assessment;
 
     public Gradebook() {
