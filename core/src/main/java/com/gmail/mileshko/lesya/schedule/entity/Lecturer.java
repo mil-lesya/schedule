@@ -14,8 +14,9 @@ public class Lecturer {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    @Column(name = "pass_number")
-    private String passNumber;
+    @OneToOne
+    @JoinColumn(name = "pass_id")
+    private Pass pass;
 
     @Column(name = "surname")
     private  String surname;
@@ -38,9 +39,9 @@ public class Lecturer {
     public Lecturer() {
     }
 
-    public Lecturer(Department department, String passNumber, String surname, String name, String patronimic, String phoneNumber, String mail, String password) {
+    public Lecturer(Department department, Pass pass, String surname, String name, String patronimic, String phoneNumber, String mail, String password) {
         this.department = department;
-        this.passNumber = passNumber;
+        this.pass = pass;
         this.surname = surname;
         this.name = name;
         this.patronimic = patronimic;
@@ -73,12 +74,12 @@ public class Lecturer {
         this.department = department;
     }
 
-    public String getPassNumber() {
-        return passNumber;
+    public Pass getPass() {
+        return pass;
     }
 
-    public void setPassNumber(String passNumber) {
-        this.passNumber = passNumber;
+    public void setPass(Pass pass) {
+        this.pass = pass;
     }
 
     public String getSurname() {

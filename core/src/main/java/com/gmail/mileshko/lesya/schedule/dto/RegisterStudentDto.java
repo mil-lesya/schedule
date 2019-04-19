@@ -8,7 +8,7 @@ public class RegisterStudentDto {
     public String address;
     public String phoneNumber;
     public String mail;
-    public String gradebook;
+    public String gradebookNumber;
     public Integer groupNumber;
     public Integer course;
     public String password;
@@ -16,7 +16,7 @@ public class RegisterStudentDto {
     public RegisterStudentDto() {
     }
 
-    public RegisterStudentDto(String name, String surname, String patronymic, String parentContact, String address, String phoneNumber, String mail, String gradebook, Integer groupNumber, Integer course, String password) {
+    public RegisterStudentDto(String name, String surname, String patronymic, String parentContact, String address, String phoneNumber, String mail, String gradebookNumber, Integer groupNumber, Integer course, String password) {
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;
@@ -24,7 +24,7 @@ public class RegisterStudentDto {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.mail = mail;
-        this.gradebook = gradebook;
+        this.gradebookNumber = gradebookNumber;
         this.groupNumber = groupNumber;
         this.course = course;
         this.password = password;

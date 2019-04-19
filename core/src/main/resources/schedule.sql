@@ -179,7 +179,7 @@ create unique index schedule_subject_uindex
   on schedule (subject_id);
 
 create unique index lecturer_pass_number_uindex
-  on lecturer (pass_number);
+  on lecturer (pass_id);
 
 create unique index lecturer_id_uindex
   on lecturer (id);
@@ -193,7 +193,7 @@ create unique index department_id_uindex
 create unique index department_auditory_id_uindex
   on department (auditory_id);
 
-create table gradebook
+create table gradebookNumber
 (
   id               bigserial not null
     constraint gradebook_pk
@@ -204,7 +204,7 @@ create table gradebook
       references assessment
 );
 
-alter table gradebook
+alter table gradebookNumber
   owner to postgres;
 
 create table student
@@ -214,7 +214,7 @@ create table student
       primary key,
   gradebook_id     bigint    not null
     constraint student_gradebook_id_fk
-      references gradebook,
+      references gradebookNumber,
   group_id         bigint    not null,
   personal_card_id bigint    not null
     constraint student_personal_card_id_fk
@@ -289,13 +289,13 @@ create unique index attendance_student_uindex
   on attendance (student_id);
 
 create unique index gradebook_gradebook_number_uindex
-  on gradebook (gradebook_number);
+  on gradebookNumber (gradebook_number);
 
 create unique index gradebook_id_uindex
-  on gradebook (id);
+  on gradebookNumber (id);
 
 create unique index gradebook_assessment_id_uindex
-  on gradebook (assessment_id);
+  on gradebookNumber (assessment_id);
 
 create table group_schedule
 (

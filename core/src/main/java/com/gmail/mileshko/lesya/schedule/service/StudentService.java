@@ -10,10 +10,13 @@ import com.gmail.mileshko.lesya.schedule.security.Hasher;
 import com.gmail.mileshko.lesya.schedule.security.TokenGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.naming.AuthenticationException;
+import java.util.Optional;
 
 @Service
+@Transactional
 public class StudentService {
     private final StudentRepository studentRepository;
     private final GradebookRepository gradebookRepository;
@@ -21,7 +24,7 @@ public class StudentService {
     private final GroupRepository groupRepository;
     private final PersonalCardRepository personalCardRepository;
 
-    @Autowired
+
     public StudentService(StudentRepository studentRepository, GradebookRepository gradebookRepository, StudentTokenRepository studentTokenRepository, GroupRepository groupRepository, PersonalCardRepository personalCardRepository) {
         this.studentRepository = studentRepository;
         this.gradebookRepository = gradebookRepository;
@@ -32,7 +35,7 @@ public class StudentService {
 
     public String authenticate(AuthStudentDto authStudentDto) throws NoSuchEntityException, AuthenticationException {
         Student student = gradebookRepository.findByGradebookNumber(authStudentDto.gradebookNumber)
-                .orElseThrow(() -> new NoSuchEntityException("no student with such gradebook number"))
+                .orElseThrow(() -> new NoSuchEntityException("no student with such gradebookNumber number"))
                 .getStudent();
         if (!Hasher.check(authStudentDto.password, student.getPassword()))
             throw new AuthenticationException("invalid student");//
@@ -47,14 +50,10 @@ public class StudentService {
                 .getStudent();
     }
 
-    public void register(RegisterStudentDto registerStudentDto) throws RegistrationException {
-        if (gradebookRepository.findByGradebookNumber(registerStudentDto.gradebook).isPresent())
-            throw new RegistrationException("student with such gradebook number already exist");
+    public void register(RegisterStudentDto registerStudentDto) throws NoSuchEntityException, RegistrationException {
 
         Student student = new Student();
-        Group group = new Group(
-                registerStudentDto.groupNumber,
-                registerStudentDto.course);
+
         PersonalCard personalCard = new PersonalCard(
                 registerStudentDto.surname,
                 registerStudentDto.name,
@@ -64,10 +63,26 @@ public class StudentService {
                 registerStudentDto.address,
                 registerStudentDto.mail);
 
-        student.setGradebook(new Gradebook(registerStudentDto.gradebook));
+        Optional<Gradebook> gradebookOptional = gradebookRepository.findByGradebookNumber(registerStudentDto.gradebookNumber);
+        if (gradebookOptional.isPresent()){
+            student.setGradebook(gradebookOptional.get());
+        }
+        else{
+            throw new RegistrationException("student with the gradebook number doesn't exist");
+        }
+        Optional<Group> groupOptional = groupRepository.findByGroupNumberAndCourse(registerStudentDto.groupNumber, registerStudentDto.course);
+        if (groupOptional.isPresent()){
+            student.setGroup(groupOptional.get());
+        }
+        else{
+            throw new RegistrationException("you are not a student of this group");
+        }
 
-        student.setGroup(group);
-        groupRepository.save(group);
+
+        //student.setGradebook(gradebookRepository.findByGradebookNumber(registerStudentDto.gradebookNumber).orElseThrow(() -> new NoSuchEntityException("student with the gradebook number doesn't exist")));
+        //student.setGroup(groupRepository.findByGroupNumber(registerStudentDto.groupNumber).orElseThrow(() -> new NoSuchEntityException("you are not a student of this group")));
+        //Group group = groupRepository.findByGroupNumber(registerStudentDto.groupNumber).orElseThrow(() -> new NoSuchEntityException("you are not a student of this group"));
+
         student.setPersonalCard(personalCard);
         personalCardRepository.save(personalCard);
         student.setPassword(Hasher.getHash(registerStudentDto.password));

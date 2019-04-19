@@ -17,8 +17,8 @@ public class PersonalCard {
     @Column(name = "name")
     private  String name;
 
-    @Column(name = "patronimic")
-    private String patronimic;
+    @Column(name = "patronymic")
+    private String patronymic;
 
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -35,10 +35,10 @@ public class PersonalCard {
     public PersonalCard() {
     }
 
-    public PersonalCard(String surname, String name, String patronimic, String phoneNumber, String parentContact, String address, String mail) {
+    public PersonalCard(String surname, String name, String patronymic, String phoneNumber, String parentContact, String address, String mail) {
         this.surname = surname;
         this.name = name;
-        this.patronimic = patronimic;
+        this.patronymic = patronymic;
         this.phoneNumber = phoneNumber;
         this.parentContact = parentContact;
         this.address = address;
@@ -69,12 +69,12 @@ public class PersonalCard {
         this.name = name;
     }
 
-    public String getPatronimic() {
-        return patronimic;
+    public String getPatronymic() {
+        return patronymic;
     }
 
-    public void setPatronimic(String patronimic) {
-        this.patronimic = patronimic;
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
     }
 
     public String getPhoneNumber() {

@@ -19,7 +19,7 @@ public class Gradebook {
     private Student student;
 
     @OneToMany
-    @JoinColumn(name = "ASSESSMENT_ID")
+    @JoinColumn(name = "asessment_id")
     private List<Assessment> assessment;
 
     public Gradebook() {
