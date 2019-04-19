@@ -24,8 +24,8 @@ public class Lecturer {
     @Column(name = "name")
     private  String name;
 
-    @Column(name = "patronimic")
-    private String patronimic;
+    @Column(name = "patronymic")
+    private String patronymic;
 
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -39,12 +39,12 @@ public class Lecturer {
     public Lecturer() {
     }
 
-    public Lecturer(Department department, Pass pass, String surname, String name, String patronimic, String phoneNumber, String mail, String password) {
+    public Lecturer(Department department, Pass pass, String surname, String name, String patronymic, String phoneNumber, String mail, String password) {
         this.department = department;
         this.pass = pass;
         this.surname = surname;
         this.name = name;
-        this.patronimic = patronimic;
+        this.patronymic = patronymic;
         this.phoneNumber = phoneNumber;
         this.mail = mail;
         this.password = password;
@@ -98,12 +98,12 @@ public class Lecturer {
         this.name = name;
     }
 
-    public String getPatronimic() {
-        return patronimic;
+    public String getPatronymic() {
+        return patronymic;
     }
 
-    public void setPatronimic(String patronimic) {
-        this.patronimic = patronimic;
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
     }
 
     public String getPhoneNumber() {

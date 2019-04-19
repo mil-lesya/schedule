@@ -7,7 +7,7 @@ export class Lecturer {
   pass : Pass;
   surname : string;
   name : string;
-  patronimic : string;
+  patronymic : string;
   phoneNumber : string;
   mail : string;
   password : string;

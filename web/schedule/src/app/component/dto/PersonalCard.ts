@@ -2,7 +2,7 @@ export class PersonalCard {
   id : number;
   surname : string;
   name : string;
-  patronimic : string;
+  patronymic : string;
   phoneNumber : string;
   parentContact : string;
   address : string;
