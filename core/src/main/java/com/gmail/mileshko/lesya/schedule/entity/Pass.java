@@ -10,6 +10,9 @@ public class Pass {
     @Column(name = "id")
     private Long id;
 
+    @OneToOne(mappedBy = "pass", cascade = CascadeType.ALL)
+    private Lecturer lecturer;
+
     @Column
     private  String passNumber;
 
@@ -66,6 +69,14 @@ public class Pass {
 
     public String getPatronymic() {
         return patronymic;
+    }
+
+    public Lecturer getLecturer() {
+        return lecturer;
+    }
+
+    public void setLecturer(Lecturer lecturer) {
+        this.lecturer = lecturer;
     }
 
     public void setPatronymic(String patronymic) {

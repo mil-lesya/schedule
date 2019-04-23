@@ -3,6 +3,7 @@ package com.gmail.mileshko.lesya.schedule.service;
 import com.gmail.mileshko.lesya.schedule.dto.AuthStudentDto;
 import com.gmail.mileshko.lesya.schedule.dto.RegisterStudentDto;
 import com.gmail.mileshko.lesya.schedule.entity.*;
+import com.gmail.mileshko.lesya.schedule.exception.AuthenticationException;
 import com.gmail.mileshko.lesya.schedule.exception.NoSuchEntityException;
 import com.gmail.mileshko.lesya.schedule.exception.RegistrationException;
 import com.gmail.mileshko.lesya.schedule.repository.*;
@@ -12,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.naming.AuthenticationException;
 import java.util.Optional;
 
 @Service
@@ -24,7 +24,7 @@ public class StudentService {
     private final GroupRepository groupRepository;
     private final PersonalCardRepository personalCardRepository;
 
-
+    @Autowired
     public StudentService(StudentRepository studentRepository, GradebookRepository gradebookRepository, StudentTokenRepository studentTokenRepository, GroupRepository groupRepository, PersonalCardRepository personalCardRepository) {
         this.studentRepository = studentRepository;
         this.gradebookRepository = gradebookRepository;
@@ -50,7 +50,7 @@ public class StudentService {
                 .getStudent();
     }
 
-    public void register(RegisterStudentDto registerStudentDto) throws NoSuchEntityException, RegistrationException {
+    public void register(RegisterStudentDto registerStudentDto) throws RegistrationException {
 
         Student student = new Student();
 
@@ -63,29 +63,15 @@ public class StudentService {
                 registerStudentDto.address,
                 registerStudentDto.mail);
 
-        Optional<Gradebook> gradebookOptional = gradebookRepository.findByGradebookNumber(registerStudentDto.gradebookNumber);
-        if (gradebookOptional.isPresent()){
-            student.setGradebook(gradebookOptional.get());
-        }
-        else{
-            throw new RegistrationException("student with the gradebook number doesn't exist");
-        }
-        Optional<Group> groupOptional = groupRepository.findByGroupNumberAndCourse(registerStudentDto.groupNumber, registerStudentDto.course);
-        if (groupOptional.isPresent()){
-            student.setGroup(groupOptional.get());
-        }
-        else{
-            throw new RegistrationException("you are not a student of this group");
-        }
-
-
-        //student.setGradebook(gradebookRepository.findByGradebookNumber(registerStudentDto.gradebookNumber).orElseThrow(() -> new NoSuchEntityException("student with the gradebook number doesn't exist")));
-        //student.setGroup(groupRepository.findByGroupNumber(registerStudentDto.groupNumber).orElseThrow(() -> new NoSuchEntityException("you are not a student of this group")));
-        //Group group = groupRepository.findByGroupNumber(registerStudentDto.groupNumber).orElseThrow(() -> new NoSuchEntityException("you are not a student of this group"));
-
+        student.setGradebook(gradebookRepository.findByGradebookNumber(registerStudentDto.gradebookNumber)
+                .orElseThrow(() -> new RegistrationException("student with the gradebook number doesn't exist")));
+        student.setGroup(groupRepository.findByGroupNumberAndCourse(registerStudentDto.groupNumber, registerStudentDto.course)
+                .orElseThrow(() -> new RegistrationException("you are not a student of this group")));
         student.setPersonalCard(personalCard);
         personalCardRepository.save(personalCard);
         student.setPassword(Hasher.getHash(registerStudentDto.password));
         studentRepository.save(student);
     }
+
+
 }

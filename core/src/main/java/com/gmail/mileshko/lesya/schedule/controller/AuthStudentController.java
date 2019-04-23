@@ -2,12 +2,12 @@ package com.gmail.mileshko.lesya.schedule.controller;
 
 import com.gmail.mileshko.lesya.schedule.dto.AuthStudentDto;
 import com.gmail.mileshko.lesya.schedule.dto.GradebookDto;
+import com.gmail.mileshko.lesya.schedule.exception.AuthenticationException;
 import com.gmail.mileshko.lesya.schedule.exception.NoSuchEntityException;
 import com.gmail.mileshko.lesya.schedule.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.naming.AuthenticationException;
 
 @RestController
 @RequestMapping("auth/student")

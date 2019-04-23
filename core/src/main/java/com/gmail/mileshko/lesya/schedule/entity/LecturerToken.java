@@ -3,7 +3,7 @@ package com.gmail.mileshko.lesya.schedule.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "student_token")
+@Table(name = "lecturer_token")
 public class LecturerToken {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,11 +33,11 @@ public class LecturerToken {
         this.id = id;
     }
 
-    public Lecturer getStudent() {
+    public Lecturer getLecturer() {
         return lecturer;
     }
 
-    public void setStudent(Lecturer lecturer) {
+    public void setLecturer(Lecturer lecturer) {
         this.lecturer = lecturer;
     }
 
