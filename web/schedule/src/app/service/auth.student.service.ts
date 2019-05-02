@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {AuthStudent} from "../dto/AuthStudent";
-import {API_URL} from "../../global";
-import {Student} from "../dto/Student";
+import {AuthStudent} from '../dto/AuthStudent';
+import {Observable} from 'rxjs';
+import {API_URL} from '../../global';
+import {Student} from '../dto/Student';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthStudentService {
 
   constructor(private http: HttpClient) {
