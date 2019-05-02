@@ -1,0 +1,118 @@
+
+
+a {
+  color: #382e33;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+
+input {
+  border: none;
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5em;
+  padding: 0;
+  -webkit-appearance: none;
+}
+
+p {
+  line-height: 1.5em;
+}
+
+.clearfix { *zoom: 1;
+  background: whitesmoke;
+  max-width: 1000px;
+  align-items: flex-start;
+  margin: 0 auto;
+
+} /* For IE 6/7 */
+.clearfix:before, .clearfix:after {
+  display: table;
+  content: "";
+
+}
+.clearfix:after { clear: both; }
+
+/* ---------- LOGIN ---------- */
+.auth-container{
+  width: 100%;
+  max-width: 1000px;
+  align-items: flex-start;
+  margin: 0 auto;
+  padding: 5px 5px;
+  background-image: url("../../auth.jpg");
+
+}
+.text{
+  font-family: 'Open Sans', Arial, sans-serif;
+  text-align: center;
+  font-size: 20px;
+  margin: 20px;
+}
+
+#login {
+
+  max-width: 1000px;
+  align-items: flex-start;
+  margin: 0 auto;
+  flex-direction: column;
+  justify-content: center;
+  background-size: cover;
+  padding: 100px;
+  width: 280px;
+}
+
+#login form span {
+  background-color: #814f7b;
+  border-radius: 6px 0px 0px 6px;
+  -moz-border-radius: 3px 0px 0px 3px;
+  -webkit-border-radius: 3px 0px 0px 3px;
+  color: #664668;
+  display: block;
+  float: left;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  width: 50px;
+}
+
+#login form input {
+  height: 50px;
+  outline:none;
+}
+
+#login form input[type="text"], input[type="password"] {
+  background-color: #9c6ea6;
+  border-radius: 0px 3px 3px 0px;
+  -moz-border-radius: 0px 3px 3px 0px;
+  -webkit-border-radius: 0px 3px 3px 0px;
+  color: #2e2328;
+  margin-bottom: 1em;
+  padding: 0 16px;
+  width: 198px;
+}
+
+#login form input:focus {
+  color: #2e2328;
+}
+
+#login form input[type="submit"] {
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  background-color: #eaa9db;
+  color: #340b38;
+  margin-bottom: 2em;
+  font-size: 16px;
+  text-transform: uppercase;
+  cursor:pointer;
+  width: 280px;
+}
+
+#login form input[type="submit"]:hover {
+  background-color: #9c6ea6;
+}
