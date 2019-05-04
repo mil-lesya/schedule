@@ -1,4 +1,4 @@
 export  class Auditory {
   id: number;
-  auditoryNumber : number;
+  auditoryNumber: number;
 }

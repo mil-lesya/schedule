@@ -1,5 +1,5 @@
-import {Department} from "./Department";
-import {Pass} from "./Pass";
+import {Department} from './Department';
+import {Pass} from './Pass';
 
 export class Lecturer {
   id: number;

@@ -5,15 +5,16 @@
   align-items: flex-start;
   max-width: 1280px;
   min-height: calc(100vh - 50px);
+  background-image: url("auth.jpg");
 
   margin: 50px auto 0 auto;
 
-  background: white;
+
   animation: appear .2s;
 
   .content {
 
-    background: white;
+    background-image: url("auth.jpg");
     width: 100%;
   }
 }

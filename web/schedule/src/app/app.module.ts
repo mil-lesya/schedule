@@ -14,6 +14,8 @@ import {AppRoutingModule} from './app-routing.module';
 import { HomeComponent } from './component/home/home.component';
 import { AuthStudentComponent } from './component/auth-student/auth-student.component';
 import { RegisterStudentComponent } from './component/register-student/register-student.component';
+import { AuthComponent } from './component/auth/auth.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,12 +29,13 @@ import { RegisterStudentComponent } from './component/register-student/register-
     HomeComponent,
     AuthStudentComponent,
     RegisterStudentComponent,
+    AuthComponent,
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     FormsModule,
-    RouterModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

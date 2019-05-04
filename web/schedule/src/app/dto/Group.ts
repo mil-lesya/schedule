@@ -1,4 +1,4 @@
-import {Student} from "./Student";
+import {Student} from './Student';
 import {Lecturer} from "./Lecturer";
 
 export class Group {

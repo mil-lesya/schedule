@@ -1,0 +1,58 @@
+.content-container {
+  background-image: url("../../auth.jpg");
+
+  overflow: hidden;
+  padding: 5px 5px;
+  max-width: 1000px;
+  align-items: flex-start;
+  margin: 0 auto;
+  height: 600px;
+}
+
+.gradebook-container{
+
+padding: 20px;
+
+}
+  .gradebook-table {
+
+    width: 100%;
+    margin-top: 4px;
+background: #fbfbfb;
+    border-collapse: collapse;
+    vertical-align: top;
+    max-width: 100%;
+
+    overflow-x: auto;
+
+    // optional - looks better for small cell values
+    white-space: nowrap;
+    border-spacing: 0;
+
+
+    th {
+      padding: 12px 12px;
+      border: 1px solid #d9d7ce;
+      font-size: 18px;
+      text-align: center;
+    }
+
+    .row {
+      cursor: pointer;
+
+      transition: border linear 2s;
+
+      td {
+        text-align: center;
+
+        padding: 12px 12px;
+        border: 1px solid #d9d7ce;
+        font-size: 18px;
+      }
+    }
+
+
+
+  }
+
+

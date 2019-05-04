@@ -7,6 +7,8 @@ import {GroupComponent} from './component/group/group.component';
 import {PresenceComponent} from './component/presence/presence.component';
 import {HomeComponent} from './component/home/home.component';
 import {AuthStudentComponent} from './component/auth-student/auth-student.component';
+import {AuthComponent} from './component/auth/auth.component';
+import {RegisterStudentComponent} from './component/register-student/register-student.component';
 
 const routes: Routes = [
   {
@@ -15,8 +17,8 @@ const routes: Routes = [
     data: {title: 'Feed'}
   },
   {
-    path: 'auth/student',
-    component: AuthStudentComponent,
+    path: 'auth',
+    component: AuthComponent,
     data: {title: 'AuthStudent'}
   },
   {
@@ -47,6 +49,12 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent,
     data: {title: 'Home'}
+  },
+
+  {
+    path: 'register/student',
+    component: RegisterStudentComponent,
+    data: {title: 'Register Student'}
   },
 
 ];

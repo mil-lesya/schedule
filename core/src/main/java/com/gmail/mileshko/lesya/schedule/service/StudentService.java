@@ -2,6 +2,7 @@ package com.gmail.mileshko.lesya.schedule.service;
 
 import com.gmail.mileshko.lesya.schedule.dto.AuthStudentDto;
 import com.gmail.mileshko.lesya.schedule.dto.RegisterStudentDto;
+import com.gmail.mileshko.lesya.schedule.dto.StudentDto;
 import com.gmail.mileshko.lesya.schedule.entity.*;
 import com.gmail.mileshko.lesya.schedule.exception.AuthenticationException;
 import com.gmail.mileshko.lesya.schedule.exception.NoSuchEntityException;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.awt.print.Pageable;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,7 +38,7 @@ public class StudentService {
 
     public String authenticate(AuthStudentDto authStudentDto) throws NoSuchEntityException, AuthenticationException {
         Student student = gradebookRepository.findByGradebookNumber(authStudentDto.gradebookNumber)
-                .orElseThrow(() -> new NoSuchEntityException("no student with such gradebookNumber number"))
+                .orElseThrow(() -> new NoSuchEntityException("no student with such gradebook number"))
                 .getStudent();
         if (!Hasher.check(authStudentDto.password, student.getPassword()))
             throw new AuthenticationException("invalid student");//
@@ -71,6 +74,10 @@ public class StudentService {
         personalCardRepository.save(personalCard);
         student.setPassword(Hasher.getHash(registerStudentDto.password));
         studentRepository.save(student);
+    }
+
+    public List<Student> getGroup(Student student) {
+        return studentRepository.findAllByGroup(student.getGroup());
     }
 
 
