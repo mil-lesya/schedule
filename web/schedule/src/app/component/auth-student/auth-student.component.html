@@ -1,18 +1,18 @@
-  <div class="auth-container">
-    <div id="login">
-      <form action="javascript:void(0);" method="get" (ngSubmit)="authenticate()" >
-        <fieldset class="clearfix">
-          <div class="text">Вход</div>
-          <p><span class="fontawesome-user"></span>
-            <input type="text" placeholder="Номер зачётки" [(ngModel)]="authStudent.gradebookNumber" name="gradebookNumber"></p>
-          <p><span class="fontawesome-lock"></span>
-            <input type="password" placeholder="password" [(ngModel)]="authStudent.password" name="password">
-          </p>
-          <p><input type="submit" value="ВОЙТИ"></p>
-          <p> Нет аккаунта? Регистрация</p>
-
-        </fieldset>
-      </form>
-    </div>
+<div class="auth-container">
+  <div id="login">
+    <form class="auth-form" (ngSubmit)="authenticate()">
+      <fieldset class="clearfix">
+        <div class="text">Вход</div>
+        <input type="text" placeholder="Номер зачётки" [(ngModel)]="authStudent.gradebookNumber" name="gradebookNumber">
+        <input type="password" placeholder="Пароль" [(ngModel)]="authStudent.password" name="password">
+        <div class="register-hint">
+          <div class="text">Еще не зарегистрированы?</div>
+          <a [routerLink]="'/register/student'">Регистрация</a>
+        </div>
+        <button type="submit">Войти</button>
+      </fieldset>
+    </form>
   </div>
+</div>
+
 

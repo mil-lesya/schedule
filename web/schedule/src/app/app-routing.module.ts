@@ -17,9 +17,15 @@ const routes: Routes = [
     data: {title: 'Feed'}
   },
   {
+    path: 'auth/student',
+    component: AuthStudentComponent,
+    data: {title: 'Auth'}
+
+  },
+  {
     path: 'auth',
     component: AuthComponent,
-    data: {title: 'AuthStudent'}
+    data: {title: 'Auth'}
   },
   {
     path: 'gradebook',

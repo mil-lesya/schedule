@@ -8,11 +8,26 @@ a {
 a:hover {
   text-decoration: underline;
 }
+.register-hint {
+  display: flex;
+  align-items: center;
 
+  .text {
+    margin: 0 5px;
+
+    color: var(--dark);
+    font-size: 16px;
+  }
+
+  a {
+    color: var(--dark);
+    font-size: 16px;
+    text-decoration-line: underline;
+  }
+}
 
 input {
   border: none;
-  font-family: 'Open Sans', Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5em;
   padding: 0;
@@ -35,6 +50,18 @@ p {
   content: "";
 
 }
+
+button {
+  align-self: center;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  margin: 20px;
+  max-width: 100px;
+  font-size: 16px;
+  cursor:pointer;
+  width: 280px;
+}
 .clearfix:after { clear: both; }
 
 /* ---------- LOGIN ---------- */
@@ -45,24 +72,22 @@ p {
   margin: 0 auto;
   padding: 5px 5px;
   background-image: url("../../auth.jpg");
-
+height: 610px;
 }
 .text{
-  font-family: 'Open Sans', Arial, sans-serif;
   text-align: center;
-  font-size: 20px;
+  font-size: 18px;
   margin: 20px;
 }
 
 #login {
 
   max-width: 1000px;
-  align-items: flex-start;
   margin: 0 auto;
   flex-direction: column;
   justify-content: center;
   background-size: cover;
-  padding: 100px;
+  padding: 10%;
   width: 280px;
 }
 
@@ -86,14 +111,14 @@ p {
 }
 
 #login form input[type="text"], input[type="password"] {
-  background-color: #9c6ea6;
+  background-color: white;
   border-radius: 0px 3px 3px 0px;
   -moz-border-radius: 0px 3px 3px 0px;
-  -webkit-border-radius: 0px 3px 3px 0px;
+  -webkit-border-radius: 3px 3px 3px 3px;
   color: #2e2328;
   margin-bottom: 1em;
   padding: 0 16px;
-  width: 198px;
+  width: 280px;
 }
 
 #login form input:focus {
