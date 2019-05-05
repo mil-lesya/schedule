@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {VerifiableRegisterStudent} from '../../dto/VerifiableRegisterStudent';
 import {RegisterStudentService} from '../../service/register.student.service';
 import {Router} from '@angular/router';
@@ -26,7 +26,8 @@ export class RegisterStudentComponent implements OnInit {
     if (this.verifiableRegisterStudent.password !== this.verifiableRegisterStudent.confirmPassword) {
       return;
     }
-    this.registerStudentService.register(new RegisterStudent(
+
+    const registerStudent = new RegisterStudent(
       this.verifiableRegisterStudent.name,
       this.verifiableRegisterStudent.surname,
       this.verifiableRegisterStudent.patronymic,
@@ -37,10 +38,11 @@ export class RegisterStudentComponent implements OnInit {
       this.verifiableRegisterStudent.gradebookNumber,
       this.verifiableRegisterStudent.groupNumber,
       this.verifiableRegisterStudent.course,
-      this.verifiableRegisterStudent.password))
-      .subscribe(() => {
-        this.router.navigate(['/auth'], {replaceUrl: true});
-      });
+      this.verifiableRegisterStudent.password);
+
+    this.registerStudentService.register(registerStudent).subscribe(() => {
+      this.router.navigate(['/auth'], {replaceUrl: true});
+    });
   }
 
 }
