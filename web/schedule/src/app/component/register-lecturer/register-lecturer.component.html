@@ -1,0 +1,30 @@
+<div class="content-container">
+  <div class="register-container">
+    <div id="register">
+      <form class="register-form" (ngSubmit)="register()">
+        <fieldset class="clearfix">
+          <div class="text">Регистрация</div>
+          <input type="text" placeholder="Номер пропуска" [(ngModel)]="verifiableRegisterLecturer.passNumber" name="passNumber">
+          <input type="text" placeholder="Имя" [(ngModel)]="verifiableRegisterLecturer.name" name="name">
+          <input type="text" placeholder="Фамилия" [(ngModel)]="verifiableRegisterLecturer.surname" name="surname">
+          <input type="text" placeholder="Отчество" [(ngModel)]="verifiableRegisterLecturer.patronymic"
+                 name="patronymic">
+          <input type="text" placeholder="Номер мобильного телефона" [(ngModel)]="verifiableRegisterLecturer.phoneNumber"
+                 name="phoneNumber">
+          <input type="text" placeholder="mail" [(ngModel)]="verifiableRegisterLecturer.mail" name="mail">
+          <input type="text" placeholder="auditory" [(ngModel)]="verifiableRegisterLecturer.auditory" name="auditory">
+          <input type="password" placeholder="Пароль" [(ngModel)]="verifiableRegisterLecturer.password" name="password">
+          <input type="password" placeholder="Повторите пароль" [(ngModel)]="verifiableRegisterLecturer.confirmPassword"
+                 name="confirm password">
+          <div class="auth-hint">
+            <div class="text">Уже зарегистрированы?</div>
+            <a [routerLink]="'/auth/lecturer'">Войти</a>
+          </div>
+          <button type="submit">Отправить</button>
+        </fieldset>
+
+      </form>
+    </div>
+  </div>
+</div>
+

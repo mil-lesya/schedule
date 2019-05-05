@@ -1,0 +1,18 @@
+<div class="auth-container">
+  <div id="login">
+    <form class="auth-form" (ngSubmit)="authenticate()">
+      <fieldset class="clearfix">
+        <div class="text">Вход</div>
+        <input type="text" placeholder="Номер пропуска" [(ngModel)]="authLecturer.passNumber" name="passNumber">
+        <input type="password" placeholder="Пароль" [(ngModel)]="authLecturer.password" name="password">
+        <div class="register-hint">
+          <div class="text">Не зарегистрированы?</div>
+          <a [routerLink]="'/register/lecturer'">Регистрация</a>
+        </div>
+        <button type="submit">Войти</button>
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+
