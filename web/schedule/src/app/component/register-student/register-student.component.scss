@@ -68,9 +68,9 @@ p {
   max-width: 1000px;
   align-items: flex-start;
   margin: 0 auto;
+  background-color: #f9f9f9;
   padding: 5px 5px;
-  background-image: url("../../auth.jpg");
-
+  height: 690px;
 }
 .text{
   text-align: center;
@@ -86,6 +86,7 @@ p {
   flex-direction: column;
   justify-content: center;
   background-size: cover;
+  padding: 4%;
   width: 280px;
 }
 

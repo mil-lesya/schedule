@@ -41,7 +41,7 @@ export class RegisterStudentComponent implements OnInit {
       this.verifiableRegisterStudent.password);
 
     this.registerStudentService.register(registerStudent).subscribe(() => {
-      this.router.navigate(['/auth'], {replaceUrl: true});
+      this.router.navigate(['/auth/student'], {replaceUrl: true});
     });
   }
 

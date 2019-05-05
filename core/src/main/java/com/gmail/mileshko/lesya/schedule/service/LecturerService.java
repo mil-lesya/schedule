@@ -6,6 +6,7 @@ import com.gmail.mileshko.lesya.schedule.dto.RegisterLecturerDto;
 import com.gmail.mileshko.lesya.schedule.entity.Department;
 import com.gmail.mileshko.lesya.schedule.entity.Lecturer;
 import com.gmail.mileshko.lesya.schedule.entity.LecturerToken;
+import com.gmail.mileshko.lesya.schedule.entity.Pass;
 import com.gmail.mileshko.lesya.schedule.exception.AuthenticationException;
 import com.gmail.mileshko.lesya.schedule.exception.NoSuchEntityException;
 import com.gmail.mileshko.lesya.schedule.exception.RegistrationException;
@@ -53,9 +54,14 @@ public class LecturerService {
     public void register(RegisterLecturerDto registerLecturerDto) throws RegistrationException {
 
         Lecturer lecturer = new Lecturer();
+        Pass pass = passRepository.findByPassNumber(registerLecturerDto.passNumber)
+                .orElseThrow(() -> new RegistrationException("lecturer with the pass number doesn't exist"));
+        pass.setName(registerLecturerDto.name);
+        pass.setName(registerLecturerDto.surname);
+        pass.setName(registerLecturerDto.patronymic);
+        passRepository.save(pass);
 
-        lecturer.setPass(passRepository.findByPassNumber(registerLecturerDto.passNumber)
-                .orElseThrow(() -> new RegistrationException("lecturer with the pass number doesn't exist")));
+        lecturer.setPass(pass);
         lecturer.setName(registerLecturerDto.name);
         lecturer.setSurname(registerLecturerDto.surname);
         lecturer.setPatronymic(registerLecturerDto.patronymic);

@@ -7,10 +7,16 @@ import {GroupComponent} from './component/group/group.component';
 import {PresenceComponent} from './component/presence/presence.component';
 import {HomeComponent} from './component/home/home.component';
 import {AuthStudentComponent} from './component/auth-student/auth-student.component';
-import {AuthComponent} from './component/auth/auth.component';
 import {RegisterStudentComponent} from './component/register-student/register-student.component';
+import {AuthLecturerComponent} from './component/auth-lecturer/auth-lecturer.component';
+import {RegisterLecturerComponent} from './component/register-lecturer/register-lecturer.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent,
+    data: {title: 'Home'}
+  },
   {
     path: 'feed',
     component: FeedComponent,
@@ -22,11 +28,13 @@ const routes: Routes = [
     data: {title: 'Auth'}
 
   },
+
   {
-    path: 'auth',
-    component: AuthComponent,
+    path: 'auth/lecturer',
+    component: AuthLecturerComponent,
     data: {title: 'Auth'}
   },
+
   {
     path: 'gradebook',
     component: GradebookComponent,
@@ -60,7 +68,13 @@ const routes: Routes = [
   {
     path: 'register/student',
     component: RegisterStudentComponent,
-    data: {title: 'Register Student'}
+    data: {title: 'Register'}
+  },
+
+  {
+    path: 'register/lecturer',
+    component: RegisterLecturerComponent,
+    data: {title: 'Register'}
   },
 
 ];
