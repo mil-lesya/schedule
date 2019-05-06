@@ -2,8 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { FeedComponent } from './component/feed/feed.component';
-import { NavigationComponent } from './component/navigation/navigation.component';
+import { FeedStudentComponent } from './component/feed-student/feed-student.component';
+import { NavigationStudentComponent } from './component/navigation-student/navigation-student.component';
 import { GradebookComponent } from './component/gradebook/gradebook.component';
 import { ScheduleComponent } from './component/schedule/schedule.component';
 import { GroupComponent } from './component/group/group.component';
@@ -17,12 +17,14 @@ import { RegisterStudentComponent } from './component/register-student/register-
 import {HttpClientModule} from '@angular/common/http';
 import { AuthLecturerComponent } from './component/auth-lecturer/auth-lecturer.component';
 import { RegisterLecturerComponent } from './component/register-lecturer/register-lecturer.component';
+import { NavigationLecturerComponent } from './component/navigation-lecturer/navigation-lecturer.component';
+import { FeedLecturerComponent } from './component/feed-lecturer/feed-lecturer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FeedComponent,
-    NavigationComponent,
+    FeedStudentComponent,
+    NavigationStudentComponent,
     GradebookComponent,
     ScheduleComponent,
     GroupComponent,
@@ -32,6 +34,8 @@ import { RegisterLecturerComponent } from './component/register-lecturer/registe
     RegisterStudentComponent,
     AuthLecturerComponent,
     RegisterLecturerComponent,
+    NavigationLecturerComponent,
+    FeedLecturerComponent,
   ],
   imports: [
     AppRoutingModule,

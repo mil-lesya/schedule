@@ -57,8 +57,8 @@ public class LecturerService {
         Pass pass = passRepository.findByPassNumber(registerLecturerDto.passNumber)
                 .orElseThrow(() -> new RegistrationException("lecturer with the pass number doesn't exist"));
         pass.setName(registerLecturerDto.name);
-        pass.setName(registerLecturerDto.surname);
-        pass.setName(registerLecturerDto.patronymic);
+        pass.setSurname(registerLecturerDto.surname);
+        pass.setPatronymic(registerLecturerDto.patronymic);
         passRepository.save(pass);
 
         lecturer.setPass(pass);

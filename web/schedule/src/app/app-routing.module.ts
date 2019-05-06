@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {GradebookComponent} from './component/gradebook/gradebook.component';
-import {FeedComponent} from './component/feed/feed.component';
+import {FeedStudentComponent} from './component/feed-student/feed-student.component';
 import {ScheduleComponent} from './component/schedule/schedule.component';
 import {GroupComponent} from './component/group/group.component';
 import {PresenceComponent} from './component/presence/presence.component';
@@ -10,6 +10,7 @@ import {AuthStudentComponent} from './component/auth-student/auth-student.compon
 import {RegisterStudentComponent} from './component/register-student/register-student.component';
 import {AuthLecturerComponent} from './component/auth-lecturer/auth-lecturer.component';
 import {RegisterLecturerComponent} from './component/register-lecturer/register-lecturer.component';
+import {FeedLecturerComponent} from './component/feed-lecturer/feed-lecturer.component';
 
 const routes: Routes = [
   {
@@ -18,8 +19,13 @@ const routes: Routes = [
     data: {title: 'Home'}
   },
   {
-    path: 'feed',
-    component: FeedComponent,
+    path: 'feed/student',
+    component: FeedStudentComponent,
+    data: {title: 'Feed'}
+  },
+  {
+    path: 'feed/lecturer',
+    component: FeedLecturerComponent,
     data: {title: 'Feed'}
   },
   {

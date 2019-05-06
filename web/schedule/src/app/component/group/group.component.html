@@ -1,3 +1,4 @@
+<app-navigation-student></app-navigation-student>
 <div class="content-container">
   <div class="group-container">
 <table class="group-table">
@@ -7,29 +8,11 @@
     <th>Имя</th>
     <th>Отчество</th>
   </tr>
-  <tr class="row" >
-    <td>1</td>
-    <td>Милешко</td>
-    <td>Олеся</td>
-    <td>Анатольевна</td>
-  </tr>
-  <tr class="row" >
-    <td>1</td>
-    <td>Милешко</td>
-    <td>Олеся</td>
-    <td>Анатольевна</td>
-  </tr>
-  <tr class="row" >
-    <td>1</td>
-    <td>Милешко</td>
-    <td>Олеся</td>
-    <td>Анатольевна</td>
-  </tr>
-  <tr class="row" >
-    <td>1</td>
-    <td>Милешко</td>
-    <td>Олеся</td>
-    <td>Анатольевна</td>
+  <tr class="row"  *ngFor="let s of students"  >
+    <td>{{s.id}}</td>
+    <td>{{s.personalCard.surname}}</td>
+    <td>{{s.personalCard.name}}</td>
+    <td>{{s.personalCard.patronymic}}</td>
   </tr>
 </table>
 </div>
