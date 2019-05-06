@@ -32,6 +32,7 @@ export class GroupComponent implements OnInit {
 
   ngOnInit() {
           this.tokenProviderService.token.subscribe(token => {
+            console.log(token);
             this.groupService.getGroup(token).subscribe(students => {
                   this.students = students;
             });

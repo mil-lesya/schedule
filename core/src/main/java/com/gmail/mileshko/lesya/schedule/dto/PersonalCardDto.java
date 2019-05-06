@@ -2,13 +2,13 @@ package com.gmail.mileshko.lesya.schedule.dto;
 
 public class PersonalCardDto {
 
-    private String name;
-    private String surname;
-    private String patronymic;
-    private String parentContact;
-    private String address;
-    private String phoneNumber;
-    private String mail;
+    public String name;
+    public String surname;
+    public String patronymic;
+    public String parentContact;
+    public String address;
+    public String phoneNumber;
+    public String mail;
 
     public PersonalCardDto() {
     }

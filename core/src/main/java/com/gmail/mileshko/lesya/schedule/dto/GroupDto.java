@@ -3,16 +3,16 @@ package com.gmail.mileshko.lesya.schedule.dto;
 public class GroupDto {
     public Integer groupNumber;
     public Integer course;
-    public StudentDto headman;
+    public Long headmanId;
     public LecturerDto curator;
 
     public GroupDto() {
     }
-
-    public GroupDto(Integer groupNumber, Integer course, StudentDto headman, LecturerDto curator) {
-        this.groupNumber = groupNumber;
-        this.course = course;
-        this.headman = headman;
-        this.curator = curator;
-    }
+    
+	public GroupDto(Integer groupNumber, Integer course, Long headmanId, LecturerDto curator) {
+		this.groupNumber = groupNumber;
+		this.course = course;
+		this.headmanId = headmanId;
+		this.curator = curator;
+	}
 }

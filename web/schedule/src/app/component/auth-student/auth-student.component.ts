@@ -29,6 +29,7 @@ export class AuthStudentComponent implements OnInit {
   authenticate() {
     this.authStudentService.authenticate(this.authStudent).subscribe(token => {
       this.tokenProviderService.setToken(token);
+      console.log('set token', token);
       localStorage.setItem(LOCALSTORAGE_TOKEN_NAME, token);
 
       this.router.navigate(['/feed/student'], {replaceUrl: true});
