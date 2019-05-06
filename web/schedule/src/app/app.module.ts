@@ -9,7 +9,6 @@ import { ScheduleComponent } from './component/schedule/schedule.component';
 import { GroupComponent } from './component/group/group.component';
 import { PresenceComponent } from './component/presence/presence.component';
 import {FormsModule} from '@angular/forms';
-import {RouterModule} from '@angular/router';
 import {AppRoutingModule} from './app-routing.module';
 import { HomeComponent } from './component/home/home.component';
 import { AuthStudentComponent } from './component/auth-student/auth-student.component';

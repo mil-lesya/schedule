@@ -8,6 +8,7 @@ import {Title} from '@angular/platform-browser';
 import {AuthStudentService} from '../../service/auth.student.service';
 import {StudentProviderService} from '../../service/student.provider.service';
 import {GroupService} from '../../service/group.service';
+import {ArrayService} from '../../service/array.service';
 
 @Component({
   selector: 'app-group',
@@ -19,18 +20,22 @@ export class GroupComponent implements OnInit {
   me: Student;
   students: Student[];
 
-  constructor(private app: AppComponent,
+  constructor(
+              private app: AppComponent,
               private router: Router,
               private route: ActivatedRoute,
               private urlService: UrlService,
               private groupService: GroupService,
               private tokenProviderService: TokenProviderService,
               private studentProviderService: StudentProviderService,
-              private authService: AuthStudentService,
-              private titleService: Title) { }
+              ) { }
 
   ngOnInit() {
-
+          this.tokenProviderService.token.subscribe(token => {
+            this.groupService.getGroup(token).subscribe(students => {
+                  this.students = students;
+            });
+          });
   }
 
 }

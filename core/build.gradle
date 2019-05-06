@@ -19,6 +19,6 @@ dependencies {
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.7.3'
     compile "org.postgresql:postgresql:42.2.4"
     compile "dom4j:dom4j:1.6.1"
-
+    compile "org.modelmapper:modelmapper:2.3.0"
     testCompile "org.springframework.boot:spring-boot-starter-test:$springVersion"
 }

@@ -13,9 +13,9 @@ export class GroupService {
     private http: HttpClient
   ) {
   }
-  getGroup(): Observable<Student[]> {
+  getGroup(token: string): Observable<Student[]> {
     return this.http.get<Student[]>(API_URL + 'group', {
-
+      headers: {token: token}
     });
   }
 }
