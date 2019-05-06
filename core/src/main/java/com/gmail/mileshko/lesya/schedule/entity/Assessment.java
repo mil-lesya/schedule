@@ -12,12 +12,16 @@ public class Assessment {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "gradebook_id")
+    private Gradebook gradebook;
+
+    @ManyToOne
     @JoinColumn(name = "subject_id")
     private Subject subject;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "session_id")
-    private List<Session> session;
+    private Session session;
 
     @Column(name = "mark")
     private Integer mark;
@@ -25,7 +29,7 @@ public class Assessment {
     public Assessment() {
     }
 
-    public Assessment(Subject subject, List<Session> session, Integer mark) {
+    public Assessment(Subject subject, Session session, Integer mark) {
         this.subject = subject;
         this.session = session;
         this.mark = mark;
@@ -47,11 +51,11 @@ public class Assessment {
         this.subject = subject;
     }
 
-    public List<Session> getSession() {
+    public Session getSession() {
         return session;
     }
 
-    public void setSession(List<Session> session) {
+    public void setSession(Session session) {
         this.session = session;
     }
 

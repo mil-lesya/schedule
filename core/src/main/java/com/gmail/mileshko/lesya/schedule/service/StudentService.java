@@ -26,15 +26,18 @@ public class StudentService {
     private final StudentTokenRepository studentTokenRepository;
     private final GroupRepository groupRepository;
     private final PersonalCardRepository personalCardRepository;
+    private final AssessmentRepository assessmentRepository;
 
     @Autowired
-    public StudentService(StudentRepository studentRepository, GradebookRepository gradebookRepository, StudentTokenRepository studentTokenRepository, GroupRepository groupRepository, PersonalCardRepository personalCardRepository) {
+    public StudentService(StudentRepository studentRepository, GradebookRepository gradebookRepository, StudentTokenRepository studentTokenRepository, GroupRepository groupRepository, PersonalCardRepository personalCardRepository, AssessmentRepository assessmentRepository) {
         this.studentRepository = studentRepository;
         this.gradebookRepository = gradebookRepository;
         this.studentTokenRepository = studentTokenRepository;
         this.groupRepository = groupRepository;
         this.personalCardRepository = personalCardRepository;
+        this.assessmentRepository = assessmentRepository;
     }
+
 
     public String authenticate(AuthStudentDto authStudentDto) throws NoSuchEntityException, AuthenticationException {
         Student student = gradebookRepository.findByGradebookNumber(authStudentDto.gradebookNumber)
@@ -80,5 +83,9 @@ public class StudentService {
         return studentRepository.findAllByGroup(student.getGroup());
     }
 
+    public List<Assessment> getGradebookAssessments(Student student) {
+        Gradebook gradebook = student.getGradebook();
+        return assessmentRepository.findAllByGradebook(student.getGradebook());
+    }
 
 }
