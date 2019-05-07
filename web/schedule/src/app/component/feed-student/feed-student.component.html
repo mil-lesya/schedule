@@ -1,1 +1,39 @@
 <app-navigation-student></app-navigation-student>
+<div class="content-container">
+  <fieldset class="clearfix">
+
+    <div class="wrapper">
+      <div class="box1">
+        <img class="displayed" src="../../../assets/stud.png" height="150" width="150"/>
+
+      </div>
+      <div class="box2">
+        <div class="text">
+          <p>{{me.personalCard.surname}} {{me.personalCard.name}}</p>
+          <p>{{me.gradebook.gradebookNumber}}</p>
+          <p>Группа:{{me.group.groupNumber}}</p>
+          <p>Курс:{{me.group.course}}</p>
+        </div>
+      </div>
+
+      <div class="box3">
+        <div class="text">
+          <p>e-mail:</p>
+          <p>Номер телефона:</p>
+          <p>Домашний адрес:</p>
+        </div>
+      </div>
+      <div class="box4">
+        <div class="text">
+
+          <p>{{me.personalCard.mail}}</p>
+          <p>{{me.personalCard.phoneNumber}}</p>
+          <p>{{me.personalCard.address}}</p>
+        </div>
+      </div>
+      <div class="box4">
+
+      </div>
+    </div>
+  </fieldset>
+</div>

@@ -14,9 +14,9 @@ public class Session {
     private Integer semesterNumber;
 
     @Column(name="year")
-    private Integer year;
+    private String year;
 
-    public Session(Integer semesterNumber, Integer year) {
+    public Session(Integer semesterNumber, String year) {
         this.semesterNumber = semesterNumber;
         this.year = year;
     }
@@ -40,11 +40,11 @@ public class Session {
         this.semesterNumber = semesterNumber;
     }
 
-    public Integer getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(Integer year) {
+    public void setYear(String year) {
         this.year = year;
     }
 }

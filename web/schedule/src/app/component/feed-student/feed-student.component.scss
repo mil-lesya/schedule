@@ -1,0 +1,91 @@
+.content-container {
+  width: 100%;
+
+  display: flex;
+  align-items: flex-start;
+  max-width: 1000px;
+  min-height: calc(100vh - 50px);
+  margin: 0 auto;
+  background-image: url("../../../assets/auth.jpg");
+  padding: 5px 5px;
+  a{
+    border: none;
+    padding: 10px;
+
+  }
+
+  button{
+
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    margin-bottom: 5em;
+    font-size: 20px;
+    cursor:pointer;
+    width: 280px;
+    height: 100px;
+
+  }
+
+  .text{
+    color: var(--dark);
+    font-size: 20px;
+    padding: 10px;
+    font-family: Courier, monospace;
+
+  }
+
+
+  .clearfix { *zoom: 1;
+    background: whitesmoke;
+    max-width: 1000px;
+    align-items: flex-start;
+    margin: 30px auto;
+
+    .wrapper {
+      margin: 20px auto;
+      display: grid;
+      grid-template-columns: repeat(2, 250px);
+      grid-auto-rows: 200px;
+    }
+    .box1 {
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 1;
+      grid-row-end: 2;
+    }
+    .box2 {
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row-start: 1;
+      grid-row-end: 2;
+    }
+    .box3 {
+
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 2;
+      grid-row-end: 3;
+    }
+
+    .box4 {
+
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row-start: 2;
+      grid-row-end: 3;
+    }
+
+    img.displayed {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 10px;
+    }
+
+  }
+
+  animation: appear .2s;
+
+
+}

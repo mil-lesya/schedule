@@ -1,1 +1,34 @@
 <app-navigation-lecturer></app-navigation-lecturer>
+<div class="content-container">
+  <fieldset class="clearfix">
+    <div class="wrapper">
+      <div class="box1">
+        <img class="displayed" src="../../../assets/lect.png" height="150" width="150"/>
+      </div>
+      <div class="box2">
+        <div class="text">
+          <p>{{lecturer.surname}}</p>
+          <p>{{lecturer.name}}</p>
+          <p>{{lecturer.patronymic}}</p>
+        </div>
+      </div>
+      <div class="box3">
+        <div class="text">
+          <p>e-mail:</p>
+          <p>Номер телефона:</p>
+          <p>Аудитория:</p>
+        </div>
+      </div>
+      <div class="box4">
+        <div class="text">
+          <p>{{lecturer.mail}}</p>
+          <p>{{lecturer.phoneNumber}}</p>
+          <p>{{lecturer.department.auditory.auditoryNumber}}</p>
+        </div>
+      </div>
+      <div class="box4">
+
+      </div>
+    </div>
+  </fieldset>
+</div>

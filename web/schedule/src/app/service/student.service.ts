@@ -7,15 +7,15 @@ import {Observable} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class GroupService {
+export class StudentService {
 
   constructor(
     private http: HttpClient
   ) {
   }
 
-  getGroup(token: string): Observable<Student[]> {
-    return this.http.get<Student[]>(API_URL + 'group', {
+  getStudent(token: string): Observable<Student> {
+    return this.http.get<Student>(API_URL + 'feed/student', {
       headers: {token: token}
     });
   }

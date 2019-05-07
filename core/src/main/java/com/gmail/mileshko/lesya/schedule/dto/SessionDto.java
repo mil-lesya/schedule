@@ -1,14 +1,14 @@
 package com.gmail.mileshko.lesya.schedule.dto;
 
 public class SessionDto {
-    public  Integer semestrNumber;
-    public Integer year;
+    public  Integer semesterNumber;
+    public String year;
 
     public SessionDto() {
     }
 
-    public SessionDto(Integer semestrNumber, Integer year) {
-        this.semestrNumber = semestrNumber;
+    public SessionDto(Integer semesterNumber, String year) {
+        this.semesterNumber = semesterNumber;
         this.year = year;
     }
 }

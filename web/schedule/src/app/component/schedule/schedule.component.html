@@ -1,3 +1,22 @@
-<p>
-  schedule works!
-</p>
+<app-navigation-student></app-navigation-student>
+<div class="content-container">
+  <div class="schedule-container">
+    <table class="schedule-table">
+      <tr>
+        <th>Время</th>
+        <th>Понедельник</th>
+        <th>Вторник</th>
+        <th>Среда</th>
+        <th>Четверг</th>
+        <th>Пятница</th>
+        <th>Суббота</th>
+      </tr>
+      <tr class="row"  *ngFor="let s of students; let i = index"  >
+        <td>{{i+1}}</td>
+        <td>{{s.personalCard.surname}}</td>
+        <td>{{s.personalCard.name}}</td>
+        <td>{{s.personalCard.patronymic}}</td>
+      </tr>
+    </table>
+  </div>
+</div>

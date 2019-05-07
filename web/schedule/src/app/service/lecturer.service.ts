@@ -1,21 +1,21 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {API_URL} from '../../global';
-import {Student} from '../dto/Student';
 import {Observable} from 'rxjs';
+import {Lecturer} from '../dto/Lecturer';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GroupService {
+export class LecturerService {
 
   constructor(
     private http: HttpClient
   ) {
   }
 
-  getGroup(token: string): Observable<Student[]> {
-    return this.http.get<Student[]>(API_URL + 'group', {
+  getLecturer(token: string): Observable<Lecturer> {
+    return this.http.get<Lecturer>(API_URL + 'feed/lecturer', {
       headers: {token: token}
     });
   }
