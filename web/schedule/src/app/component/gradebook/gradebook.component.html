@@ -1,7 +1,7 @@
 <app-navigation-student></app-navigation-student>
 <div class="content-container">
   <div class="gradebook-container">
-    <form *ngIf="isHeadman" class="register-form" (ngSubmit)="save()">
+    <form *ngIf="isHeadman" class="gradebook-form" (ngSubmit)="save()">
     <table  class="gradebook-table">
       <tr>
         <th>Семестр</th>
@@ -20,7 +20,7 @@
           <input type="text"  [(ngModel)]="a.subject.name" name="{{a.subject.name}}">
         </td>
         <td>
-          <input type="text" [(ngModel)]="a.mark" name="{{a.mark}}">
+          <input type="number" [(ngModel)]="a.mark" name="{{a.mark}}">
         </td>
       </tr>
     </table>

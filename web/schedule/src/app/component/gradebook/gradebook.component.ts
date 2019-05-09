@@ -2,13 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {AppComponent} from '../../app.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UrlService} from '../../service/url.service';
-import {GroupService} from '../../service/group.service';
 import {TokenProviderService} from '../../service/token.provider.service';
 import {GradebookService} from '../../service/gradebook.service';
 import {Assessment} from '../../dto/Assessment';
-import {EditAssessment} from '../../dto/EditAssessment';
-import {Student} from '../../dto/Student';
-import {RegisterStudent} from '../../dto/RegisterStudent';
+import {AssessmentService} from '../../service/assessment.service';
 
 @Component({
   selector: 'app-gradebook',
@@ -26,7 +23,8 @@ export class GradebookComponent implements OnInit {
               private route: ActivatedRoute,
               private urlService: UrlService,
               private gradebookService: GradebookService,
-              private tokenProviderService: TokenProviderService) {
+              private tokenProviderService: TokenProviderService,
+              private assessmentService: AssessmentService) {
   }
 
   ngOnInit() {
@@ -53,7 +51,11 @@ export class GradebookComponent implements OnInit {
     });
   }
 
-  save(){
+  save() {
     console.log(this.assessments);
+    this.assessmentService.saveAssessments(this.assessments).subscribe(() => {
+      this.router.navigate(['/group'], {replaceUrl: true});
+    });
   }
+
 }

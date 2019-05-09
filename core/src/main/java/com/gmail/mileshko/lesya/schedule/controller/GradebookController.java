@@ -48,9 +48,8 @@ public class GradebookController {
 
 
     @PostMapping("edit")
-    public AssessmentDto editAssessment( AssessmentDto assessmentDto, EditAssessmentDto editAssessmentDto) throws NoSuchEntityException, AuthorizationException {
-        Assessment assessment = assessmentRepository.findById(assessmentDto.id).orElseThrow(()-> new NoSuchEntityException(""));
-        return Mapper.map(assessmentService.editAssessment(assessment, editAssessmentDto), AssessmentDto.class);
+    public void editAssessments(@RequestBody List<AssessmentDto> assessmentsDto) throws NoSuchEntityException, AuthorizationException {
+        assessmentService.editAssessment(assessmentsDto);
     }
 
 

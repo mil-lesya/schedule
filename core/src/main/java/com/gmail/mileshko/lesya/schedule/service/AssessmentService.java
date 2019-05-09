@@ -1,5 +1,6 @@
 package com.gmail.mileshko.lesya.schedule.service;
 
+import com.gmail.mileshko.lesya.schedule.dto.AssessmentDto;
 import com.gmail.mileshko.lesya.schedule.dto.EditAssessmentDto;
 import com.gmail.mileshko.lesya.schedule.entity.Assessment;
 import com.gmail.mileshko.lesya.schedule.entity.Session;
@@ -12,6 +13,8 @@ import com.gmail.mileshko.lesya.schedule.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -29,14 +32,17 @@ public class AssessmentService {
         this.subjectRepository = subjectRepository;
     }
 
-    public Assessment editAssessment(Assessment assessment, EditAssessmentDto editAssessmentDto) throws NoSuchEntityException, AuthorizationException {
+    public void editAssessment(List<AssessmentDto> assessmentsDto) throws NoSuchEntityException, AuthorizationException {
 
+        for (AssessmentDto assessmentDto :
+                assessmentsDto) {
+            Assessment assessment = assessmentRepository.findById(assessmentDto.id).orElseThrow(()-> new NoSuchEntityException(""));
+            assessment.setSession(sessionRepository.findBySemesterNumberAndYear(assessmentDto.session.semesterNumber, assessmentDto.session.year).orElseThrow(()-> new NoSuchEntityException("")));
 
-        assessment.setSubject(subjectRepository.findByName(editAssessmentDto.subjectName).orElseThrow(()-> new NoSuchEntityException("нет предмета с таким названием")));
-        Session session = sessionRepository.findBySemesterNumberAndYear(editAssessmentDto.semesterNumber, editAssessmentDto.year).orElseThrow(()-> new NoSuchEntityException("нет сессии с таким номером и годом обучения"));
-        assessment.setSession(session);
-        assessment.setMark(editAssessmentDto.mark);
+            assessment.setSubject(subjectRepository.findByName(assessmentDto.subject.name).orElseThrow(()-> new NoSuchEntityException("")));
+            assessment.setMark(assessmentDto.mark);
+            assessmentRepository.save(assessment);
+        }
 
-        return assessmentRepository.save(assessment);
     }
 }
