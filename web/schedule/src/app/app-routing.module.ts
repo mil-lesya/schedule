@@ -48,6 +48,12 @@ const routes: Routes = [
   },
 
   {
+    path: 'gradebook/student',
+    component: GradebookComponent,
+    data: {title: 'Gradebook'}
+  },
+
+  {
     path: 'schedule',
     component: ScheduleComponent,
     data: {title: 'Schedule'}

@@ -2,9 +2,9 @@ package com.gmail.mileshko.lesya.schedule.service;
 
 import com.gmail.mileshko.lesya.schedule.dto.AuthStudentDto;
 import com.gmail.mileshko.lesya.schedule.dto.RegisterStudentDto;
-import com.gmail.mileshko.lesya.schedule.dto.StudentDto;
 import com.gmail.mileshko.lesya.schedule.entity.*;
 import com.gmail.mileshko.lesya.schedule.exception.AuthenticationException;
+import com.gmail.mileshko.lesya.schedule.exception.AuthorizationException;
 import com.gmail.mileshko.lesya.schedule.exception.NoSuchEntityException;
 import com.gmail.mileshko.lesya.schedule.exception.RegistrationException;
 import com.gmail.mileshko.lesya.schedule.repository.*;
@@ -14,9 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.print.Pageable;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -88,6 +86,11 @@ public class StudentService {
         return assessmentRepository.findAllByGradebook(student.getGradebook());
     }
 
+    public Boolean isHeadman(Student student){
+       return groupRepository.findByHeadman(student).isPresent();
+    }
 
-
+    public void authorize(Student student) throws AuthorizationException {
+        groupRepository.findByHeadman(student).orElseThrow(()-> new AuthorizationException("no permission"));
+    }
 }

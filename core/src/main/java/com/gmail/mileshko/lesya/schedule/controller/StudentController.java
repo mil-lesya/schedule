@@ -21,7 +21,7 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping
+    @GetMapping("get")
     public StudentDto get(@RequestHeader("token") String token) throws NoSuchEntityException {
         Student student = studentService.validate(token);
         return Mapper.map(student, StudentDto.class);

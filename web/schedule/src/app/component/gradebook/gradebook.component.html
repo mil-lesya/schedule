@@ -1,20 +1,46 @@
 <app-navigation-student></app-navigation-student>
 <div class="content-container">
   <div class="gradebook-container">
-  <table class="gradebook-table">
-    <tr>
-      <th>Семестр</th>
-      <th>Год</th>
-      <th>Предмет</th>
-      <th>Оценка</th>
-    </tr>
-    <tr class="row" *ngFor="let a of assessments"  >
-      <td>{{a.session.semesterNumber}}</td>
-      <td>{{a.session.year}}</td>
-      <td>{{a.subject.name}}</td>
-      <td>{{a.mark}}</td>
-    </tr>
+    <form *ngIf="isHeadman" class="register-form" (ngSubmit)="save()">
+    <table  class="gradebook-table">
+      <tr>
+        <th>Семестр</th>
+        <th>Год</th>
+        <th>Предмет</th>
+        <th>Оценка</th>
+      </tr>
+      <tr  *ngFor="let a of assessments" class="row">
+        <td>
+          <input type="number"[(ngModel)]="a.session.semesterNumber" name="{{a.session.semesterNumber}}">
+        </td>
+        <td>
+          <input type="text"  [(ngModel)]="a.session.year" name="{{a.session.year}}">
+        </td>
+        <td>
+          <input type="text"  [(ngModel)]="a.subject.name" name="{{a.subject.name}}">
+        </td>
+        <td>
+          <input type="text" [(ngModel)]="a.mark" name="{{a.mark}}">
+        </td>
+      </tr>
+    </table>
+      <button>Добавить</button>
+      <button> Сохранить</button>
+    </form>
 
-  </table>
-</div>
+    <table *ngIf="!isHeadman" class="gradebook-table">
+      <tr>
+        <th>Семестр</th>
+        <th>Год</th>
+        <th>Предмет</th>
+        <th>Оценка</th>
+      </tr>
+      <tr *ngFor="let a of assessments" class="row">
+        <td>{{a.session.semesterNumber}}</td>
+        <td>{{a.session.year}}</td>
+        <td>{{a.subject.name}}</td>
+        <td>{{a.mark}}</td>
+      </tr>
+    </table>
+  </div>
 </div>

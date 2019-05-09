@@ -3,7 +3,6 @@ package com.gmail.mileshko.lesya.schedule.service;
 
 import com.gmail.mileshko.lesya.schedule.dto.AuthLecturerDto;
 import com.gmail.mileshko.lesya.schedule.dto.RegisterLecturerDto;
-import com.gmail.mileshko.lesya.schedule.entity.Department;
 import com.gmail.mileshko.lesya.schedule.entity.Lecturer;
 import com.gmail.mileshko.lesya.schedule.entity.LecturerToken;
 import com.gmail.mileshko.lesya.schedule.entity.Pass;
@@ -15,8 +14,10 @@ import com.gmail.mileshko.lesya.schedule.security.Hasher;
 import com.gmail.mileshko.lesya.schedule.security.TokenGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class LecturerService {
     private final LecturerRepository lecturerRepository;
     private final PassRepository passRepository;

@@ -18,8 +18,7 @@ public class Gradebook {
     @OneToOne(mappedBy = "gradebook", cascade = CascadeType.ALL)
     private Student student;
 
-    @OneToMany
-    @JoinColumn(name = "asessment_id")
+    @OneToMany(mappedBy = "gradebook", cascade = CascadeType.ALL)
     private List<Assessment> assessment;
 
     public Gradebook() {

@@ -7,6 +7,4 @@ export class Student {
   id: number;
   group: Group;
   personalCard: PersonalCard;
-  gradebook: Gradebook;
-  password: string;
 }

@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UrlService} from '../../service/url.service';
 import {TokenProviderService} from '../../service/token.provider.service';
 import {GroupService} from '../../service/group.service';
+import {GradebookService} from '../../service/gradebook.service';
 
 @Component({
   selector: 'app-group',
@@ -13,8 +14,8 @@ import {GroupService} from '../../service/group.service';
 })
 export class GroupComponent implements OnInit {
 
-  num: number;
   students: Student[];
+  isHeadman: boolean;
 
   constructor(
     private app: AppComponent,
@@ -22,18 +23,27 @@ export class GroupComponent implements OnInit {
     private route: ActivatedRoute,
     private urlService: UrlService,
     private groupService: GroupService,
+    private gradebookService: GradebookService,
     private tokenProviderService: TokenProviderService
   ) {
   }
 
   ngOnInit() {
-    this.num = 0;
     this.tokenProviderService.token.subscribe(token => {
       console.log(token);
       this.groupService.getGroup(token).subscribe(students => {
         this.students = students;
+        this.gradebookService.isHeadman(token).subscribe(isHeadman => {
+          this.isHeadman = isHeadman;
+          console.log(isHeadman);
+        });
       });
     });
   }
 
+  editAssessment(studentId: number) {
+
+    this.router.navigate(['/gradebook'], { queryParams: {id: studentId }});
+
+  }
 }

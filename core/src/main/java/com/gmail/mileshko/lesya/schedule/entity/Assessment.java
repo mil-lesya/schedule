@@ -1,7 +1,6 @@
 package com.gmail.mileshko.lesya.schedule.entity;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "assessment")
@@ -29,7 +28,8 @@ public class Assessment {
     public Assessment() {
     }
 
-    public Assessment(Subject subject, Session session, Integer mark) {
+    public Assessment(Gradebook gradebook, Subject subject, Session session, Integer mark) {
+        this.gradebook = gradebook;
         this.subject = subject;
         this.session = session;
         this.mark = mark;
@@ -65,5 +65,13 @@ public class Assessment {
 
     public void setMark(Integer mark) {
         this.mark = mark;
+    }
+
+    public Gradebook getGradebook() {
+        return gradebook;
+    }
+
+    public void setGradebook(Gradebook gradebook) {
+        this.gradebook = gradebook;
     }
 }

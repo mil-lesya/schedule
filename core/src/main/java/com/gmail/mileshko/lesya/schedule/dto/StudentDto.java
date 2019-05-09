@@ -1,15 +1,16 @@
 package com.gmail.mileshko.lesya.schedule.dto;
 
 public class StudentDto {
-    public GradebookDto gradebook;
+    public Long id;
     public GroupDto group;
     public PersonalCardDto personalCard;
 
     public StudentDto() {
     }
 
-    public StudentDto(GradebookDto gradebook, GroupDto group, PersonalCardDto personalCard) {
-        this.gradebook = gradebook;
+    public StudentDto(Long id, GroupDto group, PersonalCardDto personalCard) {
+        this.id = id;
+
         this.group = group;
         this.personalCard = personalCard;
     }

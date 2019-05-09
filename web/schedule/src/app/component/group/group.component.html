@@ -1,19 +1,35 @@
 <app-navigation-student></app-navigation-student>
 <div class="content-container">
   <div class="group-container">
-<table class="group-table">
-  <tr>
-    <th>№</th>
-    <th>Фамилия</th>
-    <th>Имя</th>
-    <th>Отчество</th>
-  </tr>
-  <tr class="row"  *ngFor="let s of students; let i = index"  >
-    <td>{{i+1}}</td>
-    <td>{{s.personalCard.surname}}</td>
-    <td>{{s.personalCard.name}}</td>
-    <td>{{s.personalCard.patronymic}}</td>
-  </tr>
-</table>
-</div>
+    <table *ngIf="isHeadman" class="group-table">
+      <tr>
+        <th>№</th>
+        <th>Фамилия</th>
+        <th>Имя</th>
+        <th>Отчество</th>
+      </tr>
+      <tr class="row" *ngFor="let s of students; let i = index">
+        <td (click)="editAssessment(s.id)" >
+            {{i + 1}}
+        </td>
+        <td>{{s.personalCard.surname}}</td>
+        <td>{{s.personalCard.name}}</td>
+        <td>{{s.personalCard.patronymic}}</td>
+      </tr>
+    </table>
+    <table *ngIf="!isHeadman" class="group-table">
+      <tr>
+        <th>№</th>
+        <th>Фамилия</th>
+        <th>Имя</th>
+        <th>Отчество</th>
+      </tr>
+      <tr class="row" *ngFor="let s of students; let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{s.personalCard.surname}}</td>
+        <td>{{s.personalCard.name}}</td>
+        <td>{{s.personalCard.patronymic}}</td>
+      </tr>
+    </table>
+  </div>
 </div>

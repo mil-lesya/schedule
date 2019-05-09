@@ -32,9 +32,10 @@ export class FeedStudentComponent implements OnInit {
 
     this.tokenProviderService.token.subscribe(token => {
       console.log(token);
-      this.studentService.getStudent(token).subscribe(me =>
-        this.me = me);
-      console.log(this.me);
+      this.studentService.getStudent(token).subscribe(me => {
+        this.me = me;
+        console.log(this.me);
+      });
     });
 
   }

@@ -9,50 +9,63 @@
   height: 600px;
 }
 
-.gradebook-container{
+.gradebook-container {
 
-padding: 20px;
+  padding: 20px;
 
 }
-  .gradebook-table {
 
-    width: 100%;
-    margin-top: 4px;
-background: #fbfbfb;
-    border-collapse: collapse;
-    vertical-align: top;
-    max-width: 100%;
+button{
 
-    overflow-x: auto;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  margin-bottom: 2em;
+  font-size: 20px;
+  cursor:pointer;
+  width: 180px;
+  height: 80px;
+  margin: 20px;
+}
 
-    // optional - looks better for small cell values
-    white-space: nowrap;
-    border-spacing: 0;
+.gradebook-table {
+
+  width: 100%;
+  margin-top: 4px;
+  background: #fbfbfb;
+  border-collapse: collapse;
+  vertical-align: top;
+  max-width: 100%;
+
+  overflow-x: auto;
+
+  // optional - looks better for small cell values
+  white-space: nowrap;
+  border-spacing: 0;
 
 
-    th {
+  th {
+    padding: 12px 12px;
+    border: 1px solid #d9d7ce;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .row {
+    cursor: pointer;
+
+    transition: border linear 2s;
+
+    td {
+      text-align: center;
+
       padding: 12px 12px;
       border: 1px solid #d9d7ce;
       font-size: 18px;
-      text-align: center;
     }
-
-    .row {
-      cursor: pointer;
-
-      transition: border linear 2s;
-
-      td {
-        text-align: center;
-
-        padding: 12px 12px;
-        border: 1px solid #d9d7ce;
-        font-size: 18px;
-      }
-    }
-
-
-
   }
+
+
+}
 
 

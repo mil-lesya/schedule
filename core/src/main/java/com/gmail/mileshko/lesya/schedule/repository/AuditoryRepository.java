@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 
 public interface AuditoryRepository extends CrudRepository<Auditory, Long> {
-    Optional<Auditory> findByAuditoryNumber(Integer gradebookNumber);
+    Optional<Auditory> findByAuditoryNumber(Integer auditoryNumber);
 
 }

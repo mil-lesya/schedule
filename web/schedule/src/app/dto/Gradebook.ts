@@ -1,9 +1,8 @@
 import {Student} from './Student';
+import {Assessment} from './Assessment';
 
-export  class Gradebook {
-  id : number;
-  gradebookNumber : string;
-  student : Student;
-  
-
+export class Gradebook {
+  gradebookNumber: string;
+  assessments: Assessment[];
+  student: Student;
 }

@@ -10,13 +10,34 @@ import {Assessment} from '../dto/Assessment';
 })
 export class GradebookService {
 
+  student: Student;
+
   constructor(
     private http: HttpClient
   ) {
   }
+
   getGradebookAssessments(token: string): Observable<Assessment[]> {
     return this.http.get<Assessment[]>(API_URL + 'gradebook', {
       headers: {token: token}
     });
+  }
+
+  getStudentAssessments(studentId: number): Observable<Assessment[]> {
+    return this.http.get<Assessment[]>(API_URL + 'gradebook/student', {
+      params: {studentId: studentId.toString()}
+    });
+  }
+
+
+  isHeadman(token: string) {
+    return this.http.get<boolean>(API_URL + 'gradebook/headman', {
+      headers: {token: token}
+    });
+  }
+
+  getStudent(student: Student) {
+    this.student = student;
+    console.log(student);
   }
 }
