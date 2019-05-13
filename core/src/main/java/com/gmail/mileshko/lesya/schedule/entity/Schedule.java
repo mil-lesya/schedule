@@ -1,6 +1,9 @@
 package com.gmail.mileshko.lesya.schedule.entity;
 
+import com.gmail.mileshko.lesya.schedule.entity.enums.Week;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "schedule")
@@ -29,18 +32,27 @@ public class Schedule {
     private Integer periodicity;
 
     @Column(name = "week")
-    private  String week;
+    private Week week;
+
+    @ManyToMany
+    @JoinTable(
+            name = "group_schedule",
+            joinColumns = @JoinColumn(name = "schedule_id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id")
+    )
+    private List<Group> groupList;
 
     public Schedule() {
     }
 
-    public Schedule(Subject subject, Auditory auditory, Lecturer lecturer, Integer classNumber, Integer periodicity, String week) {
+    public Schedule(Subject subject, Auditory auditory, Lecturer lecturer, Integer classNumber, Integer periodicity, Week week, List<Group> groupList) {
         this.subject = subject;
         this.auditory = auditory;
         this.lecturer = lecturer;
         this.classNumber = classNumber;
         this.periodicity = periodicity;
         this.week = week;
+        this.groupList = groupList;
     }
 
     public Long getId() {
@@ -91,11 +103,19 @@ public class Schedule {
         this.periodicity = periodicity;
     }
 
-    public String getWeek() {
+    public Week getWeek() {
         return week;
     }
 
-    public void setWeek(String week) {
+    public void setWeek(Week week) {
         this.week = week;
+    }
+
+    public List<Group> getGroupList() {
+        return groupList;
+    }
+
+    public void setGroupList(List<Group> groupList) {
+        this.groupList = groupList;
     }
 }

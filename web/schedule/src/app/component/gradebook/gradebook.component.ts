@@ -6,6 +6,10 @@ import {TokenProviderService} from '../../service/token.provider.service';
 import {GradebookService} from '../../service/gradebook.service';
 import {Assessment} from '../../dto/Assessment';
 import {AssessmentService} from '../../service/assessment.service';
+import {Observable} from 'rxjs';
+import {Subject} from '../../dto/Subject';
+import {Session} from '../../dto/Session';
+import {NewAssessment} from '../../dto/NewAssessment';
 
 @Component({
   selector: 'app-gradebook',
@@ -17,6 +21,8 @@ export class GradebookComponent implements OnInit {
   assessments: Assessment[];
   isHeadman: boolean;
   studentId: number;
+  buttonType: string;
+  newAssessments: NewAssessment[] = [];
 
   constructor(private app: AppComponent,
               private router: Router,
@@ -39,7 +45,7 @@ export class GradebookComponent implements OnInit {
         if (isHeadman) {
           this.route.queryParams.subscribe(params => {
             this.studentId = params.id;
-            console.log( this.studentId);
+            console.log(this.studentId);
             this.gradebookService.getStudentAssessments(params.id).subscribe(assessments => {
               this.assessments = assessments;
               console.log(assessments);
@@ -51,11 +57,20 @@ export class GradebookComponent implements OnInit {
     });
   }
 
-  save() {
-    console.log(this.assessments);
-    this.assessmentService.saveAssessments(this.assessments).subscribe(() => {
-      this.router.navigate(['/group'], {replaceUrl: true});
-    });
-  }
 
+  onSubmit(): void {
+    if (this.buttonType === 'add') {
+
+      console.log(this.newAssessments);
+    }
+    if (this.buttonType === 'save') {
+      console.log(this.assessments);
+      this.assessmentService.saveAssessments(this.assessments).subscribe(() => {
+        this.assessmentService.addAssessment(this.newAssessments).subscribe(() => {
+          this.router.navigate(['/group'], {replaceUrl: true});
+        });
+      });
+    }
+
+  }
 }

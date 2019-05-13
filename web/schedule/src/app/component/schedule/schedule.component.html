@@ -11,12 +11,13 @@
         <th>Пятница</th>
         <th>Суббота</th>
       </tr>
-      <tr class="row"  *ngFor="let s of students; let i = index"  >
-        <td>{{i+1}}</td>
-        <td>{{s.personalCard.surname}}</td>
-        <td>{{s.personalCard.name}}</td>
-        <td>{{s.personalCard.patronymic}}</td>
-      </tr>
+        <tr *ngFor="let s of schedule">
+          <td *ngIf="s.classNumber == 1">8:00</td>
+          <td *ngIf="s.classNumber == 2">9:50</td>
+          <td *ngIf="s.classNumber == 3">11:40</td>
+          <td *ngIf="s.classNumber == 4">13:50</td>
+          <td *ngIf="s.week == 1">{{s.subjectDto}} {{s.lecturerDto.surname}} {{s.auditoryDto.auditoryNumber}}</td>
+        </tr>
     </table>
   </div>
 </div>

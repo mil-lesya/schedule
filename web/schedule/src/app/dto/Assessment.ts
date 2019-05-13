@@ -1,11 +1,13 @@
 import {Gradebook} from './Gradebook';
 import {Session} from './Session';
-import {Sabject} from './Sabject';
+import {Subject} from './Subject';
 
 export  class Assessment {
   id: number;
   gradebook: Gradebook;
-  subject: Sabject;
+  subject: Subject;
   session: Session;
   mark: number;
+
 }
+

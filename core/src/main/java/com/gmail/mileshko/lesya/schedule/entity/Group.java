@@ -41,11 +41,12 @@ public class Group {
         this.course = course;
     }
 
-    public Group(Integer groupNumber, Integer course, Student headman, Lecturer curator) {
+    public Group(Integer groupNumber, Integer course, Student headman, Lecturer curator, List<Schedule> scheduleList) {
         this.groupNumber = groupNumber;
         this.course = course;
         this.headman = headman;
         this.curator = curator;
+        this.scheduleList = scheduleList;
     }
 
     public Long getId() {

@@ -5,7 +5,7 @@ import org.hibernate.validator.constraints.Range;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-public class EditAssessmentDto {
+public class NewAssessmentDto {
 
     @NotNull
     public Long id;
@@ -19,4 +19,6 @@ public class EditAssessmentDto {
     public Integer mark;
 
     public String year;
+
+    public  GradebookDto gradebook;
 }

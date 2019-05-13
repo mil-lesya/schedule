@@ -326,7 +326,7 @@ alter table group_schedule
     owner to postgres;
 
 create unique index group_schedule_gpoup_id_uindex
-    on group_schedule (gpoup_id);
+    on group_schedule (group_id);
 
 create unique index group_schedule_shedule_id_uindex
     on group_schedule (shedule_id);
