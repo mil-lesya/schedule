@@ -1,9 +1,7 @@
 package com.gmail.mileshko.lesya.schedule.controller;
 
 import com.gmail.mileshko.lesya.schedule.dto.AssessmentDto;
-import com.gmail.mileshko.lesya.schedule.dto.EditAssessmentDto;
-import com.gmail.mileshko.lesya.schedule.dto.StudentDto;
-import com.gmail.mileshko.lesya.schedule.entity.Assessment;
+import com.gmail.mileshko.lesya.schedule.dto.NewAssessmentDto;
 import com.gmail.mileshko.lesya.schedule.entity.Student;
 import com.gmail.mileshko.lesya.schedule.exception.AuthorizationException;
 import com.gmail.mileshko.lesya.schedule.exception.NoSuchEntityException;
@@ -23,17 +21,15 @@ public class GradebookController {
     private  final StudentService studentService;
     private  final StudentRepository studentRepository;
     private final AssessmentService assessmentService;
-    private final AssessmentRepository assessmentRepository;
 
     @Autowired
-    public GradebookController(StudentService studentService, StudentRepository studentRepository, AssessmentService assessmentService, AssessmentRepository assessmentRepository) {
+    public GradebookController(StudentService studentService, StudentRepository studentRepository, AssessmentService assessmentService) {
         this.studentService = studentService;
         this.studentRepository = studentRepository;
         this.assessmentService = assessmentService;
-        this.assessmentRepository = assessmentRepository;
     }
 
-    @GetMapping()
+    @GetMapping
     public List<AssessmentDto> getAssessments(@RequestHeader("token") String token) throws NoSuchEntityException {
         Student student = studentService.validate(token);
         return Mapper.mapAll(studentService.getGradebookAssessments(student), AssessmentDto.class);
@@ -52,7 +48,10 @@ public class GradebookController {
         assessmentService.editAssessment(assessmentsDto);
     }
 
-
+    @PostMapping("add")
+    public void addAssessment(@RequestBody List<NewAssessmentDto> newAssessmentsDto) throws NoSuchEntityException {
+        assessmentService.addAssessment(newAssessmentsDto);
+    }
 
     @GetMapping("headman")
     public boolean isHeadman(@RequestHeader("token") String token) throws NoSuchEntityException {

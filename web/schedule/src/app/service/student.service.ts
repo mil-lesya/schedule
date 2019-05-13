@@ -15,7 +15,7 @@ export class StudentService {
   }
 
   getStudent(token: string): Observable<Student> {
-    return this.http.get<Student>(API_URL + 'feed/student/get', {
+    return this.http.get<Student>(API_URL + 'student/get', {
       headers: {token: token}
     });
   }

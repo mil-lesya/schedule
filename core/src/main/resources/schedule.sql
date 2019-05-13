@@ -120,14 +120,14 @@ create table assessment
     id           bigserial not null
         constraint performance_monitoring_pk
             primary key,
-    subject_id   bigint    not null
+    subject_id   bigint
         constraint assessment_subject_id_fk
             references subject,
-    session_id   bigint    not null
+    session_id   bigint
         constraint performance_monitoring_session_id_fk
             references session,
-    mark         integer   not null,
-    gradebook_id bigint    not null
+    mark         integer,
+    gradebook_id bigint
         constraint assessment_gradebook_id_fk
             references gradebook
 );
@@ -137,9 +137,6 @@ alter table assessment
 
 create unique index performance_monitoring_assessment_id_uindex
     on assessment (id);
-
-create unique index performance_monitoring_subject_id_uindex
-    on assessment (subject_id);
 
 create unique index gradebook_id_uindex
     on gradebook (id);
@@ -160,9 +157,6 @@ create table student_token
 
 alter table student_token
     owner to postgres;
-
-create unique index student_token_student_id_uindex
-    on student_token (student_id);
 
 create table pass
 (
@@ -231,20 +225,20 @@ create unique index group_curator_id_uindex
 
 create table schedule
 (
-    id           bigint  not null
+    id           bigserial not null
         constraint schedule_pk
             primary key,
-    subject_id   bigint  not null
+    subject_id   bigint    not null
         constraint schedule_subject_id_fk
             references subject,
-    auditory_id  bigint  not null
+    auditory_id  bigint    not null
         constraint schedule_auditory_id_fk
             references auditory,
-    lecturer_id  bigint  not null
+    lecturer_id  bigint    not null
         constraint schedule_lecturer_id_fk
             references lecturer,
-    class_number integer not null,
-    periodicity  integer not null,
+    class_number integer   not null,
+    periodicity  integer,
     week         varchar
 );
 
@@ -294,17 +288,8 @@ create unique index class_class_id_uindex
 create unique index class_schedule_uindex
     on class (schedule_id);
 
-create unique index schedule_auditory_uindex
-    on schedule (auditory_id);
-
-create unique index schedule_lecturer_uindex
-    on schedule (lecturer_id);
-
 create unique index schedule_schedule_id_uindex
     on schedule (id);
-
-create unique index schedule_subject_uindex
-    on schedule (subject_id);
 
 create unique index lecturer_id_uindex
     on lecturer (id);
@@ -314,22 +299,16 @@ create unique index lecturer_pass_number_uindex
 
 create table group_schedule
 (
-    shedule_id bigint not null
+    "sсhedule_id" bigint
         constraint group_schedule_schedule_id_fk
             references schedule,
-    gpoup_id   bigint not null
+    group_id      bigint
         constraint group_schedule_group_id_fk
             references "group"
 );
 
 alter table group_schedule
     owner to postgres;
-
-create unique index group_schedule_gpoup_id_uindex
-    on group_schedule (group_id);
-
-create unique index group_schedule_shedule_id_uindex
-    on group_schedule (shedule_id);
 
 create table lecturer_token
 (
@@ -344,9 +323,6 @@ create table lecturer_token
 
 alter table lecturer_token
     owner to postgres;
-
-create unique index lecturer_token_lecturer_id_uindex
-    on lecturer_token (lecturer_id);
 
 create unique index passes_pass_number_uindex
     on pass (pass_number);
