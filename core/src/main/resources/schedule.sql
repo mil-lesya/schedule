@@ -299,7 +299,7 @@ create unique index lecturer_pass_number_uindex
 
 create table group_schedule
 (
-    "sсhedule_id" bigint
+    "schedule_id" bigint
         constraint group_schedule_schedule_id_fk
             references schedule,
     group_id      bigint

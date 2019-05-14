@@ -2,22 +2,68 @@
 <div class="content-container">
   <div class="schedule-container">
     <table class="schedule-table">
+
       <tr>
+        <th></th>
         <th>Время</th>
-        <th>Понедельник</th>
-        <th>Вторник</th>
-        <th>Среда</th>
-        <th>Четверг</th>
-        <th>Пятница</th>
-        <th>Суббота</th>
+        <th>Предмет</th>
+        <th>Преподаватель</th>
+        <th>Аудитория</th>
       </tr>
-        <tr *ngFor="let s of schedule">
-          <td *ngIf="s.classNumber == 1">8:00</td>
-          <td *ngIf="s.classNumber == 2">9:50</td>
-          <td *ngIf="s.classNumber == 3">11:40</td>
-          <td *ngIf="s.classNumber == 4">13:50</td>
-          <td *ngIf="s.week == 1">{{s.subjectDto}} {{s.lecturerDto.surname}} {{s.auditoryDto.auditoryNumber}}</td>
-        </tr>
+      <tr>
+      <td [rowSpan]="monday.length + 1">Пн</td>
+      </tr>
+      <tr class="row" *ngFor="let s of monday">
+        <td >{{time[s.classNumber]}}</td>
+        <td>{{s.subject.name}}</td>
+        <td>{{s.lecturer.surname}} {{s.lecturer.name}} {{s.lecturer.patronymic}} </td>
+        <td>{{s.auditory.auditoryNumber}}</td>
+      </tr>
+      <tr>
+        <td  [rowSpan]="tuesday.length + 1">Вт</td>
+      </tr>
+      <tr class="row" *ngFor="let s of tuesday">
+        <td >{{time[s.classNumber]}}</td>
+        <td >{{s.subject.name}}</td>
+        <td>{{s.lecturer.surname}} {{s.lecturer.name}} {{s.lecturer.patronymic}} </td>
+        <td>{{s.auditory.auditoryNumber}}</td>
+      </tr>
+      <tr>
+        <td  [rowSpan]="wednesday.length + 1">Ср</td>
+      </tr>
+      <tr class="row" *ngFor="let s of wednesday">
+        <td>{{time[s.classNumber]}}</td>
+        <td>{{s.subject.name}}</td>
+        <td>{{s.lecturer.surname}} {{s.lecturer.name}} {{s.lecturer.patronymic}} </td>
+        <td>{{s.auditory.auditoryNumber}}</td>
+      </tr>
+      <tr>
+        <td  [rowSpan]="thursday.length + 1">Чт</td>
+      </tr>
+      <tr class="row" *ngFor="let s of thursday">
+        <td>{{time[s.classNumber]}}</td>
+        <td>{{s.subject.name}}</td>
+        <td>{{s.lecturer.surname}} {{s.lecturer.name}} {{s.lecturer.patronymic}} </td>
+        <td>{{s.auditory.auditoryNumber}}</td>
+      </tr>
+      <tr>
+        <td  [rowSpan]="friday.length + 1">Пт</td>
+      </tr>
+      <tr class="row" *ngFor="let s of friday">
+        <td>{{time[s.classNumber]}}</td>
+        <td>{{s.subject.name}}</td>
+        <td>{{s.lecturer.surname}} {{s.lecturer.name}} {{s.lecturer.patronymic}} </td>
+        <td>{{s.auditory.auditoryNumber}}</td>
+      </tr>
+      <tr>
+        <td  [rowSpan]="saturday.length + 1">Сб</td>
+      </tr>
+      <tr class="row" *ngFor="let s of saturday">
+        <td>{{time[s.classNumber]}}</td>
+        <td>{{s.subject.name}}</td>
+        <td>{{s.lecturer.surname}} {{s.lecturer.name}} {{s.lecturer.patronymic}} </td>
+        <td>{{s.auditory.auditoryNumber}}</td>
+      </tr>
     </table>
   </div>
 </div>

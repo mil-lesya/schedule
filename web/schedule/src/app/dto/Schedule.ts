@@ -5,9 +5,9 @@ import {Group} from './Group';
 import {Week} from './Week';
 
 export  class Schedule {
-  subjectDto: Subject;
-  auditoryDto: Auditory;
-  lecturerDto: Lecturer;
+  subject: Subject;
+  auditory: Auditory;
+  lecturer: Lecturer;
   classNumber: number;
   periodicity: number;
   week: Week;

@@ -3,12 +3,12 @@ import {Pass} from './Pass';
 
 export class Lecturer {
   id: number;
-  department : Department;
-  pass : Pass;
-  surname : string;
-  name : string;
-  patronymic : string;
-  phoneNumber : string;
-  mail : string;
-  password : string;
+  department: Department;
+  pass: Pass;
+  surname: string;
+  name: string;
+  patronymic: string;
+  phoneNumber: string;
+  mail: string;
+  password: string;
 }
