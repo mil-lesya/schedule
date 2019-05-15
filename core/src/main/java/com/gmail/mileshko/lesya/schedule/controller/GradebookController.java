@@ -32,13 +32,13 @@ public class GradebookController {
     @GetMapping
     public List<AssessmentDto> getAssessments(@RequestHeader("token") String token) throws NoSuchEntityException {
         Student student = studentService.validate(token);
-        return Mapper.mapAll(studentService.getGradebookAssessments(student), AssessmentDto.class);
+        return Mapper.mapAll(assessmentService.getGradebookAssessments(student), AssessmentDto.class);
     }
 
     @GetMapping("student")
     public List<AssessmentDto> getStudentAssessments(@RequestParam("studentId") Long id) throws NoSuchEntityException {
         Student student = studentRepository.findById(id).orElseThrow(()-> new NoSuchEntityException("") );
-        return Mapper.mapAll(studentService.getGradebookAssessments(student), AssessmentDto.class);
+        return Mapper.mapAll(assessmentService.getGradebookAssessments(student), AssessmentDto.class);
     }
 
 

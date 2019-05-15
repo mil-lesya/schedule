@@ -23,7 +23,7 @@ public class ScheduleService {
     }
 
 
-    public List<Schedule> getSchedule(Student student) throws NoSuchEntityException {
+    public List<Schedule> getSchedule(Student student){
          return scheduleRepository.findAllByGroupList(student.getGroup());
     }
 }

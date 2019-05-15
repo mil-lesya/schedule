@@ -1,10 +1,7 @@
-import {Student} from './Student';
-import {Lecturer} from "./Lecturer";
+import {Lecturer} from './Lecturer';
 
 export class Group {
-  id: number;
-  groupNumber : number;
-  course : number;
-  headman : Student;
-  curator : Lecturer;
+  groupNumber: number;
+  course: number;
+  curator: Lecturer;
 }

@@ -1,0 +1,37 @@
+<app-navigation-lecturer></app-navigation-lecturer>
+<div class="content-container">
+  <div class="group-container">
+    <form class="group-form" (ngSubmit)="getGroup()">
+      <fieldset class="clearfix">
+        <div class="wrapper">
+          <div class="box1">
+            Курс:
+            <input type="text" [(ngModel)]="expectedGroup.course" name="course">
+          </div>
+          <div class="box2">
+            Группа:
+            <input type="text" [(ngModel)]="expectedGroup.group" name="group">
+          </div>
+          <div class="box3">
+           <button>Посмотреть </button>
+          </div>
+        </div>
+      </fieldset>
+    <table *ngIf="received && authorize" class="group-table">
+      <tr>
+        <th>№</th>
+        <th>Фамилия</th>
+        <th>Имя</th>
+        <th>Отчество</th>
+      </tr>
+      <tr class="row" *ngFor="let s of students; let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{s.personalCard.surname}}</td>
+        <td>{{s.personalCard.name}}</td>
+        <td>{{s.personalCard.patronymic}}</td>
+      </tr>
+    </table>
+    </form>
+  </div>
+</div>
+

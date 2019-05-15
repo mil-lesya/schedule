@@ -11,6 +11,7 @@ import {RegisterStudentComponent} from './component/register-student/register-st
 import {AuthLecturerComponent} from './component/auth-lecturer/auth-lecturer.component';
 import {RegisterLecturerComponent} from './component/register-lecturer/register-lecturer.component';
 import {FeedLecturerComponent} from './component/feed-lecturer/feed-lecturer.component';
+import {GroupNumberComponent} from './component/group-number/group-number.component';
 
 const routes: Routes = [
   {
@@ -63,6 +64,12 @@ const routes: Routes = [
     path: 'group',
     component: GroupComponent,
     data: {title: 'Group'}
+  },
+
+  {
+    path: 'group/number',
+    component: GroupNumberComponent,
+    data: {title: 'Group Number'}
   },
 
   {

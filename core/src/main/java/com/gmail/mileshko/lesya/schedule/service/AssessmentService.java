@@ -3,6 +3,7 @@ package com.gmail.mileshko.lesya.schedule.service;
 import com.gmail.mileshko.lesya.schedule.dto.AssessmentDto;
 import com.gmail.mileshko.lesya.schedule.dto.NewAssessmentDto;
 import com.gmail.mileshko.lesya.schedule.entity.Assessment;
+import com.gmail.mileshko.lesya.schedule.entity.Student;
 import com.gmail.mileshko.lesya.schedule.exception.AuthorizationException;
 import com.gmail.mileshko.lesya.schedule.exception.NoSuchEntityException;
 import com.gmail.mileshko.lesya.schedule.repository.AssessmentRepository;
@@ -55,6 +56,11 @@ public class AssessmentService {
             assessmentRepository.save(assessment);
         }
 
+    }
+
+
+    public List<Assessment> getGradebookAssessments(Student student) {
+        return assessmentRepository.findAllByGradebook(student.getGradebook());
     }
 
 

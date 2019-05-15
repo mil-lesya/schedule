@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Student} from '../../dto/Student';
-import {AppComponent} from '../../app.component';
-import {ActivatedRoute, Router} from '@angular/router';
-import {UrlService} from '../../service/url.service';
+import {Router} from '@angular/router';
 import {TokenProviderService} from '../../service/token.provider.service';
 import {GroupService} from '../../service/group.service';
 import {GradebookService} from '../../service/gradebook.service';
@@ -18,10 +16,7 @@ export class GroupComponent implements OnInit {
   isHeadman: boolean;
 
   constructor(
-    private app: AppComponent,
     private router: Router,
-    private route: ActivatedRoute,
-    private urlService: UrlService,
     private groupService: GroupService,
     private gradebookService: GradebookService,
     private tokenProviderService: TokenProviderService

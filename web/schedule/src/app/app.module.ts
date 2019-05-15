@@ -18,6 +18,7 @@ import { AuthLecturerComponent } from './component/auth-lecturer/auth-lecturer.c
 import { RegisterLecturerComponent } from './component/register-lecturer/register-lecturer.component';
 import { NavigationLecturerComponent } from './component/navigation-lecturer/navigation-lecturer.component';
 import { FeedLecturerComponent } from './component/feed-lecturer/feed-lecturer.component';
+import { GroupNumberComponent } from './component/group-number/group-number.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { FeedLecturerComponent } from './component/feed-lecturer/feed-lecturer.c
     RegisterLecturerComponent,
     NavigationLecturerComponent,
     FeedLecturerComponent,
+    GroupNumberComponent,
   ],
   imports: [
     AppRoutingModule,

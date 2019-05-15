@@ -77,14 +77,6 @@ public class StudentService {
         studentRepository.save(student);
     }
 
-    public List<Student> getGroup(Student student) {
-        return studentRepository.findAllByGroup(student.getGroup());
-    }
-
-    public List<Assessment> getGradebookAssessments(Student student) {
-        Gradebook gradebook = student.getGradebook();
-        return assessmentRepository.findAllByGradebook(student.getGradebook());
-    }
 
     public Boolean isHeadman(Student student){
        return groupRepository.findByHeadman(student).isPresent();
