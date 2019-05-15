@@ -51,7 +51,6 @@ export class GradebookComponent implements OnInit {
               console.log(assessments);
             });
           });
-
         }
       });
     });

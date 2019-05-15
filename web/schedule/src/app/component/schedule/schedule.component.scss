@@ -1,13 +1,13 @@
 .content-container {
   background-image: url("../../../assets/auth.jpg");
-
+  min-height: calc(100vh - 50px);
   overflow: hidden;
   padding: 5px 5px;
   max-width: 1000px;
   align-items: flex-start;
   margin: 0 auto;
+  font-family: Garamond, monospace;
   height: 100%;
-
   .schedule-container{
     padding: 20px;
   }
@@ -39,7 +39,6 @@
       padding: 6px 12px;
       border: 1px solid #d9d7ce;
       font-size: 20px;
-      text-align: center;
     }
 
     .row {

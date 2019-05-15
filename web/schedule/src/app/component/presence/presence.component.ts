@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {TokenProviderService} from '../../service/token.provider.service';
+import {AttendanceService} from '../../service/attendance.service';
+import {Attendance} from '../../dto/Attendance';
 
 @Component({
   selector: 'app-presence',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PresenceComponent implements OnInit {
 
-  constructor() { }
+  attendance: Attendance[];
+
+  constructor(
+    private tokenProviderService: TokenProviderService,
+    private attendanseService: AttendanceService,
+  ) {
+  }
 
   ngOnInit() {
+    this.tokenProviderService.token.subscribe(token => {
+      console.log(token);
+      this.attendanseService.getAttendance(token).subscribe(attendance => {
+        this.attendance = attendance;
+        console.log(attendance);
+      });
+    });
   }
 
 }

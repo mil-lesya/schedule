@@ -1,6 +1,5 @@
 .content-container {
   width: 100%;
-
   display: flex;
   align-items: flex-start;
   max-width: 1000px;
@@ -11,7 +10,6 @@
   a{
       border: none;
       padding: 10px;
-
   }
 
   button{
@@ -24,7 +22,8 @@
     cursor:pointer;
     width: 280px;
     height: 100px;
-
+    font-family: Garamond, monospace;
+    font-weight: bold;
   }
 
   .text{
@@ -32,6 +31,7 @@
     text-align: center;
     font-size: 26px;
     padding: 50px;
+    font-family: Garamond, monospace;
   }
 
   .clearfix { *zoom: 1;

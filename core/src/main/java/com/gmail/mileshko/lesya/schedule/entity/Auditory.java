@@ -13,16 +13,6 @@ public class Auditory {
     @Column(name = "auditory_number")
     private Integer auditoryNumber;
 
-    @OneToOne(mappedBy = "auditory", cascade = CascadeType.ALL)
-    private Department department;
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
 
     public Auditory() {
     }

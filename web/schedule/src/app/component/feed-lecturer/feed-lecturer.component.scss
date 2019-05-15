@@ -31,7 +31,8 @@
     color: var(--dark);
     font-size: 20px;
     padding: 10px;
-    font-family: Courier, monospace;
+    font-family: Garamond, monospace;
+
 
   }
 
@@ -40,8 +41,7 @@
     background: whitesmoke;
     max-width: 1000px;
     align-items: flex-start;
-    margin: 40px auto;
-
+    margin: 5% auto;
     .wrapper {
       margin: 20px auto;
       display: grid;

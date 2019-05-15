@@ -23,6 +23,7 @@ a:hover {
     color: var(--dark);
     font-size: 20px;
     text-decoration-line: underline;
+    font-family: Garamond, monospace;
   }
 }
 
@@ -42,7 +43,7 @@ p {
   background: whitesmoke;
   max-width: 1000px;
   align-items: flex-start;
-  margin: 0 auto;
+  margin: 5%;
 
 } /* For IE 6/7 */
 .clearfix:before, .clearfix:after {
@@ -56,11 +57,14 @@ button {
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
-  margin: 20px;
+  margin: 30px;
+  padding: 10px;
   max-width: 100px;
   font-size: 16px;
   cursor:pointer;
   width: 280px;
+  font-family: Garamond, monospace;
+  font-weight: bold;
 }
 .clearfix:after { clear: both; }
 
@@ -71,20 +75,21 @@ button {
   align-items: flex-start;
   margin: 0 auto;
   padding: 5px 5px;
-  height: 690px;
+  background-color: #f9f9f9;
+  min-height: calc(100vh - 50px);
   background-image: url("../../../assets/auth.jpg");
-
 }
 .text{
   text-align: center;
   font-size: 26px;
   margin: 20px;
+  font-family: Garamond, monospace;
 }
 
 #login {
-
+  text-align: center;
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 5% auto;
   flex-direction: column;
   justify-content: center;
   background-size: cover;
@@ -120,6 +125,7 @@ button {
   margin-bottom: 1em;
   padding: 0 16px;
   width: 280px;
+
 }
 
 #login form input:focus {

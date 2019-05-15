@@ -1,0 +1,17 @@
+<app-navigation-student></app-navigation-student>
+<div class="content-container">
+  <div class="presence-container">
+    <form class="presence-form">
+      <table  class="presence-table">
+        <tr>
+          <th>Дата</th>
+          <th>Предмет</th>
+        </tr>
+        <tr *ngFor="let a of attendance" class="row">
+          <td>{{a._class.date | date:"dd.MM.yyyy"}}</td>
+          <td>{{a._class.schedule.subject.name}}</td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>

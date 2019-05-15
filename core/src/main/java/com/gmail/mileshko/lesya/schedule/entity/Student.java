@@ -1,6 +1,7 @@
 package com.gmail.mileshko.lesya.schedule.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "student")
@@ -25,14 +26,26 @@ public class Student {
     @JoinColumn(name = "gradebook_id")
     private Gradebook gradebook;
 
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    private List<Attendance> attendances;
+
     public Student() {
     }
 
-    public Student(Gradebook gradebook, Group group, PersonalCard personalCard, String password) {
+    public Student(Gradebook gradebook, Group group, PersonalCard personalCard, String password, List<Attendance> attendances) {
         this.gradebook = gradebook;
         this.group = group;
         this.personalCard = personalCard;
         this.password = password;
+        this.attendances = attendances;
+    }
+
+    public List<Attendance> getAttendances() {
+        return attendances;
+    }
+
+    public void setAttendances(List<Attendance> attendances) {
+        this.attendances = attendances;
     }
 
     public String getPassword() {
