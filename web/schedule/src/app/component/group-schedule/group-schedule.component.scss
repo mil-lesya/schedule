@@ -10,56 +10,56 @@
   text-align: center;
   font-size: 20px;
 
-  .group-container{
+  .schedule-container{
     padding: 10px;
     height: 100%;
     text-align: center;
   }
-.group-form{
-  input[type=text] {
-    border: 1px solid #2e2328;
-    border-radius: 4px;
-    padding: 10px;
-    width: 20%;
-  }
-
-  .clearfix { *zoom: 2;
-    background: whitesmoke;
-    max-width: 1000px;
-    align-items: flex-start;
-    .text{
-      color: var(--dark);
+  .schedule-form{
+    input[type=text] {
+      border: 1px solid #2e2328;
+      border-radius: 4px;
       padding: 10px;
-      font-family: Garamond, monospace;
+      width: 20%;
     }
-    .wrapper {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-    }
-    .box1 {
-      grid-column-start: 1;
-      grid-column-end: 2;
-      margin-left: auto;
-      margin-right: auto;
-      min-width: 10px;
 
-    }
-    .box2 {
-      grid-column-start: 2;
-      grid-column-end: 3;
-      margin-left: auto;
-      margin-right: auto;
-      min-width: 10px;
+    .clearfix { *zoom: 2;
+      background: whitesmoke;
+      max-width: 1000px;
+      align-items: flex-start;
+      .text{
+        color: var(--dark);
+        padding: 10px;
+        font-family: Garamond, monospace;
+      }
+      .wrapper {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .box1 {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        margin-left: auto;
+        margin-right: auto;
+        min-width: 10px;
 
-    }
-    .box3 {
-      grid-column-start: 3;
-      grid-column-end: 4;
-      margin-left: auto;
-      margin-right: auto;
+      }
+      .box2 {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        margin-left: auto;
+        margin-right: auto;
+        min-width: 10px;
+
+      }
+      .box3 {
+        grid-column-start: 3;
+        grid-column-end: 4;
+        margin-left: auto;
+        margin-right: auto;
+      }
     }
   }
-}
 
   button {
     align-self: center;
@@ -72,7 +72,7 @@
     width: 200px;
     font-family: Garamond, monospace;
   }
-  .group-table {
+  .schedule-table {
     width: 100%;
     margin-top: 4px;
     background-color: #fbfbfb;
@@ -87,25 +87,31 @@
     white-space: nowrap;
     border-spacing: 0;
 
-
-    th {
+    tr{
+      width: 100%;
       padding: 6px 12px;
       border: 1px solid #d9d7ce;
       font-size: 20px;
       text-align: left;
     }
 
+    th {
+      padding: 6px 12px;
+      border: 1px solid #d9d7ce;
+      font-size: 20px;
+    }
+
     .row {
       cursor: pointer;
-
       transition: border linear 2s;
 
       td {
-        text-align: left;
         padding: 6px 12px;
         border: 1px solid #d9d7ce;
         font-size: 20px;
+
       }
+
     }
 
     .row:hover {
@@ -114,5 +120,6 @@
     }
 
   }
+
 
 }

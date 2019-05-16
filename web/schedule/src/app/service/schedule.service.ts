@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {API_URL} from '../../global';
 import {Schedule} from '../dto/Schedule';
+import {ExpectedGroup} from '../dto/ExpectedGroup';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,7 @@ export class ScheduleService {
       headers: {token: token}
     });
   }
-
+  getGroupSchedule(expectedGroup: ExpectedGroup): Observable<Schedule[]> {
+    return this.http.post<Schedule[]>(API_URL + 'schedule/group', expectedGroup, {responseType: 'text' as 'json'});
+  }
 }

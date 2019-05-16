@@ -27,9 +27,9 @@ export class GroupNumberComponent implements OnInit {
   ngOnInit() {
     this.tokenProviderService.token.subscribe(token => {
       console.log(token);
-      if (token != null) {
-        this.authorize = true;
-      }
+      this.lecturerService.authorize(token).subscribe(authorize =>
+        this.authorize = authorize
+      );
     });
   }
 

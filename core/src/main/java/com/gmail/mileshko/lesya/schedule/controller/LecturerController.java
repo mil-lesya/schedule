@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-    @RequestMapping("feed/lecturer")
+    @RequestMapping("lecturer")
     public class LecturerController {
     private final LecturerService lecturerService;
 
@@ -26,5 +26,10 @@ import org.springframework.web.bind.annotation.RestController;
     public LecturerDto get(@RequestHeader("token") String token) throws NoSuchEntityException {
         Lecturer lecturer = lecturerService.validate(token);
         return Mapper.map(lecturer, LecturerDto.class);
+    }
+
+    @GetMapping("authorize")
+    public boolean authorize(@RequestHeader("token") String token){
+        return lecturerService.authorize(token);
     }
 }

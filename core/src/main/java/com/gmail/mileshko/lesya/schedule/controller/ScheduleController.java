@@ -1,5 +1,6 @@
 package com.gmail.mileshko.lesya.schedule.controller;
 
+import com.gmail.mileshko.lesya.schedule.dto.ExpectedGroupDto;
 import com.gmail.mileshko.lesya.schedule.dto.ScheduleDto;
 import com.gmail.mileshko.lesya.schedule.dto.StudentDto;
 import com.gmail.mileshko.lesya.schedule.entity.Schedule;
@@ -9,10 +10,7 @@ import com.gmail.mileshko.lesya.schedule.service.ScheduleService;
 import com.gmail.mileshko.lesya.schedule.service.StudentService;
 import com.gmail.mileshko.lesya.schedule.util.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,6 +30,11 @@ public class ScheduleController {
     public List<ScheduleDto> getSchedule(@RequestHeader("token") String token) throws NoSuchEntityException {
         Student student = studentService.validate(token);
         return Mapper.mapAll(scheduleService.getSchedule(student), ScheduleDto.class);
+    }
+
+    @PostMapping("group")
+    public List<ScheduleDto> getGroupSchedule(@RequestBody ExpectedGroupDto expectedGroupDto) throws NoSuchEntityException {
+        return Mapper.mapAll(scheduleService.getGroupSchedule(expectedGroupDto), ScheduleDto.class);
     }
 }
 

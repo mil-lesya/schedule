@@ -11,6 +11,5 @@ public interface AssessmentRepository extends CrudRepository<Assessment, Long> {
 
     List<Assessment> findAllByGradebook(Gradebook gradebook);
 
-    Optional<Assessment> findByGradebook(Gradebook gradebook);
 
 }

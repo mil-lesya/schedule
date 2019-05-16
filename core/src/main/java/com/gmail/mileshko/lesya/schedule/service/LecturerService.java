@@ -74,4 +74,8 @@ public class LecturerService {
         lecturer.setPassword(Hasher.getHash(registerLecturerDto.password));
         lecturerRepository.save(lecturer);
     }
+
+    public boolean authorize(String tokenValue){
+        return lecturerTokenRepository.findByToken(tokenValue).isPresent();
+    }
 }

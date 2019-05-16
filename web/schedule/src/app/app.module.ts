@@ -19,6 +19,7 @@ import { RegisterLecturerComponent } from './component/register-lecturer/registe
 import { NavigationLecturerComponent } from './component/navigation-lecturer/navigation-lecturer.component';
 import { FeedLecturerComponent } from './component/feed-lecturer/feed-lecturer.component';
 import { GroupNumberComponent } from './component/group-number/group-number.component';
+import { GroupScheduleComponent } from './component/group-schedule/group-schedule.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { GroupNumberComponent } from './component/group-number/group-number.comp
     NavigationLecturerComponent,
     FeedLecturerComponent,
     GroupNumberComponent,
+    GroupScheduleComponent,
   ],
   imports: [
     AppRoutingModule,
