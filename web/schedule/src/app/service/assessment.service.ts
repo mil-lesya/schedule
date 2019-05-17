@@ -15,9 +15,6 @@ export class AssessmentService {
   ) {
   }
 
-  saveAssessments(assessments: Assessment[]): Observable<void> {
-    return this.http.post<void>(API_URL + 'gradebook/edit', assessments);
-  }
 
   addAssessment(newAssessment: NewAssessment): Observable<void> {
     return this.http.post<void>(API_URL + 'gradebook/add', newAssessment);

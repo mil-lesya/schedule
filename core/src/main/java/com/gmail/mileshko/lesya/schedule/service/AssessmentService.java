@@ -32,31 +32,6 @@ public class AssessmentService {
         this.studentRepository = studentRepository;
     }
 
-    public void editAssessment(List<AssessmentDto> assessmentsDto) throws NoSuchEntityException {
-
-        for (AssessmentDto assessmentDto :
-                assessmentsDto) {
-            Assessment assessment = assessmentRepository.findById(assessmentDto.id)
-                    .orElseThrow(()-> new NoSuchEntityException("Изменяемая оценка не найдена"));
-
-            assessment.setGradebook(gradebookRepository.findByGradebookNumber(assessmentDto.gradebook.gradebookNumber)
-                    .orElseThrow(() -> new NoSuchEntityException("Зачётка не найдена")));
-            Session session;
-            if (sessionRepository.findBySemesterNumberAndYear(assessmentDto.session.semesterNumber, assessmentDto.session.year).isPresent()) {
-                session = sessionRepository.findBySemesterNumberAndYear(assessmentDto.session.semesterNumber, assessmentDto.session.year).get();
-            }
-            else {
-                session = new Session(assessmentDto.session.semesterNumber, assessmentDto.session.year);
-                sessionRepository.save(session);
-            }
-            assessment.setSession(session);
-            assessment.setSession(session);
-            assessment.setSubject(subjectRepository.findByName(assessmentDto.subject.name)
-                    .orElseThrow(() -> new NoSuchEntityException("")));
-            assessment.setMark(assessmentDto.mark);
-            assessmentRepository.save(assessment);
-        }
-    }
 
     public void addAssessment(NewAssessmentDto newAssessmentDto) throws NoSuchEntityException {
 

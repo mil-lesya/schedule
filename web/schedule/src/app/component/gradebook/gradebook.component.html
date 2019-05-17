@@ -9,11 +9,11 @@
         <th>Предмет</th>
         <th>Оценка</th>
       </tr>
-      <tr  *ngFor="let a of assessments" class="row"  (click)="takeAssessmentId(a.id)">
-        <td> <input type="number"[(ngModel)]="a.session.semesterNumber" name="{{a.session.semesterNumber}}"> </td>
-        <td> <input type="text"  [(ngModel)]="a.session.year" name="{{a.session.year}}"> </td>
-        <td> <input type="text"  [(ngModel)]="a.subject.name" name="{{a.subject.name}}"> </td>
-        <td> <input type="number" [(ngModel)]="a.mark" name="{{a.mark}}"> </td>
+      <tr *ngFor="let a of assessments" class="row" (click)="takeAssessmentId(a.id)">
+        <td>{{a.session.semesterNumber}}</td>
+        <td>{{a.session.year}}</td>
+        <td>{{a.subject.name}}</td>
+        <td>{{a.mark}}</td>
       </tr>
     </table>
     </form>
@@ -35,8 +35,8 @@
       </tr>
       </table>
       <button type="submit" (click)="buttonType = 'add'">Добавить</button>
+      <button type="submit" (click)="buttonType = 'save'"> Сохранить</button>
       <button type ="submit" (click)="buttonType = 'delete'">Удалить</button>
-      <button type="submit" (click)="buttonType = 'save'"> Сохранить всё</button>
     </form>
     <table *ngIf="!isHeadman" class="gradebook-table">
       <tr>

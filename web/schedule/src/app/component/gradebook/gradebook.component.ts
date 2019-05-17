@@ -62,28 +62,17 @@ export class GradebookComponent implements OnInit {
       this.route.queryParams.subscribe(params => {
         this.studentId = params.id;
         this.newAssessment.studentId = this.studentId;
-          console.log(this.newAssessment);
-          this.assessmentService.addAssessment(this.newAssessment).subscribe(() => {
-            console.log(this.newAssessment);
-            this.gradebookService.getStudentAssessments(params.id).subscribe(assessments => {
-              this.assessments = assessments;
-              console.log(assessments);
-              this.newAssessment = new NewAssessment();
-            });
-          });
+        console.log(this.newAssessment);
       });
     } else if (this.buttonType === 'save') {
-      if (this.assessments.length > 0) {
-        console.log(this.assessments);
-        this.assessmentService.saveAssessments(this.assessments).subscribe(() => {
-          console.log('save');
+      this.assessmentService.addAssessment(this.newAssessment).subscribe(() => {
+        this.gradebookService.getStudentAssessments(this.studentId).subscribe(assessments => {
+          this.assessments = assessments;
+          console.log(assessments);
+          this.received = false;
+          this.newAssessment = new NewAssessment();
         });
-      }
-      if (this.newAssessment != null) {
-        this.assessmentService.addAssessment(this.newAssessment).subscribe(() => {
-          this.router.navigate(['/group'], {replaceUrl: true});
-        });
-      }
+      });
     } else if (this.buttonType === 'delete') {
       this.assessmentService.deleteAssessment(this.assessmentId).subscribe(() => {
         console.log('delete');
