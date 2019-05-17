@@ -18,7 +18,7 @@ public class NewAssessmentDto {
     @Range(min = 1, max = 10, message = "недопустимая оценка")
     public Integer mark;
 
-    public String year;
+    public Integer year;
 
-    public  GradebookDto gradebook;
+    public  Long studentId;
 }

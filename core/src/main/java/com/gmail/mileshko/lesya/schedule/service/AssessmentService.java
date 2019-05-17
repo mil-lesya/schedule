@@ -3,13 +3,11 @@ package com.gmail.mileshko.lesya.schedule.service;
 import com.gmail.mileshko.lesya.schedule.dto.AssessmentDto;
 import com.gmail.mileshko.lesya.schedule.dto.NewAssessmentDto;
 import com.gmail.mileshko.lesya.schedule.entity.Assessment;
+import com.gmail.mileshko.lesya.schedule.entity.Gradebook;
+import com.gmail.mileshko.lesya.schedule.entity.Session;
 import com.gmail.mileshko.lesya.schedule.entity.Student;
-import com.gmail.mileshko.lesya.schedule.exception.AuthorizationException;
 import com.gmail.mileshko.lesya.schedule.exception.NoSuchEntityException;
-import com.gmail.mileshko.lesya.schedule.repository.AssessmentRepository;
-import com.gmail.mileshko.lesya.schedule.repository.GradebookRepository;
-import com.gmail.mileshko.lesya.schedule.repository.SessionRepository;
-import com.gmail.mileshko.lesya.schedule.repository.SubjectRepository;
+import com.gmail.mileshko.lesya.schedule.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,39 +21,68 @@ public class AssessmentService {
     private final SessionRepository sessionRepository;
     private final SubjectRepository subjectRepository;
     private final GradebookRepository gradebookRepository;
+    private final StudentRepository studentRepository;
 
     @Autowired
-    public AssessmentService(AssessmentRepository assessmentRepository, SessionRepository sessionRepository, SubjectRepository subjectRepository, GradebookRepository gradebookRepository) {
+    public AssessmentService(AssessmentRepository assessmentRepository, SessionRepository sessionRepository, SubjectRepository subjectRepository, GradebookRepository gradebookRepository, StudentRepository studentRepository) {
         this.assessmentRepository = assessmentRepository;
         this.sessionRepository = sessionRepository;
         this.subjectRepository = subjectRepository;
         this.gradebookRepository = gradebookRepository;
+        this.studentRepository = studentRepository;
     }
 
-    public void editAssessment(List<AssessmentDto> assessmentsDto) throws NoSuchEntityException{
+    public void editAssessment(List<AssessmentDto> assessmentsDto) throws NoSuchEntityException {
 
-        Assessment assessment = new Assessment();
         for (AssessmentDto assessmentDto :
                 assessmentsDto) {
-            assessment.setSession(sessionRepository.findBySemesterNumberAndYear(assessmentDto.session.semesterNumber, assessmentDto.session.year).orElseThrow(() -> new NoSuchEntityException("")));
-            assessment.setSubject(subjectRepository.findByName(assessmentDto.subject.name).orElseThrow(() -> new NoSuchEntityException("")));
+            Assessment assessment = assessmentRepository.findById(assessmentDto.id)
+                    .orElseThrow(()-> new NoSuchEntityException("Изменяемая оценка не найдена"));
+
+            assessment.setGradebook(gradebookRepository.findByGradebookNumber(assessmentDto.gradebook.gradebookNumber)
+                    .orElseThrow(() -> new NoSuchEntityException("Зачётка не найдена")));
+            Session session;
+            if (sessionRepository.findBySemesterNumberAndYear(assessmentDto.session.semesterNumber, assessmentDto.session.year).isPresent()) {
+                session = sessionRepository.findBySemesterNumberAndYear(assessmentDto.session.semesterNumber, assessmentDto.session.year).get();
+            }
+            else {
+                session = new Session(assessmentDto.session.semesterNumber, assessmentDto.session.year);
+                sessionRepository.save(session);
+            }
+            assessment.setSession(session);
+            assessment.setSession(session);
+            assessment.setSubject(subjectRepository.findByName(assessmentDto.subject.name)
+                    .orElseThrow(() -> new NoSuchEntityException("")));
             assessment.setMark(assessmentDto.mark);
             assessmentRepository.save(assessment);
         }
     }
 
-    public void addAssessment(List<NewAssessmentDto> newAssessmentsDto) throws NoSuchEntityException {
+    public void addAssessment(NewAssessmentDto newAssessmentDto) throws NoSuchEntityException {
 
         Assessment assessment = new Assessment();
-        for (NewAssessmentDto newAssessmentDto :
-                newAssessmentsDto) {
-            assessment.setGradebook(gradebookRepository.findByGradebookNumber(newAssessmentDto.gradebook.gradebookNumber).orElseThrow(() -> new NoSuchEntityException("")));
-            assessment.setSession(sessionRepository.findBySemesterNumberAndYear(newAssessmentDto.semesterNumber, newAssessmentDto.year).orElseThrow(() -> new NoSuchEntityException("")));
-            assessment.setSubject(subjectRepository.findByName(newAssessmentDto.subjectName).orElseThrow(() -> new NoSuchEntityException("")));
-            assessment.setMark(newAssessmentDto.mark);
-            assessmentRepository.save(assessment);
+        Gradebook gradebook = studentRepository.findById(newAssessmentDto.studentId)
+                .orElseThrow(() -> new NoSuchEntityException("Студент не найден"))
+                .getGradebook();
+        assessment.setGradebook(gradebook);
+        Session session;
+        if (sessionRepository.findBySemesterNumberAndYear(newAssessmentDto.semesterNumber, newAssessmentDto.year).isPresent()) {
+            session = sessionRepository.findBySemesterNumberAndYear(newAssessmentDto.semesterNumber, newAssessmentDto.year).get();
         }
+        else {
+            session = new Session(newAssessmentDto.semesterNumber, newAssessmentDto.year);
+            sessionRepository.save(session);
+        }
+        assessment.setSession(session);
+        assessment.setSubject(subjectRepository.findByName(newAssessmentDto.subjectName).orElseThrow(() -> new NoSuchEntityException("Предмет не найден")));
+        assessment.setMark(newAssessmentDto.mark);
+        assessmentRepository.save(assessment);
 
+    }
+
+    public void deleteAssessment(Long assessmentId) throws NoSuchEntityException {
+        Assessment assessment = assessmentRepository.findById(assessmentId).orElseThrow(() -> new NoSuchEntityException("Оценка не найдена"));
+        assessmentRepository.delete(assessment);
     }
 
 

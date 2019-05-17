@@ -19,7 +19,11 @@ export class AssessmentService {
     return this.http.post<void>(API_URL + 'gradebook/edit', assessments);
   }
 
-  addAssessment(newAssessments: NewAssessment[]): Observable<void> {
-    return this.http.post<void>(API_URL + 'gradebook/add', newAssessments);
+  addAssessment(newAssessment: NewAssessment): Observable<void> {
+    return this.http.post<void>(API_URL + 'gradebook/add', newAssessment);
+  }
+
+  deleteAssessment(assessmentId: number): Observable<void> {
+    return this.http.post<void>(API_URL + 'assessment/delete', assessmentId);
   }
 }

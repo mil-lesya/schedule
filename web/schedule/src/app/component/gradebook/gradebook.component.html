@@ -1,7 +1,7 @@
 <app-navigation-student></app-navigation-student>
 <div class="content-container">
   <div class="gradebook-container">
-    <form *ngIf="isHeadman" class="gradebook-form" (ngSubmit)="onSubmit()">
+    <form *ngIf="isHeadman" class="gradebook-form" >
     <table  class="gradebook-table">
       <tr>
         <th>Семестр</th>
@@ -9,37 +9,34 @@
         <th>Предмет</th>
         <th>Оценка</th>
       </tr>
-      <tr  *ngFor="let a of assessments" class="row">
-        <td>
-          <input type="number"[(ngModel)]="a.session.semesterNumber" name="{{a.session.semesterNumber}}">
-        </td>
-        <td>
-          <input type="text"  [(ngModel)]="a.session.year" name="{{a.session.year}}">
-        </td>
-        <td>
-          <input type="text"  [(ngModel)]="a.subject.name" name="{{a.subject.name}}">
-        </td>
-        <td>
-          <input type="number" [(ngModel)]="a.mark" name="{{a.mark}}">
-        </td>
-      </tr>
-      <tr *ngFor="let n of newAssessments"  class="row">
-        <td>
-          <input type="number" [(ngModel)]="n.semesterNumber" name="semesterNumber">
-        </td>
-        <td>
-          <input type="text" [(ngModel)]="n.year" name="year">
-        </td>
-        <td>
-          <input type="text"  [(ngModel)]="n.subjectName" name="subjectName">
-        </td>
-        <td>
-          <input type="number"  [(ngModel)]="n.mark" name="mark">
-        </td>
+      <tr  *ngFor="let a of assessments" class="row"  (click)="takeAssessmentId(a.id)">
+        <td> <input type="number"[(ngModel)]="a.session.semesterNumber" name="{{a.session.semesterNumber}}"> </td>
+        <td> <input type="text"  [(ngModel)]="a.session.year" name="{{a.session.year}}"> </td>
+        <td> <input type="text"  [(ngModel)]="a.subject.name" name="{{a.subject.name}}"> </td>
+        <td> <input type="number" [(ngModel)]="a.mark" name="{{a.mark}}"> </td>
       </tr>
     </table>
+    </form>
+    <form *ngIf="isHeadman" class="gradebook-form" (ngSubmit)="onSubmit()">
+      <table *ngIf="received" class="gradebook-table">
+      <tr  class="row">
+        <td>
+          <input type="number" [(ngModel)]="newAssessment.semesterNumber" name="semesterNumber">
+        </td>
+        <td>
+          <input type="number" [(ngModel)]="newAssessment.year" name="year">
+        </td>
+        <td>
+          <input type="text"  [(ngModel)]="newAssessment.subjectName" name="subjectName">
+        </td>
+        <td>
+          <input type="number"  [(ngModel)]="newAssessment.mark" name="mark">
+        </td>
+      </tr>
+      </table>
       <button type="submit" (click)="buttonType = 'add'">Добавить</button>
-      <button type="submit" (click)="buttonType = 'save'"> Сохранить</button>
+      <button type ="submit" (click)="buttonType = 'delete'">Удалить</button>
+      <button type="submit" (click)="buttonType = 'save'"> Сохранить всё</button>
     </form>
     <table *ngIf="!isHeadman" class="gradebook-table">
       <tr>

@@ -41,16 +41,14 @@ public class GradebookController {
         return Mapper.mapAll(assessmentService.getGradebookAssessments(student), AssessmentDto.class);
     }
 
-
-
     @PostMapping("edit")
     public void editAssessments(@RequestBody List<AssessmentDto> assessmentsDto) throws NoSuchEntityException, AuthorizationException {
         assessmentService.editAssessment(assessmentsDto);
     }
 
     @PostMapping("add")
-    public void addAssessment(@RequestBody List<NewAssessmentDto> newAssessmentsDto) throws NoSuchEntityException {
-        assessmentService.addAssessment(newAssessmentsDto);
+    public void addAssessment(@RequestBody NewAssessmentDto newAssessmentDto) throws NoSuchEntityException {
+        assessmentService.addAssessment(newAssessmentDto);
     }
 
     @GetMapping("headman")

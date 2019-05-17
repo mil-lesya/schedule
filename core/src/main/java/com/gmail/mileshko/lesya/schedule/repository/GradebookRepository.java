@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface GradebookRepository extends CrudRepository<Gradebook, Long> {
     Optional<Gradebook> findByGradebookNumber(String gradebookNumber);
+    Optional<Gradebook> findByStudentId(Long studentId);
 }
