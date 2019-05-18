@@ -9,7 +9,7 @@
         <th>Предмет</th>
         <th>Оценка</th>
       </tr>
-      <tr *ngFor="let a of assessments" class="row" (click)="takeAssessmentId(a.id)">
+      <tr *ngFor="let a of assessments" class="row" (click)="takeAssessmentId(a.id)" [ngClass]="{active : a.id == assessmentId}">
         <td>{{a.session.semesterNumber}}</td>
         <td>{{a.session.year}}</td>
         <td>{{a.subject.name}}</td>
