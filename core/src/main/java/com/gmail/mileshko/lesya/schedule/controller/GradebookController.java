@@ -37,7 +37,7 @@ public class GradebookController {
 
     @GetMapping("student")
     public List<AssessmentDto> getStudentAssessments(@RequestParam("studentId") Long id) throws NoSuchEntityException {
-        Student student = studentRepository.findById(id).orElseThrow(()-> new NoSuchEntityException("") );
+        Student student = studentRepository.findById(id).orElseThrow(()-> new NoSuchEntityException("Студент не найден") );
         return Mapper.mapAll(assessmentService.getGradebookAssessments(student), AssessmentDto.class);
     }
 

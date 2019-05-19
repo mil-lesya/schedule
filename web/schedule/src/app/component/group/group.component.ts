@@ -36,9 +36,7 @@ export class GroupComponent implements OnInit {
     });
   }
 
-  editAssessment(studentId: number) {
-
-    this.router.navigate(['/gradebook'], { queryParams: {id: studentId }});
-
+  setPasses(studentId: number, studentName: string) {
+    this.router.navigate(['/presence'], { queryParams: {id: studentId, name: studentName}});
   }
 }

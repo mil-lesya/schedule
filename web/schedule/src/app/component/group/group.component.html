@@ -8,8 +8,8 @@
         <th>Имя</th>
         <th>Отчество</th>
       </tr>
-      <tr class="row" *ngFor="let s of students; let i = index">
-        <td (click)="editAssessment(s.id)" >
+      <tr class="row" *ngFor="let s of students; let i = index" (click)="setPasses(s.id, s.personalCard.name)">
+        <td  >
             {{i + 1}}
         </td>
         <td>{{s.personalCard.surname}}</td>
