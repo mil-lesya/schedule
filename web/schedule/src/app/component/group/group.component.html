@@ -1,4 +1,5 @@
-<app-navigation-student></app-navigation-student>
+<app-navigation-student *ngIf="!isAdmin"></app-navigation-student>
+<app-navigation-admin *ngIf="isAdmin"></app-navigation-admin>
 <div class="content-container">
   <div class="group-container">
     <table *ngIf="isHeadman" class="group-table">

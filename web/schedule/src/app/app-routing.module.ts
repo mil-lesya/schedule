@@ -13,6 +13,7 @@ import {RegisterLecturerComponent} from './component/register-lecturer/register-
 import {FeedLecturerComponent} from './component/feed-lecturer/feed-lecturer.component';
 import {GroupNumberComponent} from './component/group-number/group-number.component';
 import {GroupScheduleComponent} from './component/group-schedule/group-schedule.component';
+import {AuthAdminComponent} from './component/auth-admin/auth-admin.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,11 @@ const routes: Routes = [
   {
     path: 'auth/lecturer',
     component: AuthLecturerComponent,
+    data: {title: 'Auth'}
+  },
+  {
+    path: 'auth/admin',
+    component: AuthAdminComponent,
     data: {title: 'Auth'}
   },
 

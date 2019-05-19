@@ -24,16 +24,14 @@ public class StudentService {
     private final StudentTokenRepository studentTokenRepository;
     private final GroupRepository groupRepository;
     private final PersonalCardRepository personalCardRepository;
-    private final AssessmentRepository assessmentRepository;
 
     @Autowired
-    public StudentService(StudentRepository studentRepository, GradebookRepository gradebookRepository, StudentTokenRepository studentTokenRepository, GroupRepository groupRepository, PersonalCardRepository personalCardRepository, AssessmentRepository assessmentRepository) {
+    public StudentService(StudentRepository studentRepository, GradebookRepository gradebookRepository, StudentTokenRepository studentTokenRepository, GroupRepository groupRepository, PersonalCardRepository personalCardRepository) {
         this.studentRepository = studentRepository;
         this.gradebookRepository = gradebookRepository;
         this.studentTokenRepository = studentTokenRepository;
         this.groupRepository = groupRepository;
         this.personalCardRepository = personalCardRepository;
-        this.assessmentRepository = assessmentRepository;
     }
 
 

@@ -18,7 +18,6 @@ public class AuthLecturerController {
 
     @Autowired
     public AuthLecturerController(LecturerService lecturerService) {
-
         this.lecturerService = lecturerService;
     }
 

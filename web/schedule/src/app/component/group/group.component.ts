@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Student} from '../../dto/Student';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {TokenProviderService} from '../../service/token.provider.service';
 import {GroupService} from '../../service/group.service';
 import {GradebookService} from '../../service/gradebook.service';
@@ -14,8 +14,9 @@ export class GroupComponent implements OnInit {
 
   students: Student[];
   isHeadman: boolean;
-
+  isAdmin: boolean;
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
     private groupService: GroupService,
     private gradebookService: GradebookService,
@@ -33,6 +34,9 @@ export class GroupComponent implements OnInit {
           console.log(isHeadman);
         });
       });
+    });
+    this.route.queryParams.subscribe(params => {
+      this.isAdmin = params.admin;
     });
   }
 

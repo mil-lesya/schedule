@@ -20,15 +20,13 @@ public class AssessmentService {
     private final AssessmentRepository assessmentRepository;
     private final SessionRepository sessionRepository;
     private final SubjectRepository subjectRepository;
-    private final GradebookRepository gradebookRepository;
     private final StudentRepository studentRepository;
 
     @Autowired
-    public AssessmentService(AssessmentRepository assessmentRepository, SessionRepository sessionRepository, SubjectRepository subjectRepository, GradebookRepository gradebookRepository, StudentRepository studentRepository) {
+    public AssessmentService(AssessmentRepository assessmentRepository, SessionRepository sessionRepository, SubjectRepository subjectRepository, StudentRepository studentRepository) {
         this.assessmentRepository = assessmentRepository;
         this.sessionRepository = sessionRepository;
         this.subjectRepository = subjectRepository;
-        this.gradebookRepository = gradebookRepository;
         this.studentRepository = studentRepository;
     }
 

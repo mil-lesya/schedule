@@ -2,6 +2,9 @@
 <div class="content-container">
   <div class="presence-container">
     <form class="presence-form">
+      <a [routerLink]="'/gradebook' " [queryParams]="{id: studentId, name: studentName}" *ngIf="studentId != null">
+        Перейти к зачётке студента {{studentName}}
+      </a>
       <table class="presence-table">
         <tr>
           <th>Дата</th>
@@ -23,6 +26,7 @@
       <button type="submit" (click)="buttonType = 'add'">Добавить</button>
       <button type="submit" (click)="buttonType = 'save'"> Сохранить</button>
       <button type="submit" (click)="buttonType = 'delete'">Удалить</button>
+
     </form>
   </div>
 </div>
