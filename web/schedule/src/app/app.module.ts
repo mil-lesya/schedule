@@ -23,6 +23,7 @@ import { GroupScheduleComponent } from './component/group-schedule/group-schedul
 import { AuthAdminComponent } from './component/auth-admin/auth-admin.component';
 import { NavigationAdminComponent } from './component/navigation-admin/navigation-admin.component';
 import { GroupChangeComponent } from './component/group-change/group-change.component';
+import { AdminScheduleComponent } from './component/admin-schedule/admin-schedule.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { GroupChangeComponent } from './component/group-change/group-change.comp
     AuthAdminComponent,
     NavigationAdminComponent,
     GroupChangeComponent,
+    AdminScheduleComponent,
   ],
   imports: [
     AppRoutingModule,

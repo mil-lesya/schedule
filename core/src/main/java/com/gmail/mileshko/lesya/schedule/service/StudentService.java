@@ -106,4 +106,10 @@ public class StudentService {
         studentRepository.delete(student);
     }
 
+    public void appointHeadman(Long headmanId) throws NoSuchEntityException {
+        Student student = studentRepository.findById(headmanId)
+                .orElseThrow(()-> new NoSuchEntityException(""));
+        student.getGroup().setHeadman(student);
+    }
+
 }

@@ -34,4 +34,9 @@ public class StudentController {
     public void deleteStudent(@RequestBody Long studentId) throws NoSuchEntityException {
         studentService.deleteStudent(studentId);
     }
+
+    @PostMapping("headman")
+    public void appointHeadman(@RequestBody Long headmanId) throws NoSuchEntityException {
+        studentService.appointHeadman(headmanId);
+    }
 }

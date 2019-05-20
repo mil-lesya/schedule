@@ -37,4 +37,9 @@ public class GroupController {
        return Mapper.mapAll(groupService.getExpectedGroup(expectedGroupDto), StudentDto.class);
    }
 
+   @PostMapping("headman")
+    public Long getHeadmanId(@RequestBody ExpectedGroupDto expectedGroupDto) throws NoSuchEntityException {
+        return groupService.getHeadmanId(expectedGroupDto);
+   }
+
 }

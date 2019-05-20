@@ -29,4 +29,8 @@ export class StudentService {
     return this.http.post<void>(API_URL + 'student/delete', studentId);
   }
 
+  appointHeadman(headmanId: number): Observable<void> {
+    return this.http.post<void>(API_URL + 'student/headman', headmanId);
+  }
+
 }

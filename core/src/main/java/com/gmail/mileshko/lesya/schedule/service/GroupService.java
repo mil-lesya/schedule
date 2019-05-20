@@ -33,4 +33,9 @@ public class GroupService {
         return studentRepository.findAllByGroup(group);
     }
 
+    public Long getHeadmanId(ExpectedGroupDto expectedGroupDto) throws NoSuchEntityException {
+        Group group = groupRepository.findByGroupNumberAndCourse(expectedGroupDto.group, expectedGroupDto.course).orElseThrow(()->new NoSuchEntityException(""));
+        return group.getHeadman().getId();
+    }
+
 }
