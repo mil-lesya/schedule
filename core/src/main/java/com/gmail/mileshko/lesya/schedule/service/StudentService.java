@@ -1,6 +1,7 @@
 package com.gmail.mileshko.lesya.schedule.service;
 
 import com.gmail.mileshko.lesya.schedule.dto.AuthStudentDto;
+import com.gmail.mileshko.lesya.schedule.dto.NewStudent;
 import com.gmail.mileshko.lesya.schedule.dto.RegisterStudentDto;
 import com.gmail.mileshko.lesya.schedule.entity.*;
 import com.gmail.mileshko.lesya.schedule.exception.AuthenticationException;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -26,7 +28,7 @@ public class StudentService {
     private final PersonalCardRepository personalCardRepository;
 
     @Autowired
-    public StudentService(StudentRepository studentRepository, GradebookRepository gradebookRepository, StudentTokenRepository studentTokenRepository, GroupRepository groupRepository, PersonalCardRepository personalCardRepository) {
+    public StudentService(StudentRepository studentRepository, GradebookRepository gradebookRepository, StudentTokenRepository studentTokenRepository, GroupRepository groupRepository, PersonalCardRepository personalCardRepository, AssessmentRepository assessmentRepository) {
         this.studentRepository = studentRepository;
         this.gradebookRepository = gradebookRepository;
         this.studentTokenRepository = studentTokenRepository;
@@ -66,9 +68,9 @@ public class StudentService {
                 registerStudentDto.mail);
 
         student.setGradebook(gradebookRepository.findByGradebookNumber(registerStudentDto.gradebookNumber)
-                .orElseThrow(() -> new RegistrationException("student with the gradebook number doesn't exist")));
+                .orElseThrow(() -> new RegistrationException("Зачётка не найдена")));
         student.setGroup(groupRepository.findByGroupNumberAndCourse(registerStudentDto.groupNumber, registerStudentDto.course)
-                .orElseThrow(() -> new RegistrationException("you are not a student of this group")));
+                .orElseThrow(() -> new RegistrationException("Группа не найдена")));
         student.setPersonalCard(personalCard);
         personalCardRepository.save(personalCard);
         student.setPassword(Hasher.getHash(registerStudentDto.password));
@@ -83,4 +85,25 @@ public class StudentService {
     public void authorize(Student student) throws AuthorizationException {
         groupRepository.findByHeadman(student).orElseThrow(()-> new AuthorizationException("no permission"));
     }
+
+    public void saveStudent(NewStudent newStudent) throws NoSuchEntityException {
+        Group group = groupRepository.findByGroupNumberAndCourse(newStudent.group, newStudent.course)
+                .orElseThrow(()-> new NoSuchEntityException("Группа не найдена"));
+        PersonalCard personalCard = personalCardRepository.findBySurnameAndNameAndPatronymic( newStudent.surname, newStudent.name,newStudent.patronymic)
+                .orElseThrow(()-> new NoSuchEntityException("Персональная карта не найдена"));
+        Student student = studentRepository.findByPersonalCard(personalCard)
+                    .orElseThrow(()-> new NoSuchEntityException("Студент не найден"));
+
+        student.setGroup(group);
+        studentRepository.save(student);
+
+    }
+
+    public void deleteStudent(Long studentId) throws NoSuchEntityException {
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(()-> new NoSuchEntityException(""));
+
+        studentRepository.delete(student);
+    }
+
 }

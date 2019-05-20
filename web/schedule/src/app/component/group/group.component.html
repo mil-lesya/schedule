@@ -18,7 +18,7 @@
         <td>{{s.personalCard.patronymic}}</td>
       </tr>
     </table>
-    <table *ngIf="!isHeadman" class="group-table">
+    <table *ngIf="!isHeadman && !isAdmin" class="group-table">
       <tr>
         <th>№</th>
         <th>Фамилия</th>

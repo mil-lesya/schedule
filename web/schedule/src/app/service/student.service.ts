@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {API_URL} from '../../global';
 import {Student} from '../dto/Student';
 import {Observable} from 'rxjs';
+import {NewStudent} from '../dto/NewStudent';
 
 @Injectable({
   providedIn: 'root'
@@ -19,4 +20,13 @@ export class StudentService {
       headers: {token: token}
     });
   }
+
+  saveStudent(newStudent: NewStudent): Observable<void> {
+    return this.http.post<void>(API_URL + 'student/new', newStudent);
+  }
+
+  deleteStudent(studentId: number): Observable<void> {
+    return this.http.post<void>(API_URL + 'student/delete', studentId);
+  }
+
 }

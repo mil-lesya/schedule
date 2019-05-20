@@ -22,6 +22,7 @@ import { GroupNumberComponent } from './component/group-number/group-number.comp
 import { GroupScheduleComponent } from './component/group-schedule/group-schedule.component';
 import { AuthAdminComponent } from './component/auth-admin/auth-admin.component';
 import { NavigationAdminComponent } from './component/navigation-admin/navigation-admin.component';
+import { GroupChangeComponent } from './component/group-change/group-change.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { NavigationAdminComponent } from './component/navigation-admin/navigatio
     GroupScheduleComponent,
     AuthAdminComponent,
     NavigationAdminComponent,
+    GroupChangeComponent,
   ],
   imports: [
     AppRoutingModule,

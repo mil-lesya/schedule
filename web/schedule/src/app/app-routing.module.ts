@@ -14,6 +14,7 @@ import {FeedLecturerComponent} from './component/feed-lecturer/feed-lecturer.com
 import {GroupNumberComponent} from './component/group-number/group-number.component';
 import {GroupScheduleComponent} from './component/group-schedule/group-schedule.component';
 import {AuthAdminComponent} from './component/auth-admin/auth-admin.component';
+import {GroupChangeComponent} from './component/group-change/group-change.component';
 
 const routes: Routes = [
   {
@@ -77,6 +78,11 @@ const routes: Routes = [
     path: 'group/number',
     component: GroupNumberComponent,
     data: {title: 'Group Number'}
+  },
+
+  {
+    path: 'group/change',
+    component: GroupChangeComponent,
   },
 
   {

@@ -1,15 +1,13 @@
 package com.gmail.mileshko.lesya.schedule.controller;
 
+import com.gmail.mileshko.lesya.schedule.dto.NewStudent;
 import com.gmail.mileshko.lesya.schedule.dto.StudentDto;
 import com.gmail.mileshko.lesya.schedule.entity.Student;
 import com.gmail.mileshko.lesya.schedule.exception.NoSuchEntityException;
 import com.gmail.mileshko.lesya.schedule.service.StudentService;
 import com.gmail.mileshko.lesya.schedule.util.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("student")
@@ -25,5 +23,15 @@ public class StudentController {
     public StudentDto get(@RequestHeader("token") String token) throws NoSuchEntityException {
         Student student = studentService.validate(token);
         return Mapper.map(student, StudentDto.class);
+    }
+
+    @PostMapping("new")
+    public void saveStudent(@RequestBody NewStudent newStudent) throws NoSuchEntityException {
+        studentService.saveStudent(newStudent);
+    }
+
+    @PostMapping("delete")
+    public void deleteStudent(@RequestBody Long studentId) throws NoSuchEntityException {
+        studentService.deleteStudent(studentId);
     }
 }

@@ -20,7 +20,7 @@ public class AuthAdminController {
     }
 
     @PostMapping("auth")
-    public boolean authorize(@RequestBody AdminDto adminDto) throws AuthenticationException, NoSuchEntityException, IOException {
+    public boolean authorize(@RequestBody AdminDto adminDto) throws  IOException {
         return adminService.authorize(adminDto);
     }
 }
