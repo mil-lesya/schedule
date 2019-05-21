@@ -9,6 +9,7 @@ import com.gmail.mileshko.lesya.schedule.util.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+//TODO: authorization for admin
 @RestController
 @RequestMapping("student")
 public class StudentController {

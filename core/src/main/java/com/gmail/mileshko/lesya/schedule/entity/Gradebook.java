@@ -15,10 +15,10 @@ public class Gradebook {
     @Column(name = "gradebook_number")
     private String gradebookNumber;
 
-    @OneToOne(mappedBy = "gradebook", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "gradebook", cascade = CascadeType.ALL, orphanRemoval = true)
     private Student student;
 
-    @OneToMany(mappedBy = "gradebook", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "gradebook", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Assessment> assessment;
 
     public Gradebook() {

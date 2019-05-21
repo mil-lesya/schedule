@@ -42,6 +42,8 @@ export class RegisterStudentComponent implements OnInit {
 
     this.registerStudentService.register(registerStudent).subscribe(() => {
       this.router.navigate(['/auth/student'], {replaceUrl: true});
+    }, error => {
+      alert('oops');
     });
   }
 

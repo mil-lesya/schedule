@@ -15,6 +15,7 @@ import {GroupNumberComponent} from './component/group-number/group-number.compon
 import {GroupScheduleComponent} from './component/group-schedule/group-schedule.component';
 import {AuthAdminComponent} from './component/auth-admin/auth-admin.component';
 import {GroupChangeComponent} from './component/group-change/group-change.component';
+import {AdminScheduleComponent} from './component/admin-schedule/admin-schedule.component';
 
 const routes: Routes = [
   {
@@ -95,6 +96,11 @@ const routes: Routes = [
     path: 'presence',
     component: PresenceComponent,
     data: {title: 'Presence'}
+  },
+
+  {
+    path: 'admin/schedule',
+    component: AdminScheduleComponent,
   },
 
   {

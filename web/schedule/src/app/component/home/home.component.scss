@@ -12,21 +12,22 @@
       padding: 10px;
   }
 
-  button{
 
+  button {
+    background-color: rgba(178, 149, 166, 0.96);
+    align-self: center;
     border-radius: 3px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
-    margin-bottom: 5em;
     font-size: 20px;
     cursor:pointer;
     width: 180px;
     height: 80px;
     font-family: Garamond, monospace;
-    font-weight: bold;
-    margin: 20px;
-  }
+    padding: 10px;
+    margin: 30px;
 
+  }
   .text{
     color: var(--dark);
     text-align: center;

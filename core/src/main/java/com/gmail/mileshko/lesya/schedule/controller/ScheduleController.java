@@ -36,5 +36,10 @@ public class ScheduleController {
     public List<ScheduleDto> getGroupSchedule(@RequestBody ExpectedGroupDto expectedGroupDto) throws NoSuchEntityException {
         return Mapper.mapAll(scheduleService.getGroupSchedule(expectedGroupDto), ScheduleDto.class);
     }
+
+    @PostMapping("save")
+    public void saveSchedule(@RequestBody List<ScheduleDto> schedules) throws NoSuchEntityException {
+        scheduleService.saveSchedule(schedules);
+    }
 }
 

@@ -11,23 +11,26 @@ public class Student {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "group_id")
     private Group group;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "personal_card_id")
     private PersonalCard personalCard;
 
     @Column(name = "password")
     private String password;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "gradebook_id")
     private Gradebook gradebook;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Attendance> attendances;
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<StudentToken> tokens;
 
     public Student() {
     }
@@ -86,5 +89,13 @@ public class Student {
 
     public void setPersonalCard(PersonalCard personalCard) {
         this.personalCard = personalCard;
+    }
+
+    public List<StudentToken> getTokens() {
+        return tokens;
+    }
+
+    public void setTokens(List<StudentToken> tokens) {
+        this.tokens = tokens;
     }
 }

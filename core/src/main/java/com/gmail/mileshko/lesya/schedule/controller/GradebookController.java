@@ -13,6 +13,7 @@ import com.gmail.mileshko.lesya.schedule.util.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -43,7 +44,7 @@ public class GradebookController {
 
 
     @PostMapping("add")
-    public void addAssessment(@RequestBody NewAssessmentDto newAssessmentDto) throws NoSuchEntityException {
+    public void addAssessment(@Valid @RequestBody NewAssessmentDto newAssessmentDto) throws NoSuchEntityException {
         assessmentService.addAssessment(newAssessmentDto);
     }
 

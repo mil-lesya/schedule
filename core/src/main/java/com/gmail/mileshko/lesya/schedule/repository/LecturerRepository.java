@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface LecturerRepository extends CrudRepository<Lecturer, Long> {
-
+    Optional<Lecturer> findByPassPassNumber(String passNumber);
 }

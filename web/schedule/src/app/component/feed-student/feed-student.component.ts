@@ -24,7 +24,8 @@ export class FeedStudentComponent implements OnInit {
     private urlService: UrlService,
     private gradebookService: GradebookService,
     private tokenProviderService: TokenProviderService,
-    private studentService: StudentService) {
+    private studentService: StudentService,
+    private studentProviderService: StudentProviderService) {
 
   }
 
@@ -37,7 +38,6 @@ export class FeedStudentComponent implements OnInit {
         console.log(this.me);
       });
     });
-
   }
 
 }

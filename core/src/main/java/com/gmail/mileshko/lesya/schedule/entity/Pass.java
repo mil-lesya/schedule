@@ -10,7 +10,7 @@ public class Pass {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne(mappedBy = "pass", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "pass", cascade = CascadeType.ALL, orphanRemoval = true)
     private Lecturer lecturer;
 
     @Column
