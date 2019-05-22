@@ -13,4 +13,5 @@ import java.util.Optional;
 public interface ScheduleRepository extends CrudRepository<Schedule, Long> {
     List<Schedule> findAllByGroupList(Group group);
     Optional<Schedule> findBySubjectNameAndWeek(String subjectName, Week week);
+    Optional<Schedule> findByClassNumberAndWeek(Integer classNumber, Week week);
 }

@@ -34,7 +34,7 @@ public class AttendanceService {
         this.scheduleRepository = scheduleRepository;
     }
 
-    public List<Attendance> getAttendance(Student student){
+    public List<Attendance> getAttendance(Student student) {
         return attendanceRepository.findAllByStudentAndPresence(student, false);
     }
 
@@ -44,19 +44,18 @@ public class AttendanceService {
         int date = newAttendanceDto.dateClass.getDayOfWeek().getValue() - 1;
         Week week = Week.values()[date];
         Schedule schedule = scheduleRepository.findBySubjectNameAndWeek(newAttendanceDto.subjectName, week)
-                .orElseThrow(()->new NoSuchEntityException("Не найдено расписание с таким днём недели и названием предмета"));
+                .orElseThrow(() -> new NoSuchEntityException("Не найдено расписание с таким днём недели и названием предмета"));
         Optional<Class> optionalClass = classRepository.findByDateAndSchedule(newAttendanceDto.dateClass, schedule);
-       Class _class;
+        Class _class;
         if (optionalClass.isPresent()) {
             _class = optionalClass.get();
-        }
-        else {
+        } else {
             _class = new Class(newAttendanceDto.dateClass, schedule);
             classRepository.save(_class);
         }
         attendance.set_class(_class);
         attendance.setStudent(studentRepository.findById(newAttendanceDto.studentId)
-                .orElseThrow(()-> new NoSuchEntityException("Студент не найден")));
+                .orElseThrow(() -> new NoSuchEntityException("Студент не найден")));
         attendance.setPresence(false);
         attendanceRepository.save(attendance);
     }

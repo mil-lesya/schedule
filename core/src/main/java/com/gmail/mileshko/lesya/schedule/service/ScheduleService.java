@@ -44,7 +44,7 @@ public class ScheduleService {
     public void saveSchedule(List<ScheduleDto> schedules) throws NoSuchEntityException {
         for (ScheduleDto scheduleDto :
                 schedules) {
-            Schedule schedule = scheduleRepository.findBySubjectNameAndWeek(scheduleDto.subject.name, scheduleDto.week)
+            Schedule schedule = scheduleRepository.findByClassNumberAndWeek(scheduleDto.classNumber, scheduleDto.week)
                     .orElseThrow(()-> new NoSuchEntityException("Расписание не найдено"));
 
             Subject subject = subjectRepository.findByName(scheduleDto.subject.name)

@@ -10,6 +10,11 @@
 
 }
 
+.topnav a.exit{
+  float: right;
+  background-color: rgba(185, 133, 195, 0.36);
+
+}
 /* Style the header links */
 .topnav a {
   float: left;
@@ -37,13 +42,9 @@
 
 }
 
-/* Style the active/current link*/
 .topnav a.active {
   background-color: #9c6ea6;
   color: white;
-  width: 40px;
-  border-right: 5px solid  #f1f1f1;
-  border-left: 5px solid  #f1f1f1;
 }
 
 @media screen and (max-width: 500px) {

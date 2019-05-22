@@ -2,8 +2,6 @@ package com.gmail.mileshko.lesya.schedule.controller;
 
 import com.gmail.mileshko.lesya.schedule.dto.ExpectedGroupDto;
 import com.gmail.mileshko.lesya.schedule.dto.ScheduleDto;
-import com.gmail.mileshko.lesya.schedule.dto.StudentDto;
-import com.gmail.mileshko.lesya.schedule.entity.Schedule;
 import com.gmail.mileshko.lesya.schedule.entity.Student;
 import com.gmail.mileshko.lesya.schedule.exception.NoSuchEntityException;
 import com.gmail.mileshko.lesya.schedule.service.ScheduleService;

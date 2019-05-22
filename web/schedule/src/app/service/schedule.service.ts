@@ -27,7 +27,7 @@ export class ScheduleService {
     return this.http.post<Schedule[]>(API_URL + 'schedule/group', expectedGroup, {responseType: 'text' as 'json'});
   }
 
-  saveSchedule(schedule: Schedule): Observable<void> {
+  saveSchedule(schedule: Schedule[]): Observable<void> {
     return this.http.post<void>(API_URL + 'schedule/save', schedule);
   }
 }

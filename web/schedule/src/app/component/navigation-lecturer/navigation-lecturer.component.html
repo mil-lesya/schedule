@@ -1,9 +1,10 @@
 <div class="content-container">
   <div class="topnav">
 
-    <a class="active" [routerLink]="'/feed/lecturer'">Я</a>
-    <a [routerLink]="'/group/number'">Списки групп </a>
-    <a [routerLink]="'/group/schedule'">Расписание</a>
+    <a [routerLink]="'/feed/lecturer'"  routerLinkActive="active">Я</a>
+    <a [routerLink]="'/group/number'"  routerLinkActive="active">Списки групп </a>
+    <a [routerLink]="'/group/schedule'"  routerLinkActive="active">Расписание</a>
+    <a class="exit" [routerLink]="'/home'" routerLinkActive="active">Выйти</a>
 
   </div>
 </div>

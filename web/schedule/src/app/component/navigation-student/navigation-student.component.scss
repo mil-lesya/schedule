@@ -8,6 +8,11 @@
   font-family: Garamond, monospace;
 }
 
+.topnav a.exit{
+  float: right;
+  background-color: rgba(185, 133, 195, 0.36);
+
+}
 /* Style the header links */
 .topnav a {
   float: left;
@@ -18,7 +23,7 @@
   font-size: 18px;
   line-height: 25px;
   border-radius: 5px;
-  width: 150px;
+  width: 130px;
   margin: 3px;
 }
 

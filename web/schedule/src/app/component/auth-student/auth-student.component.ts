@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthStudent} from '../../dto/AuthStudent';
 import {AuthStudentService} from '../../service/auth.student.service';
 import {Router} from '@angular/router';
@@ -13,7 +13,7 @@ import {LOCALSTORAGE_TOKEN_NAME} from '../../../global';
 })
 export class AuthStudentComponent implements OnInit {
 
-
+  error: any;
   authStudent: AuthStudent = new AuthStudent();
 
   constructor(
