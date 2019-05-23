@@ -6,6 +6,7 @@ import {TokenProviderService} from '../../service/token.provider.service';
 import {LOCALSTORAGE_TOKEN_NAME} from '../../../global';
 import {AuthLecturer} from '../../dto/AuthLecturer';
 import {AuthLecturerService} from '../../service/auth.lecturer.service';
+import {ErrorService} from '../../service/error.service';
 
 @Component({
   selector: 'app-auth-lecturer',
@@ -19,7 +20,8 @@ export class AuthLecturerComponent implements OnInit {
   constructor(
     private authLecturerService: AuthLecturerService,
     private router: Router,
-    private tokenProviderService: TokenProviderService
+    private tokenProviderService: TokenProviderService,
+    private errorService: ErrorService
   ) {
   }
 
@@ -32,7 +34,8 @@ export class AuthLecturerComponent implements OnInit {
       localStorage.setItem(LOCALSTORAGE_TOKEN_NAME, token);
 
       this.router.navigate(['/feed/lecturer'], {replaceUrl: true});
-    });
+    },
+      err => this.errorService.raise(err));
   }
 
 }

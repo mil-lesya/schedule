@@ -3,6 +3,7 @@ import {VerifiableRegisterStudent} from '../../dto/VerifiableRegisterStudent';
 import {RegisterStudentService} from '../../service/register.student.service';
 import {Router} from '@angular/router';
 import {RegisterStudent} from '../../dto/RegisterStudent';
+import {ErrorService} from '../../service/error.service';
 
 @Component({
   selector: 'app-register-student',
@@ -15,7 +16,8 @@ export class RegisterStudentComponent implements OnInit {
 
   constructor(
     private registerStudentService: RegisterStudentService,
-    private router: Router
+    private router: Router,
+    private errorService: ErrorService
   ) {
   }
 
@@ -24,6 +26,7 @@ export class RegisterStudentComponent implements OnInit {
 
   register() {
     if (this.verifiableRegisterStudent.password !== this.verifiableRegisterStudent.confirmPassword) {
+      alert('неверный повторный пароль');
       return;
     }
 
@@ -42,9 +45,7 @@ export class RegisterStudentComponent implements OnInit {
 
     this.registerStudentService.register(registerStudent).subscribe(() => {
       this.router.navigate(['/auth/student'], {replaceUrl: true});
-    }, error => {
-      alert('oops');
-    });
+    }, err => this.errorService.raise(err));
   }
 
 }

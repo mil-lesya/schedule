@@ -4,6 +4,7 @@ import {AuthStudentService} from '../../service/auth.student.service';
 import {Router} from '@angular/router';
 import {TokenProviderService} from '../../service/token.provider.service';
 import {LOCALSTORAGE_TOKEN_NAME} from '../../../global';
+import {ErrorService} from '../../service/error.service';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class AuthStudentComponent implements OnInit {
   constructor(
     private authStudentService: AuthStudentService,
     private router: Router,
-    private tokenProviderService: TokenProviderService
+    private tokenProviderService: TokenProviderService,
+    private errorService: ErrorService
   ) {
   }
 
@@ -28,11 +30,12 @@ export class AuthStudentComponent implements OnInit {
 
   authenticate() {
     this.authStudentService.authenticate(this.authStudent).subscribe(token => {
-      this.tokenProviderService.setToken(token);
-      console.log('set token', token);
-      localStorage.setItem(LOCALSTORAGE_TOKEN_NAME, token);
+        this.tokenProviderService.setToken(token);
+        console.log('set token', token);
+        localStorage.setItem(LOCALSTORAGE_TOKEN_NAME, token);
 
-      this.router.navigate(['/feed/student'], {replaceUrl: true});
-    });
+        this.router.navigate(['/feed/student'], {replaceUrl: true});
+      },
+        er => this.errorService.raise(er));
   }
 }

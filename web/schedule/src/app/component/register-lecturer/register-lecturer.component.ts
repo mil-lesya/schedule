@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {VerifiableRegisterLecturer} from '../../dto/VerifiableRegisterLecturer';
 import {RegisterLecturerService} from '../../service/register.lecturer.service';
 import {RegisterLecturer} from '../../dto/RegisterLecturer';
+import {ErrorService} from '../../service/error.service';
 
 @Component({
   selector: 'app-register-lecturer',
@@ -15,7 +16,8 @@ export class RegisterLecturerComponent implements OnInit {
 
   constructor(
     private registerStudentService: RegisterLecturerService,
-    private router: Router
+    private router: Router,
+    private errorService: ErrorService
   ) {
   }
 
@@ -39,7 +41,7 @@ export class RegisterLecturerComponent implements OnInit {
 
     this.registerStudentService.register(registerLecturer).subscribe(() => {
       this.router.navigate(['/auth/lecturer'], {replaceUrl: true});
-    });
+    }, err => this.errorService.raise(err));
   }
 
 }

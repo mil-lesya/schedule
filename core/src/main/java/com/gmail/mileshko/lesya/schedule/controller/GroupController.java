@@ -10,6 +10,7 @@ import com.gmail.mileshko.lesya.schedule.util.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -33,12 +34,12 @@ public class GroupController {
    }
 
    @PostMapping
-   public List<StudentDto> getGroup(@RequestBody ExpectedGroupDto expectedGroupDto) throws NoSuchEntityException {
+   public List<StudentDto> getGroup(@Valid @RequestBody ExpectedGroupDto expectedGroupDto) throws NoSuchEntityException {
        return Mapper.mapAll(groupService.getExpectedGroup(expectedGroupDto), StudentDto.class);
    }
 
    @PostMapping("headman")
-    public Long getHeadmanId(@RequestBody ExpectedGroupDto expectedGroupDto) throws NoSuchEntityException {
+    public Long getHeadmanId(@Valid @RequestBody ExpectedGroupDto expectedGroupDto) throws NoSuchEntityException {
         return groupService.getHeadmanId(expectedGroupDto);
    }
 

@@ -24,7 +24,6 @@ import { AuthAdminComponent } from './component/auth-admin/auth-admin.component'
 import { NavigationAdminComponent } from './component/navigation-admin/navigation-admin.component';
 import { GroupChangeComponent } from './component/group-change/group-change.component';
 import { AdminScheduleComponent } from './component/admin-schedule/admin-schedule.component';
-import { ScheduleAdminTableComponent } from './component/schedule-admin-table/schedule-admin-table.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +47,6 @@ import { ScheduleAdminTableComponent } from './component/schedule-admin-table/sc
     NavigationAdminComponent,
     GroupChangeComponent,
     AdminScheduleComponent,
-    ScheduleAdminTableComponent,
   ],
   imports: [
     AppRoutingModule,

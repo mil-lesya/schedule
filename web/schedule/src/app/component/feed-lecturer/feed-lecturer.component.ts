@@ -5,6 +5,7 @@ import {UrlService} from '../../service/url.service';
 import {TokenProviderService} from '../../service/token.provider.service';
 import {LecturerService} from '../../service/lecturer.service';
 import {Lecturer} from '../../dto/Lecturer';
+import {ErrorService} from '../../service/error.service';
 
 @Component({
   selector: 'app-feed-lecturer',
@@ -19,7 +20,8 @@ export class FeedLecturerComponent implements OnInit {
               private route: ActivatedRoute,
               private urlService: UrlService,
               private tokenProviderService: TokenProviderService,
-              private lecturerService: LecturerService) { }
+              private lecturerService: LecturerService,
+              private errorService: ErrorService) { }
 
   ngOnInit() {
     this.tokenProviderService.token.subscribe(token => {
@@ -27,7 +29,8 @@ export class FeedLecturerComponent implements OnInit {
       this.lecturerService.getLecturer(token).subscribe(lecturer =>
         this.lecturer = lecturer);
       console.log( this.lecturer);
-    });
+    },
+      err => this.errorService.raise(err));
   }
 
 }

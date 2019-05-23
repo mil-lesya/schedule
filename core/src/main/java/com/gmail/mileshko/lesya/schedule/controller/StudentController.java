@@ -9,6 +9,9 @@ import com.gmail.mileshko.lesya.schedule.util.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 //TODO: authorization for admin
 @RestController
 @RequestMapping("student")
@@ -27,17 +30,17 @@ public class StudentController {
     }
 
     @PostMapping("new")
-    public void saveStudent(@RequestBody NewStudent newStudent) throws NoSuchEntityException {
+    public void saveStudent(@Valid @RequestBody NewStudent newStudent) throws NoSuchEntityException {
         studentService.saveStudent(newStudent);
     }
 
     @PostMapping("delete")
-    public void deleteStudent(@RequestBody Long studentId) throws NoSuchEntityException {
+    public void deleteStudent( @RequestBody Long studentId) throws NoSuchEntityException {
         studentService.deleteStudent(studentId);
     }
 
     @PostMapping("headman")
-    public void appointHeadman(@RequestBody Long headmanId) throws NoSuchEntityException {
+    public void appointHeadman( @RequestBody Long headmanId) throws NoSuchEntityException {
         studentService.appointHeadman(headmanId);
     }
 }

@@ -1,7 +1,7 @@
 <app-navigation-student></app-navigation-student>
 <div class="content-container">
   <div class="schedule-container">
-    <table class="schedule-table">
+    <table *ngIf="came" class="schedule-table">
       <tr>
         <th></th>
         <th>Время</th>

@@ -7,7 +7,6 @@ import javax.validation.constraints.Pattern;
 
 public class NewAssessmentDto {
 
-    @NotNull
     public Long id;
 
     @Range(min = 1, max = 8, message = "недопустимый номер семестра")

@@ -7,6 +7,7 @@ import {TokenProviderService} from '../../service/token.provider.service';
 import {Student} from '../../dto/Student';
 import {StudentProviderService} from '../../service/student.provider.service';
 import {StudentService} from '../../service/student.service';
+import {ErrorService} from '../../service/error.service';
 
 @Component({
   selector: 'app-feed-student',
@@ -25,7 +26,8 @@ export class FeedStudentComponent implements OnInit {
     private gradebookService: GradebookService,
     private tokenProviderService: TokenProviderService,
     private studentService: StudentService,
-    private studentProviderService: StudentProviderService) {
+    private studentProviderService: StudentProviderService,
+    private errorService: ErrorService) {
 
   }
 
@@ -37,7 +39,8 @@ export class FeedStudentComponent implements OnInit {
         this.me = me;
         console.log(this.me);
       });
-    });
+    },
+      err => this.errorService.raise(err));
   }
 
 }

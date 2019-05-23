@@ -1,8 +1,10 @@
 package com.gmail.mileshko.lesya.schedule.service;
 
 import com.gmail.mileshko.lesya.schedule.dto.NewAttendanceDto;
-import com.gmail.mileshko.lesya.schedule.entity.*;
+import com.gmail.mileshko.lesya.schedule.entity.Attendance;
 import com.gmail.mileshko.lesya.schedule.entity.Class;
+import com.gmail.mileshko.lesya.schedule.entity.Schedule;
+import com.gmail.mileshko.lesya.schedule.entity.Student;
 import com.gmail.mileshko.lesya.schedule.entity.enums.Week;
 import com.gmail.mileshko.lesya.schedule.exception.NoSuchEntityException;
 import com.gmail.mileshko.lesya.schedule.repository.AttendanceRepository;
@@ -44,7 +46,7 @@ public class AttendanceService {
         int date = newAttendanceDto.dateClass.getDayOfWeek().getValue() - 1;
         Week week = Week.values()[date];
         Schedule schedule = scheduleRepository.findBySubjectNameAndWeek(newAttendanceDto.subjectName, week)
-                .orElseThrow(() -> new NoSuchEntityException("Не найдено расписание с таким днём недели и названием предмета"));
+                .orElseThrow(() -> new NoSuchEntityException("не найдено расписание с таким днём недели и названием предмета"));
         Optional<Class> optionalClass = classRepository.findByDateAndSchedule(newAttendanceDto.dateClass, schedule);
         Class _class;
         if (optionalClass.isPresent()) {
@@ -55,13 +57,14 @@ public class AttendanceService {
         }
         attendance.set_class(_class);
         attendance.setStudent(studentRepository.findById(newAttendanceDto.studentId)
-                .orElseThrow(() -> new NoSuchEntityException("Студент не найден")));
+                .orElseThrow(() -> new NoSuchEntityException("студент не найден")));
         attendance.setPresence(false);
         attendanceRepository.save(attendance);
     }
 
     public void deleteAttendance(Long attendanceId) throws NoSuchEntityException {
-        Attendance attendance = attendanceRepository.findById(attendanceId).orElseThrow(() -> new NoSuchEntityException(""));
+        Attendance attendance = attendanceRepository.findById(attendanceId)
+                .orElseThrow(() -> new NoSuchEntityException("посещение не найдено"));
         attendanceRepository.delete(attendance);
     }
 }

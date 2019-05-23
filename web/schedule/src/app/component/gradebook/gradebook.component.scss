@@ -21,18 +21,18 @@
 }
 
 button {
-  background-color: rgb(255, 231, 251);
+  background-color: rgba(178, 149, 166, 0.96);
+  align-self: center;
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
-  margin-bottom: 2em;
   font-size: 20px;
   cursor: pointer;
-  width: 180px;
-  height: 80px;
-  margin: 20px;
+  width: 200px;
+  height: 50px;
   font-family: Garamond, monospace;
-  font-weight: bold;
+  margin: 1%;
+  padding: 10px;
 }
 
 .gradebook-table {

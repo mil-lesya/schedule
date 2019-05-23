@@ -1,0 +1,55 @@
+<app-navigation-admin></app-navigation-admin>
+<div class="content-container">
+  <div class="group-container">
+    <form class="group-form" (ngSubmit)="onSubmit()">
+      <fieldset class="clearfix">
+        <div class="wrapper">
+          <div class="box1">
+            Курс:
+            <input type="text" [(ngModel)]="expectedGroup.course" name="course">
+          </div>
+          <div class="box2">
+            Группа:
+            <input type="text" [(ngModel)]="expectedGroup.group" name="group">
+          </div>
+          <div class="box3">
+            <button type="submit" (click)="buttonType = 'view'">Посмотреть </button>
+          </div>
+        </div>
+      </fieldset>
+      <table *ngIf="received" class="group-table" >
+        <tr>
+          <th class="num">№</th>
+          <th class="name">Фамилия</th>
+          <th class="name">Имя</th>
+          <th class="name">Отчество</th>
+        </tr>
+        <tr class="row" *ngFor="let s of students; let i = index" (click)="getStudentId(s.id)" [ngClass]="{active : s.id == studentId}">
+          <td [ngClass]="{headman : s.id == headmanId}">{{i + 1}}</td>
+          <td>{{s.personalCard.surname}}</td>
+          <td>{{s.personalCard.name}}</td>
+          <td>{{s.personalCard.patronymic}}</td>
+        </tr>
+      </table>
+      <table *ngIf="buttonType === 'add'" class="group-table">
+        <tr  class="row">
+          <td class="num">{{students.length + 1}}</td>
+          <td class="name">
+            <input type="text" class="input" [(ngModel)]="newStudent.surname" name="surname">
+          </td>
+          <td class="name">
+            <input type="text" class="input" [(ngModel)]="newStudent.name" name="name">
+          </td>
+          <td class="name" >
+            <input type="text" class="input" [(ngModel)]="newStudent.patronymic" name="patronymic">
+          </td>
+        </tr>
+      </table>
+      <button type="submit" (click)="buttonType = 'add'" *ngIf="received">Добавить</button>
+      <button type="submit" (click)="buttonType = 'save'" *ngIf="received"> Сохранить</button>
+      <button type ="submit" (click)="buttonType = 'delete'" *ngIf="received">Удалить</button>
+      <button type="submit" (click)="buttonType = 'headman'" *ngIf="received">Назначить старостой</button>
+    </form>
+  </div>
+</div>
+

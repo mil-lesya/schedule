@@ -37,7 +37,7 @@ public class ScheduleService {
 
     public List<Schedule> getGroupSchedule(ExpectedGroupDto expectedGroupDto) throws NoSuchEntityException {
         Group group = groupRepository.findByGroupNumberAndCourse(expectedGroupDto.group, expectedGroupDto.course)
-                .orElseThrow(() -> new NoSuchEntityException("Группа не найдена"));
+                .orElseThrow(() -> new NoSuchEntityException("группа не найдена"));
         return scheduleRepository.findAllByGroupList(group);
     }
 
@@ -45,14 +45,14 @@ public class ScheduleService {
         for (ScheduleDto scheduleDto :
                 schedules) {
             Schedule schedule = scheduleRepository.findByClassNumberAndWeek(scheduleDto.classNumber, scheduleDto.week)
-                    .orElseThrow(()-> new NoSuchEntityException("Расписание не найдено"));
+                    .orElseThrow(() -> new NoSuchEntityException("расписание не найдено"));
 
             Subject subject = subjectRepository.findByName(scheduleDto.subject.name)
-                    .orElseThrow(() -> new NoSuchEntityException("Предмет не найден"));
+                    .orElseThrow(() -> new NoSuchEntityException("предмет не найден"));
             Auditory auditory = auditoryRepository.findByAuditoryNumber(scheduleDto.auditory.auditoryNumber)
-                    .orElseThrow(() -> new NoSuchEntityException("Аудитория не найдена"));
+                    .orElseThrow(() -> new NoSuchEntityException("аудитория не найдена"));
             Lecturer lecturer = lecturerRepository.findByPassPassNumber(scheduleDto.lecturer.passNumber)
-                    .orElseThrow(()-> new NoSuchEntityException("Лектор не найден"));
+                    .orElseThrow(() -> new NoSuchEntityException("лектор не найден"));
 
             schedule.setAuditory(auditory);
             schedule.setClassNumber(scheduleDto.classNumber);

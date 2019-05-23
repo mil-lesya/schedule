@@ -1,0 +1,17 @@
+<div class="auth-container">
+  <div id="login">
+    <form class="auth-form" (ngSubmit)="authenticate()">
+      <fieldset class="clearfix">
+        <div class="text">Вход</div>
+        <input type="text" placeholder="Логин" [(ngModel)]="admin.login" name="login">
+        <input type="password" placeholder="Пароль" [(ngModel)]="admin.password" name="password">
+        <button type="submit">Войти</button>
+        <div class="undo">
+          <a [routerLink]="'/home'">Вернуться назад</a>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+

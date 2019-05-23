@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("register/lecturer")
 public class RegistrationLecturerController {
@@ -22,7 +24,7 @@ public class RegistrationLecturerController {
     }
 
     @PostMapping
-    public void register(@RequestBody RegisterLecturerDto registerLecturerDto) throws RegistrationException {
+    public void register(@Valid @RequestBody RegisterLecturerDto registerLecturerDto) throws RegistrationException {
         lecturerService.register(registerLecturerDto);
     }
 }

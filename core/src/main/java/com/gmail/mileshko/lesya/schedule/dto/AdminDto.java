@@ -1,13 +1,13 @@
 package com.gmail.mileshko.lesya.schedule.dto;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 public class AdminDto {
 
-    @NotNull
+    @NotEmpty(message = "Поле логин не должно быть пустым")
     public String login;
 
-    @NotNull
+    @NotEmpty(message = "Поле пароль не должно быть пустым")
     public String password;
 
     public AdminDto() {

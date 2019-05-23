@@ -5,6 +5,7 @@ import {GroupService} from '../../service/group.service';
 import {ExpectedGroup} from '../../dto/ExpectedGroup';
 import {ScheduleService} from '../../service/schedule.service';
 import {Schedule} from '../../dto/Schedule';
+import {ErrorService} from '../../service/error.service';
 
 @Component({
   selector: 'app-group-schedule',
@@ -28,23 +29,24 @@ export class GroupScheduleComponent implements OnInit {
   constructor(
     private tokenProviderService: TokenProviderService,
     private lecturerService: LecturerService,
-    private scheduleService: ScheduleService
+    private scheduleService: ScheduleService,
+    private errorService: ErrorService
   ) {
   }
 
   ngOnInit() {
     this.tokenProviderService.token.subscribe(token => {
       console.log(token);
-      this.lecturerService.authorize(token).subscribe(authorize =>
-        this.authorize = authorize
-      );
-    });
+      this.lecturerService.authorize(token).subscribe(authorize => {
+        this.authorize = authorize;
+      }, err => this.errorService.raise(err));
+    }, err => this.errorService.raise(err));
   }
 
   getSchedule() {
     console.log(this.expectedGroup);
     this.scheduleService.getGroupSchedule(this.expectedGroup).subscribe(schedule => {
-      this.schedule =  JSON.parse(schedule);
+      this.schedule = JSON.parse(schedule);
       console.log(this.schedule);
       for (const s of this.schedule) {
         switch (s.week) {
@@ -77,7 +79,7 @@ export class GroupScheduleComponent implements OnInit {
       }
       console.log(this.schedule);
       this.received = true;
-    });
+    }, err => this.errorService.raise(err));
   }
 
 }

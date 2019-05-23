@@ -6,10 +6,13 @@
         <input type="text" placeholder="Номер зачётки" [(ngModel)]="authStudent.gradebookNumber" name="gradebookNumber">
         <input type="password" placeholder="Пароль" [(ngModel)]="authStudent.password" name="password">
         <div class="register-hint">
-          <div class="text">Не зарегистрированы?</div>
+          <div class="text" style="font-size: 16px">Не зарегистрированы?</div>
           <a [routerLink]="'/register/student'">Регистрация</a>
         </div>
         <button type="submit">Войти</button>
+        <div class="register-hint">
+          <a [routerLink]="'/home'">Вернуться назад</a>
+        </div>
       </fieldset>
     </form>
   </div>

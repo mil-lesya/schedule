@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping("auth/lecturer")
@@ -23,7 +25,7 @@ public class AuthLecturerController {
 
 
     @PostMapping
-    public String authenticate(@RequestBody AuthLecturerDto authLecturerDto) throws AuthenticationException, NoSuchEntityException{
+    public String authenticate(@Valid @RequestBody AuthLecturerDto authLecturerDto) throws AuthenticationException, NoSuchEntityException{
         return lecturerService.authenticate(authLecturerDto);
     }
 

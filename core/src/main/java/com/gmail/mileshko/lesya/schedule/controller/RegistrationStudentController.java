@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("register/student")
 public class RegistrationStudentController {
@@ -21,7 +23,7 @@ public class RegistrationStudentController {
     }
 
     @PostMapping
-    public void register(@RequestBody RegisterStudentDto registerStudentDto) throws NoSuchEntityException,  RegistrationException {
+    public void register(@Valid @RequestBody RegisterStudentDto registerStudentDto) throws NoSuchEntityException,  RegistrationException {
         studentService.register(registerStudentDto);
     }
 }

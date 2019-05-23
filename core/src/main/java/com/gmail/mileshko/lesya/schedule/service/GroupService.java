@@ -29,13 +29,16 @@ public class GroupService {
     }
 
     public List<Student> getExpectedGroup(ExpectedGroupDto expectedGroupDto) throws NoSuchEntityException {
-        Group group = groupRepository.findByGroupNumberAndCourse(expectedGroupDto.group, expectedGroupDto.course).orElseThrow(()->new NoSuchEntityException(""));
+        Group group = groupRepository.findByGroupNumberAndCourse(expectedGroupDto.group, expectedGroupDto.course)
+                .orElseThrow(() -> new NoSuchEntityException("несуществующая группа"));
         return studentRepository.findAllByGroup(group);
     }
 
     public Long getHeadmanId(ExpectedGroupDto expectedGroupDto) throws NoSuchEntityException {
-        Group group = groupRepository.findByGroupNumberAndCourse(expectedGroupDto.group, expectedGroupDto.course).orElseThrow(()->new NoSuchEntityException(""));
+        Group group = groupRepository.findByGroupNumberAndCourse(expectedGroupDto.group, expectedGroupDto.course)
+                .orElseThrow(() -> new NoSuchEntityException("несуществующая группа"));
         return group.getHeadman().getId();
+
     }
 
 }

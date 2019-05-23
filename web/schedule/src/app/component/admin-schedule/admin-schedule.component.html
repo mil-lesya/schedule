@@ -1,0 +1,143 @@
+<app-navigation-admin></app-navigation-admin>
+<div class="content-container">
+  <div class="schedule-container">
+    <form class="schedule-form" (ngSubmit)="onSubmit()">
+      <fieldset class="clearfix">
+        <div class="wrapper">
+          <div class="box1">
+            Курс:
+            <input type="text" [(ngModel)]="expectedGroup.course" name="course">
+          </div>
+          <div class="box2">
+            Группа:
+            <input type="text" [(ngModel)]="expectedGroup.group" name="group">
+          </div>
+          <div class="box3">
+            <button type="submit" (click)="buttonType = 'view'">Посмотреть</button>
+          </div>
+        </div>
+      </fieldset>
+      <table *ngIf="received" class="schedule-table">
+        <tr>
+          <th></th>
+          <th>Время</th>
+          <th>Предмет</th>
+          <th>Преподаватель</th>
+          <th>Аудитория</th>
+        </tr>
+        <tr>
+          <td class="day" [rowSpan]="monday.length + 1">Пн</td>
+        </tr>
+        <tr class="row" *ngFor="let s of monday">
+          <td>{{time[s.classNumber]}}</td>
+          <td *ngIf="!view">{{s.subject.name}}</td>
+          <td *ngIf="view"><input class="input" [(ngModel)]="s.subject.name" name="{{s.subject.name}}"></td>
+          <td *ngIf="!view">{{s.lecturer.surname}} {{s.lecturer.name}} {{s.lecturer.patronymic}} </td>
+          <td *ngIf="view">
+            <input type="text" [(ngModel)]="s.lecturer.surname" name="{{s.lecturer.surname}}">
+            <input type="text" [(ngModel)]="s.lecturer.name" name="{{s.lecturer.name}}">
+            <input type="text" [(ngModel)]="s.lecturer.patronymic" name="{{s.lecturer.patronymic}}">
+          </td>
+          <td *ngIf="!view">{{s.auditory.auditoryNumber}}</td>
+          <td *ngIf="view">
+            <input class="input" [(ngModel)]="s.auditory.auditoryNumber" name="{{s.auditory.auditoryNumber}}">
+          </td>
+        </tr>
+        <tr>
+          <td class="day" [rowSpan]="tuesday.length + 1">Вт</td>
+        </tr>
+        <tr class="row" *ngFor="let s of tuesday">
+          <td>{{time[s.classNumber]}}</td>
+          <td *ngIf="!view">{{s.subject.name}}</td>
+          <td *ngIf="view"><input class="input" [(ngModel)]="s.subject.name" name="{{s.subject.name}}"></td>
+          <td *ngIf="!view">{{s.lecturer.surname}} {{s.lecturer.name}} {{s.lecturer.patronymic}} </td>
+          <td *ngIf="view">
+            <input type="text" [(ngModel)]="s.lecturer.surname" name="{{s.lecturer.surname}}">
+            <input type="text" [(ngModel)]="s.lecturer.name" name="{{s.lecturer.name}}">
+            <input type="text" [(ngModel)]="s.lecturer.patronymic" name="{{s.lecturer.patronymic}}">
+          </td>
+          <td *ngIf="!view">{{s.auditory.auditoryNumber}}</td>
+          <td *ngIf="view">
+            <input class="input" [(ngModel)]="s.auditory.auditoryNumber" name="{{s.auditory.auditoryNumber}}">
+          </td>
+        </tr>
+        <tr>
+          <td class="day" [rowSpan]="wednesday.length + 1">Ср</td>
+        </tr>
+        <tr class="row" *ngFor="let s of wednesday">
+          <td>{{time[s.classNumber]}}</td>
+          <td *ngIf="!view">{{s.subject.name}}</td>
+          <td *ngIf="view"><input class="input" [(ngModel)]="s.subject.name" name="{{s.subject.name}}"></td>
+          <td *ngIf="!view">{{s.lecturer.surname}} {{s.lecturer.name}} {{s.lecturer.patronymic}} </td>
+          <td *ngIf="view">
+            <input type="text" [(ngModel)]="s.lecturer.surname" name="{{s.lecturer.surname}}">
+            <input type="text" [(ngModel)]="s.lecturer.name" name="{{s.lecturer.name}}">
+            <input type="text" [(ngModel)]="s.lecturer.patronymic" name="{{s.lecturer.patronymic}}">
+          </td>
+          <td *ngIf="!view">{{s.auditory.auditoryNumber}}</td>
+          <td *ngIf="view">
+            <input class="input" [(ngModel)]="s.auditory.auditoryNumber" name="{{s.auditory.auditoryNumber}}">
+          </td>
+        </tr>
+        <tr>
+          <td class="day" [rowSpan]="thursday.length + 1">Чт</td>
+        </tr>
+        <tr class="row" *ngFor="let s of thursday">
+          <td>{{time[s.classNumber]}}</td>
+          <td *ngIf="!view">{{s.subject.name}}</td>
+          <td *ngIf="view"><input class="input" [(ngModel)]="s.subject.name" name="{{s.subject.name}}"></td>
+          <td *ngIf="!view">{{s.lecturer.surname}} {{s.lecturer.name}} {{s.lecturer.patronymic}} </td>
+          <td *ngIf="view">
+            <input type="text" [(ngModel)]="s.lecturer.surname" name="{{s.lecturer.surname}}">
+            <input type="text" [(ngModel)]="s.lecturer.name" name="{{s.lecturer.name}}">
+            <input type="text" [(ngModel)]="s.lecturer.patronymic" name="{{s.lecturer.patronymic}}">
+          </td>
+          <td *ngIf="!view">{{s.auditory.auditoryNumber}}</td>
+          <td *ngIf="view">
+            <input class="input" [(ngModel)]="s.auditory.auditoryNumber" name="{{s.auditory.auditoryNumber}}">
+          </td>
+        </tr>
+        <tr>
+          <td class="day" [rowSpan]="friday.length + 1"> Пт</td>
+        </tr>
+        <tr class="row" *ngFor="let s of friday">
+          <td>{{time[s.classNumber]}}</td>
+          <td *ngIf="!view">{{s.subject.name}}</td>
+          <td *ngIf="view"><input class="input" [(ngModel)]="s.subject.name" name="{{s.subject.name}}"></td>
+          <td *ngIf="!view">{{s.lecturer.surname}} {{s.lecturer.name}} {{s.lecturer.patronymic}} </td>
+          <td *ngIf="view">
+            <input type="text" [(ngModel)]="s.lecturer.surname" name="{{s.lecturer.surname}}">
+            <input type="text" [(ngModel)]="s.lecturer.name" name="{{s.lecturer.name}}">
+            <input type="text" [(ngModel)]="s.lecturer.patronymic" name="{{s.lecturer.patronymic}}">
+          </td>
+          <td *ngIf="!view">{{s.auditory.auditoryNumber}}</td>
+          <td *ngIf="view">
+            <input class="input" [(ngModel)]="s.auditory.auditoryNumber" name="{{s.auditory.auditoryNumber}}">
+          </td>
+        </tr>
+        <tr>
+          <td class="day" [rowSpan]="saturday.length + 1"> Сб</td>
+        </tr>
+        <tr class="row" *ngFor="let s of saturday">
+          <td>{{time[s.classNumber]}}</td>
+          <td *ngIf="!view">{{s.subject.name}}</td>
+          <td *ngIf="view"><input class="input" [(ngModel)]="s.subject.name" name="{{s.subject.name}}"></td>
+          <td *ngIf="!view">{{s.lecturer.surname}} {{s.lecturer.name}} {{s.lecturer.patronymic}} </td>
+          <td *ngIf="view">
+            <input type="text" [(ngModel)]="s.lecturer.surname" name="{{s.lecturer.surname}}">
+            <input type="text" [(ngModel)]="s.lecturer.name" name="{{s.lecturer.name}}">
+            <input type="text" [(ngModel)]="s.lecturer.patronymic" name="{{s.lecturer.patronymic}}">
+          </td>
+          <td *ngIf="!view">{{s.auditory.auditoryNumber}}</td>
+          <td *ngIf="view">
+            <input class="input" [(ngModel)]="s.auditory.auditoryNumber" name="{{s.auditory.auditoryNumber}}">
+          </td>
+        </tr>
+      </table>
+      <button type="submit" (click)="buttonType = 'save'" *ngIf="received">Сохранить</button>
+    </form>
+  </div>
+</div>
+
+
+

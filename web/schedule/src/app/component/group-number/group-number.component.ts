@@ -4,6 +4,7 @@ import {GroupService} from '../../service/group.service';
 import {Student} from '../../dto/Student';
 import {TokenProviderService} from '../../service/token.provider.service';
 import {LecturerService} from '../../service/lecturer.service';
+import {ErrorService} from '../../service/error.service';
 
 @Component({
   selector: 'app-group-number',
@@ -20,15 +21,17 @@ export class GroupNumberComponent implements OnInit {
   constructor(
     private groupService: GroupService,
     private tokenProviderService: TokenProviderService,
-    private lecturerService: LecturerService
+    private lecturerService: LecturerService,
+    private errorService: ErrorService
   ) {
   }
 
   ngOnInit() {
     this.tokenProviderService.token.subscribe(token => {
       console.log(token);
-      this.lecturerService.authorize(token).subscribe(authorize =>
-        this.authorize = authorize
+      this.lecturerService.authorize(token).subscribe(authorize => {
+          this.authorize = authorize;
+        }, err => this.errorService.raise(err)
       );
     });
   }
@@ -38,6 +41,6 @@ export class GroupNumberComponent implements OnInit {
       this.students = JSON.parse(students);
       console.log(this.students);
       this.received = true;
-    });
+    }, err => this.errorService.raise(err));
   }
 }

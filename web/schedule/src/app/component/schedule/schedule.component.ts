@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {TokenProviderService} from '../../service/token.provider.service';
 import {ScheduleService} from '../../service/schedule.service';
 import {Schedule} from '../../dto/Schedule';
+import {ErrorService} from '../../service/error.service';
 
 @Component({
   selector: 'app-schedule',
@@ -21,12 +22,14 @@ export class ScheduleComponent implements OnInit {
   friday: Schedule[] = [];
   saturday: Schedule[] = [];
   time: string[] = ['8:00', '9:50', '11:40', '13:50', '15:40'];
+  came: boolean;
 
   constructor(private app: AppComponent,
               private router: Router,
               private route: ActivatedRoute,
               private scheduleService: ScheduleService,
-              private tokenProviderService: TokenProviderService) {
+              private tokenProviderService: TokenProviderService,
+              private errorService: ErrorService) {
   }
 
   ngOnInit() {
@@ -64,8 +67,11 @@ export class ScheduleComponent implements OnInit {
             }
           }
         }
-      });
-    });
+        if (schedule.length > 0) {
+          this.came = true;
+        }
+      }, err => this.errorService.raise(err));
+    }, err => this.errorService.raise(err));
   }
 
 

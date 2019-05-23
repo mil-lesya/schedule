@@ -3,7 +3,10 @@ package com.gmail.mileshko.lesya.schedule.service;
 import com.gmail.mileshko.lesya.schedule.dto.AuthStudentDto;
 import com.gmail.mileshko.lesya.schedule.dto.NewStudent;
 import com.gmail.mileshko.lesya.schedule.dto.RegisterStudentDto;
-import com.gmail.mileshko.lesya.schedule.entity.*;
+import com.gmail.mileshko.lesya.schedule.entity.Group;
+import com.gmail.mileshko.lesya.schedule.entity.PersonalCard;
+import com.gmail.mileshko.lesya.schedule.entity.Student;
+import com.gmail.mileshko.lesya.schedule.entity.StudentToken;
 import com.gmail.mileshko.lesya.schedule.exception.AuthenticationException;
 import com.gmail.mileshko.lesya.schedule.exception.AuthorizationException;
 import com.gmail.mileshko.lesya.schedule.exception.NoSuchEntityException;
@@ -14,9 +17,6 @@ import com.gmail.mileshko.lesya.schedule.security.TokenGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -39,10 +39,11 @@ public class StudentService {
 
     public String authenticate(AuthStudentDto authStudentDto) throws NoSuchEntityException, AuthenticationException {
         Student student = gradebookRepository.findByGradebookNumber(authStudentDto.gradebookNumber)
-                .orElseThrow(() -> new NoSuchEntityException("no student with such gradebook number"))
+                .orElseThrow(() -> new NoSuchEntityException("нет студента с таким номером зачётки"))
                 .getStudent();
-        if (!Hasher.check(authStudentDto.password, student.getPassword()))
-            throw new AuthenticationException("invalid student");//
+        if (!Hasher.check(authStudentDto.password, student.getPassword())) {
+            throw new AuthenticationException("недействительный студент");
+        }
 
         StudentToken token = new StudentToken(student, TokenGenerator.generate());
         return studentTokenRepository.save(token).getToken();
@@ -78,21 +79,21 @@ public class StudentService {
     }
 
 
-    public Boolean isHeadman(Student student){
-       return groupRepository.findByHeadman(student).isPresent();
+    public Boolean isHeadman(Student student) {
+        return groupRepository.findByHeadman(student).isPresent();
     }
 
     public void authorize(Student student) throws AuthorizationException {
-        groupRepository.findByHeadman(student).orElseThrow(()-> new AuthorizationException("no permission"));
+        groupRepository.findByHeadman(student).orElseThrow(() -> new AuthorizationException("no permission"));
     }
 
     public void saveStudent(NewStudent newStudent) throws NoSuchEntityException {
         Group group = groupRepository.findByGroupNumberAndCourse(newStudent.group, newStudent.course)
-                .orElseThrow(()-> new NoSuchEntityException("Группа не найдена"));
-        PersonalCard personalCard = personalCardRepository.findBySurnameAndNameAndPatronymic( newStudent.surname, newStudent.name,newStudent.patronymic)
-                .orElseThrow(()-> new NoSuchEntityException("Персональная карта не найдена"));
+                .orElseThrow(() -> new NoSuchEntityException("группа не найдена"));
+        PersonalCard personalCard = personalCardRepository.findBySurnameAndNameAndPatronymic(newStudent.surname, newStudent.name, newStudent.patronymic)
+                .orElseThrow(() -> new NoSuchEntityException("персональная карта не найдена"));
         Student student = studentRepository.findByPersonalCard(personalCard)
-                    .orElseThrow(()-> new NoSuchEntityException("Студент не найден"));
+                .orElseThrow(() -> new NoSuchEntityException("студент не найден"));
 
         student.setGroup(group);
         studentRepository.save(student);
@@ -101,14 +102,14 @@ public class StudentService {
 
     public void deleteStudent(Long studentId) throws NoSuchEntityException {
         Student student = studentRepository.findById(studentId)
-                .orElseThrow(()-> new NoSuchEntityException(""));
+                .orElseThrow(() -> new NoSuchEntityException("студент не найден"));
 
         studentRepository.delete(student);
     }
 
     public void appointHeadman(Long headmanId) throws NoSuchEntityException {
         Student student = studentRepository.findById(headmanId)
-                .orElseThrow(()-> new NoSuchEntityException(""));
+                .orElseThrow(() -> new NoSuchEntityException("студент не найден"));
         student.getGroup().setHeadman(student);
     }
 

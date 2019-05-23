@@ -6,6 +6,7 @@ import {GradebookService} from '../../service/gradebook.service';
 import {Assessment} from '../../dto/Assessment';
 import {AssessmentService} from '../../service/assessment.service';
 import {NewAssessment} from '../../dto/NewAssessment';
+import {ErrorService} from '../../service/error.service';
 
 @Component({
   selector: 'app-gradebook',
@@ -27,7 +28,8 @@ export class GradebookComponent implements OnInit {
               private route: ActivatedRoute,
               private gradebookService: GradebookService,
               private tokenProviderService: TokenProviderService,
-              private assessmentService: AssessmentService) {
+              private assessmentService: AssessmentService,
+              private errorService: ErrorService) {
   }
 
   ngOnInit() {
@@ -35,7 +37,7 @@ export class GradebookComponent implements OnInit {
       console.log(token);
       this.gradebookService.getGradebookAssessments(token).subscribe(assessments => {
         this.assessments = assessments;
-      });
+      }, err => this.errorService.raise(err));
       this.gradebookService.isHeadman(token).subscribe(isHeadman => {
         this.isHeadman = isHeadman;
         console.log(isHeadman);
@@ -49,8 +51,8 @@ export class GradebookComponent implements OnInit {
             });
           });
         }
-      });
-    });
+      }, err => this.errorService.raise(err));
+    }, err => this.errorService.raise(err));
   }
 
 
@@ -61,7 +63,7 @@ export class GradebookComponent implements OnInit {
         this.studentId = params.id;
         this.newAssessment.studentId = this.studentId;
         console.log(this.newAssessment);
-      });
+      }, err => this.errorService.raise(err));
     } else if (this.buttonType === 'save') {
       this.assessmentService.addAssessment(this.newAssessment).subscribe(() => {
         this.gradebookService.getStudentAssessments(this.studentId).subscribe(assessments => {
@@ -70,14 +72,14 @@ export class GradebookComponent implements OnInit {
           this.received = false;
           this.newAssessment = new NewAssessment();
         });
-      });
+      }, err => this.errorService.raise(err));
     } else if (this.buttonType === 'delete') {
       this.assessmentService.deleteAssessment(this.assessmentId).subscribe(() => {
         console.log('delete');
         this.gradebookService.getStudentAssessments(this.studentId).subscribe(assessments => {
           this.assessments = assessments;
         });
-      });
+      }, err => this.errorService.raise(err));
     }
 
   }
