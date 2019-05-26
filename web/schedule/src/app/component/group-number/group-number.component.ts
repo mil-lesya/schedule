@@ -38,7 +38,7 @@ export class GroupNumberComponent implements OnInit {
 
   getGroup() {
     this.groupService.getExpectedGroup(this.expectedGroup).subscribe(students => {
-      this.students = JSON.parse(students);
+      this.students = JSON.parse(students.toString());
       console.log(this.students);
       this.received = true;
     }, err => this.errorService.raise(err));

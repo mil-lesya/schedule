@@ -69,9 +69,9 @@ public class StudentService {
                 registerStudentDto.mail);
 
         student.setGradebook(gradebookRepository.findByGradebookNumber(registerStudentDto.gradebookNumber)
-                .orElseThrow(() -> new RegistrationException("Зачётка не найдена")));
+                .orElseThrow(() -> new RegistrationException("зачётка не найдена")));
         student.setGroup(groupRepository.findByGroupNumberAndCourse(registerStudentDto.groupNumber, registerStudentDto.course)
-                .orElseThrow(() -> new RegistrationException("Группа не найдена")));
+                .orElseThrow(() -> new RegistrationException("группа не найдена")));
         student.setPersonalCard(personalCard);
         personalCardRepository.save(personalCard);
         student.setPassword(Hasher.getHash(registerStudentDto.password));

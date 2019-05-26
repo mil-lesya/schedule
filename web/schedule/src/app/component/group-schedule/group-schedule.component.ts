@@ -46,7 +46,7 @@ export class GroupScheduleComponent implements OnInit {
   getSchedule() {
     console.log(this.expectedGroup);
     this.scheduleService.getGroupSchedule(this.expectedGroup).subscribe(schedule => {
-      this.schedule = JSON.parse(schedule);
+      this.schedule = JSON.parse(schedule.toString());
       console.log(this.schedule);
       for (const s of this.schedule) {
         switch (s.week) {

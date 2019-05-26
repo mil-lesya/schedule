@@ -12,6 +12,7 @@ public class RegisterLecturerDto {
 
     @NotEmpty(message = "поле \"Имя\" не должно быть пустым")
     public String name;
+
     public String patronymic;
 
     @Pattern(regexp ="^(\\+375)([\\d]{9})$", message = "неверный формат поля \"Номер телефона\"")
@@ -19,7 +20,10 @@ public class RegisterLecturerDto {
 
     @Pattern(regexp ="^([a-z0-9_.-]+)@([a-z0-9_.-]+)\\.([a-z.]{2,6})$", message = "неверный формат поля mail")
     public String mail;
+
     public Integer auditory;
+
+    @NotEmpty(message = "Поле \"пароль\" не должно быть пустым")
     public String password;
 
     public RegisterLecturerDto() {

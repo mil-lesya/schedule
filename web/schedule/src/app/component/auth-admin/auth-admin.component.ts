@@ -25,7 +25,7 @@ export class AuthAdminComponent implements OnInit {
   authenticate() {
     this.authAdminService.authenticate(this.admin).subscribe(isAdmin => {
         console.log(isAdmin);
-        this.isAdmin = JSON.parse(isAdmin);
+        this.isAdmin = JSON.parse(isAdmin.toString());
         if (this.isAdmin !== true) {
           alert('ошибка: невернный логин или пароль, проверьте введённые данные');
           return;

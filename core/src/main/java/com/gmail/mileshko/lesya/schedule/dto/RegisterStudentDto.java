@@ -30,7 +30,7 @@ public class RegisterStudentDto {
     @Range(min = 1, max = 4, message = "несуществующий курс")
     public Integer course;
 
-    @NotEmpty(message = "Поле \"пароль\" не должно быть пустым")
+    @NotEmpty(message = "поле \"пароль\" не должно быть пустым")
     public String password;
 
     public RegisterStudentDto() {

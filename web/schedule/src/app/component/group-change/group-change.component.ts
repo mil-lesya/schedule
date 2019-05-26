@@ -28,6 +28,7 @@ export class GroupChangeComponent implements OnInit {
   newStudent: NewStudent = new NewStudent();
   studentId: number;
   headmanId: number;
+  admin: Admin;
 
   constructor(
     private groupService: GroupService,
@@ -41,7 +42,9 @@ export class GroupChangeComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.route.queryParams.subscribe(params => {
+      this.admin = params.admin;
+    });
   }
 
   onSubmit(): void {
@@ -53,16 +56,16 @@ export class GroupChangeComponent implements OnInit {
     } else if (this.buttonType === 'save') {
       this.studentService.saveStudent(this.newStudent).subscribe(() => {
         this.groupService.getExpectedGroup(this.expectedGroup).subscribe(students => {
-          this.students = JSON.parse(students);
+          this.students = JSON.parse(students.toString());
           console.log(this.students);
           this.newStudent = new NewStudent();
         });
       }, err => this.errorService.raise(err));
     } else if (this.buttonType === 'delete') {
-      this.studentService.deleteStudent(this.studentId).subscribe(() => {
+      this.studentService.deleteStudent(this.studentId, this.admin).subscribe(() => {
         console.log(this.studentId);
         this.groupService.getExpectedGroup(this.expectedGroup).subscribe(students => {
-          this.students = JSON.parse(students);
+          this.students = JSON.parse(students.toString());
           console.log(this.students);
         });
       }, err => this.errorService.raise(err));
@@ -75,7 +78,7 @@ export class GroupChangeComponent implements OnInit {
       this.groupService.getExpectedGroup(this.expectedGroup).subscribe(students => {
         this.groupService.getHeadmanId(this.expectedGroup).subscribe(headmanId => {
           this.headmanId = headmanId;
-          this.students = JSON.parse(students);
+          this.students = JSON.parse(students.toString());
           console.log(this.students);
           this.received = true;
         }, error1 => this.errorService.raise(error1));

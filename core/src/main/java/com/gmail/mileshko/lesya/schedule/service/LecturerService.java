@@ -35,25 +35,19 @@ public class LecturerService {
     }
 
     public String authenticate(AuthLecturerDto authLecturerDto) throws NoSuchEntityException, AuthenticationException {
-        Lecturer lecturer = passRepository.findByPassNumber(authLecturerDto.passNumber)
-                .orElseThrow(() -> new NoSuchEntityException("нет преподавателя с таким номером пропуска"))
-                .getLecturer();
+        Lecturer lecturer = passRepository.findByPassNumber(authLecturerDto.passNumber).orElseThrow(() -> new NoSuchEntityException("нет преподавателя с таким номером пропуска")).getLecturer();
         if (!Hasher.check(authLecturerDto.password, lecturer.getPassword()))
-            throw new AuthenticationException("недействительный преподаватель");//
-
+            throw new AuthenticationException("недействительный преподаватель");
         LecturerToken token = new LecturerToken(lecturer, TokenGenerator.generate());
         return lecturerTokenRepository.save(token).getToken();
     }
 
     public Lecturer validate(String tokenValue) throws NoSuchEntityException {
-        return lecturerTokenRepository.findByToken(tokenValue)
-                .orElseThrow(() -> new NoSuchEntityException("no such token"))
-                .getLecturer();
+        return lecturerTokenRepository.findByToken(tokenValue).orElseThrow(() -> new NoSuchEntityException("no such token")).getLecturer();
     }
 
 
     public void register(RegisterLecturerDto registerLecturerDto) throws RegistrationException {
-
         Lecturer lecturer = new Lecturer();
         Pass pass = passRepository.findByPassNumber(registerLecturerDto.passNumber)
                 .orElseThrow(() -> new RegistrationException("нет преподавателя с таким номером пропуска"));
@@ -61,7 +55,6 @@ public class LecturerService {
         pass.setSurname(registerLecturerDto.surname);
         pass.setPatronymic(registerLecturerDto.patronymic);
         passRepository.save(pass);
-
         lecturer.setPass(pass);
         lecturer.setName(registerLecturerDto.name);
         lecturer.setSurname(registerLecturerDto.surname);

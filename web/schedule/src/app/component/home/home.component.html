@@ -3,28 +3,19 @@
     <div class="text">Зайти как</div>
     <div class="wrapper">
       <div class="box1">
-        <img class="displayed" src="../../../assets/stud.png" height="150" width="150"/>
       </div>
       <div class="box2">
-        <img class="displayed" src="../../../assets/lect.png" height="150" width="150"/>
       </div>
       <div class="box3">
-        <img class="displayed" src="../../../assets/odmen.png" height="150" width="150"/>
       </div>
       <div class="box4">
-        <a [routerLink]="'/auth/student'">
-          <button>Студент</button>
-        </a>
+          <button [routerLink]="'/auth/student'">Студент</button>
       </div>
       <div class="box5">
-        <a [routerLink]="'/auth/lecturer'">
-          <button>Преподаватель</button>
-        </a>
+          <button [routerLink]="'/auth/lecturer'">Преподаватель</button>
       </div>
       <div class="box6">
-        <a [routerLink]="'/auth/admin'">
-          <button>Декан</button>
-        </a>
+          <button [routerLink]="'/auth/admin'">Декан</button>
       </div>
     </div>
   </fieldset>
