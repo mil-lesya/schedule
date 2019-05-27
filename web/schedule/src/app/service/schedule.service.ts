@@ -25,9 +25,8 @@ export class ScheduleService {
   }
 
   getGroupSchedule(expectedGroup: ExpectedGroup): Observable<Schedule[]> {
-    return this.http.get<Schedule[]>(API_URL + 'schedule/group', {
-      responseType: 'text' as 'json',
-      params: {expectedGroup: expectedGroup.toString()}
+    return this.http.post<Schedule[]>(API_URL + 'schedule/group', expectedGroup, {
+      responseType: 'text' as 'json'
     });
   }
 

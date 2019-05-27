@@ -35,8 +35,8 @@ public class ScheduleController {
         return Mapper.mapAll(scheduleService.getSchedule(student), ScheduleDto.class);
     }
 
-    @GetMapping("group")
-    public List<ScheduleDto> getGroupSchedule(@Valid @RequestParam("expectedGroup")ExpectedGroupDto expectedGroupDto) throws NoSuchEntityException {
+    @PostMapping("group")
+    public List<ScheduleDto> getGroupSchedule(@Valid @RequestBody ExpectedGroupDto expectedGroupDto) throws NoSuchEntityException {
         return Mapper.mapAll(scheduleService.getGroupSchedule(expectedGroupDto), ScheduleDto.class);
     }
 

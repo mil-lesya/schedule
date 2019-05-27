@@ -87,7 +87,11 @@
     // optional - looks better for small cell values
     white-space: nowrap;
     border-spacing: 0;
+    .day {
+      font-weight: bold;
+      background: rgba(156, 110, 166, 0.71);
 
+    }
     tr{
       width: 100%;
       padding: 6px 12px;

@@ -26,7 +26,7 @@
             <th>Аудитория</th>
           </tr>
           <tr>
-            <td [rowSpan]="monday.length + 1">Пн</td>
+            <td class="day" [rowSpan]="monday.length + 1">Пн</td>
           </tr>
           <tr class="row" *ngFor="let s of monday">
             <td >{{time[s.classNumber]}}</td>
@@ -35,7 +35,7 @@
             <td>{{s.auditory.auditoryNumber}}</td>
           </tr>
           <tr>
-            <td  [rowSpan]="tuesday.length + 1">Вт</td>
+            <td class="day" [rowSpan]="tuesday.length + 1">Вт</td>
           </tr>
           <tr class="row" *ngFor="let s of tuesday">
             <td >{{time[s.classNumber]}}</td>
@@ -44,7 +44,7 @@
             <td>{{s.auditory.auditoryNumber}}</td>
           </tr>
           <tr>
-            <td  [rowSpan]="wednesday.length + 1">Ср</td>
+            <td class="day" [rowSpan]="wednesday.length + 1">Ср</td>
           </tr>
           <tr class="row" *ngFor="let s of wednesday">
             <td>{{time[s.classNumber]}}</td>
@@ -53,7 +53,7 @@
             <td>{{s.auditory.auditoryNumber}}</td>
           </tr>
           <tr>
-            <td  [rowSpan]="thursday.length + 1">Чт</td>
+            <td class="day" [rowSpan]="thursday.length + 1">Чт</td>
           </tr>
           <tr class="row" *ngFor="let s of thursday">
             <td>{{time[s.classNumber]}}</td>
@@ -62,7 +62,7 @@
             <td>{{s.auditory.auditoryNumber}}</td>
           </tr>
           <tr>
-            <td  [rowSpan]="friday.length + 1"> Пт</td>
+            <td class="day" [rowSpan]="friday.length + 1"> Пт</td>
           </tr>
           <tr class="row" *ngFor="let s of friday">
             <td>{{time[s.classNumber]}}</td>
@@ -71,7 +71,7 @@
             <td>{{s.auditory.auditoryNumber}}</td>
           </tr>
           <tr>
-            <td  [rowSpan]="saturday.length + 1"> Сб</td>
+            <td class="day" [rowSpan]="saturday.length + 1"> Сб</td>
           </tr>
           <tr class="row" *ngFor="let s of saturday">
             <td>{{time[s.classNumber]}}</td>
