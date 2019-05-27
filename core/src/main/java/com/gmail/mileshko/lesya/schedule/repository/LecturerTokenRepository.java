@@ -9,6 +9,6 @@ import java.util.Optional;
 @Repository
 public interface LecturerTokenRepository extends CrudRepository<LecturerToken, Long> {
 
-    Optional<LecturerToken> findByToken(String token);
+        Optional<LecturerToken> findByToken(String token);
 
 }

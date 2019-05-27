@@ -16,10 +16,10 @@ export class AttendanceService {
   }
 
   getAttendance(token: string): Observable<Attendance[]> {
-  return this.http.get<Attendance[]>(API_URL + 'attendance/get', {
-  headers: {token: token}
-});
-}
+    return this.http.get<Attendance[]>(API_URL + 'attendance/get', {
+      headers: {token: token.toString()}
+    });
+  }
 
   getStudentAttendance(studentId: number): Observable<Attendance[]> {
     return this.http.get<Attendance[]>(API_URL + 'attendance/student', {
@@ -27,12 +27,16 @@ export class AttendanceService {
     });
   }
 
-  deleteAttendance(attendanceId: number): Observable<void> {
-    return this.http.post<void>(API_URL + 'attendance/delete', attendanceId);
+  deleteAttendance(attendanceId: number, token: string): Observable<void> {
+    return this.http.post<void>(API_URL + 'attendance/delete', attendanceId, {
+      headers: {token: token.toString()}
+    });
   }
 
-  addAttendance(newAttendance: NewAttendance): Observable<void> {
-    return this.http.post<void>(API_URL + 'attendance/add', newAttendance);
+  addAttendance(newAttendance: NewAttendance, token: string): Observable<void> {
+    return this.http.post<void>(API_URL + 'attendance/add', newAttendance, {
+      headers: {token: token.toString()}
+    });
   }
 
 }

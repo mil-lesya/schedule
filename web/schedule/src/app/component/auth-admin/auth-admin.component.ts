@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Admin} from '../../dto/Admin';
 import {AuthAdminService} from '../../service/auth.admin.service';
+import {LOCALSTORAGE_TOKEN_NAME} from '../../../global';
+import {TokenProviderService} from '../../service/token.provider.service';
+import {ErrorService} from '../../service/error.service';
 
 @Component({
   selector: 'app-auth-admin',
@@ -14,6 +17,8 @@ export class AuthAdminComponent implements OnInit {
   isAdmin: boolean;
 
   constructor(
+    private tokenProviderService: TokenProviderService,
+    private errorService: ErrorService,
     private authAdminService: AuthAdminService,
     private router: Router
   ) {
@@ -23,16 +28,12 @@ export class AuthAdminComponent implements OnInit {
   }
 
   authenticate() {
-    this.authAdminService.authenticate(this.admin).subscribe(isAdmin => {
-        console.log(isAdmin);
-        this.isAdmin = JSON.parse(isAdmin.toString());
-        if (this.isAdmin !== true) {
-          alert('ошибка: невернный логин или пароль, проверьте введённые данные');
-          return;
-        } else {
-          console.log(isAdmin);
-          this.router.navigate(['/group/change'], {replaceUrl: true, queryParams: {admin: this.admin}});
-        }
-      });
+    this.authAdminService.authenticate(this.admin).subscribe(token => {
+      this.tokenProviderService.setToken(token);
+      localStorage.setItem(LOCALSTORAGE_TOKEN_NAME, token);
+
+      this.router.navigate(['/group/change'], {replaceUrl: true});
+
+    }, err => this.errorService.raise(err));
   }
 }

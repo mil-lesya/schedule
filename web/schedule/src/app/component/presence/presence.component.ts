@@ -3,7 +3,6 @@ import {TokenProviderService} from '../../service/token.provider.service';
 import {AttendanceService} from '../../service/attendance.service';
 import {Attendance} from '../../dto/Attendance';
 import {GradebookService} from '../../service/gradebook.service';
-import {NewAssessment} from '../../dto/NewAssessment';
 import {AppComponent} from '../../app.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NewAttendance} from '../../dto/NewAttendance';
@@ -24,6 +23,7 @@ export class PresenceComponent implements OnInit {
   studentId: number;
   attendanceId: number;
   newAttendance: NewAttendance = new NewAttendance();
+  token: string;
 
   constructor(
     private app: AppComponent,
@@ -39,6 +39,7 @@ export class PresenceComponent implements OnInit {
   ngOnInit() {
     this.tokenProviderService.token.subscribe(token => {
       console.log(token);
+      this.token = token;
       this.attendanceService.getAttendance(token).subscribe(attendance => {
         this.attendance = attendance;
         console.log(attendance);
@@ -50,7 +51,7 @@ export class PresenceComponent implements OnInit {
               this.studentId = params.id;
               this.studentName = params.name;
               console.log(this.studentId);
-              this.attendanceService.getStudentAttendance(this.studentId).subscribe(attendance => {
+              this.attendanceService.getStudentAttendance(this.studentId).subscribe(attendance  => {
                 this.attendance = attendance;
                 console.log(attendance);
               }, err => this.errorService.raise(err));
@@ -70,7 +71,7 @@ export class PresenceComponent implements OnInit {
         console.log(this.newAttendance);
       }, err => this.errorService.raise(err));
     } else if (this.buttonType === 'save') {
-      this.attendanceService.addAttendance(this.newAttendance).subscribe(() => {
+      this.attendanceService.addAttendance(this.newAttendance, this.token).subscribe(() => {
         this.attendanceService.getStudentAttendance(this.studentId).subscribe(attendance => {
           this.attendance = attendance;
           console.log(attendance);
@@ -79,7 +80,7 @@ export class PresenceComponent implements OnInit {
         }, err => this.errorService.raise(err));
       }, err => this.errorService.raise(err));
     } else if (this.buttonType === 'delete') {
-      this.attendanceService.deleteAttendance(this.attendanceId).subscribe(() => {
+      this.attendanceService.deleteAttendance(this.attendanceId, this.token).subscribe(() => {
         console.log('delete');
         this.attendanceService.getStudentAttendance(this.studentId).subscribe(attendance => {
           this.attendance = attendance;

@@ -28,7 +28,8 @@ export class GroupChangeComponent implements OnInit {
   newStudent: NewStudent = new NewStudent();
   studentId: number;
   headmanId: number;
-  admin: Admin;
+  token: string;
+  authorize: boolean;
 
   constructor(
     private groupService: GroupService,
@@ -38,13 +39,17 @@ export class GroupChangeComponent implements OnInit {
     private gradebookService: GradebookService,
     private authAdminService: AuthAdminService,
     private studentService: StudentService,
-    private errorService: ErrorService) {
+    private errorService: ErrorService,
+    private tokenProviderService: TokenProviderService) {
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.admin = params.admin;
-    });
+    this.tokenProviderService.token.subscribe(token => {
+        console.log(token);
+        this.token = token;
+        this.authorize = true;
+      }, err => this.errorService.raise(err)
+    );
   }
 
   onSubmit(): void {
@@ -54,7 +59,7 @@ export class GroupChangeComponent implements OnInit {
       this.newStudent.group = this.expectedGroup.group;
       console.log(this.newStudent);
     } else if (this.buttonType === 'save') {
-      this.studentService.saveStudent(this.newStudent).subscribe(() => {
+      this.studentService.saveStudent(this.newStudent, this.token).subscribe(() => {
         this.groupService.getExpectedGroup(this.expectedGroup).subscribe(students => {
           this.students = JSON.parse(students.toString());
           console.log(this.students);
@@ -62,7 +67,7 @@ export class GroupChangeComponent implements OnInit {
         });
       }, err => this.errorService.raise(err));
     } else if (this.buttonType === 'delete') {
-      this.studentService.deleteStudent(this.studentId, this.admin).subscribe(() => {
+      this.studentService.deleteStudent(this.studentId, this.token).subscribe(() => {
         console.log(this.studentId);
         this.groupService.getExpectedGroup(this.expectedGroup).subscribe(students => {
           this.students = JSON.parse(students.toString());
@@ -87,7 +92,7 @@ export class GroupChangeComponent implements OnInit {
 
   }
 
-  getStudentId(studentid: number) {
-    this.studentId = studentid;
+  getStudentId(studentId: number) {
+    this.studentId = studentId;
   }
 }

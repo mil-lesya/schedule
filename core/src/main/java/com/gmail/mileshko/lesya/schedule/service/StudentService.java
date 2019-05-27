@@ -83,9 +83,6 @@ public class StudentService {
         return groupRepository.findByHeadman(student).isPresent();
     }
 
-    public void authorize(Student student) throws AuthorizationException {
-        groupRepository.findByHeadman(student).orElseThrow(() -> new AuthorizationException("no permission"));
-    }
 
     public void saveStudent(NewStudent newStudent) throws NoSuchEntityException {
         Group group = groupRepository.findByGroupNumberAndCourse(newStudent.group, newStudent.course)

@@ -17,12 +17,14 @@ export class GroupService {
 
   getGroup(token: string): Observable<Student[]> {
     return this.http.get<Student[]>(API_URL + 'group/get', {
-      headers: {token: token}
+      headers: {token: token.toString()}
     });
   }
 
   getExpectedGroup(expectedGroup: ExpectedGroup): Observable<Student[]> {
-    return this.http.post<Student[]>(API_URL + 'group', expectedGroup, {responseType: 'text' as 'json'});
+    return this.http.post<Student[]>(API_URL + 'group/expected', expectedGroup, {
+      responseType: 'text' as 'json',
+    });
   }
 
   getHeadmanId(expectedGroup: ExpectedGroup): Observable<number> {

@@ -20,14 +20,21 @@ export class ScheduleService {
 
   getSchedule(token: string): Observable<Schedule[]> {
     return this.http.get<Schedule[]>(API_URL + 'schedule/get', {
-      headers: {token: token}
+      headers: {token: token.toString()}
     });
   }
+
   getGroupSchedule(expectedGroup: ExpectedGroup): Observable<Schedule[]> {
-    return this.http.post<Schedule[]>(API_URL + 'schedule/group', expectedGroup, {responseType: 'text' as 'json'});
+    return this.http.get<Schedule[]>(API_URL + 'schedule/group', {
+      responseType: 'text' as 'json',
+      params: {expectedGroup: expectedGroup.toString()}
+    });
   }
 
-  saveSchedule(schedule: Schedule[]): Observable<void> {
-    return this.http.post<void>(API_URL + 'schedule/save', schedule);
+  saveSchedule(schedule: Schedule[], token: string): Observable<void> {
+    return this.http.post<void>(API_URL + 'schedule/save', schedule, {
+      responseType: 'text' as 'json',
+      headers: {token: token.toString()}
+    });
   }
 }

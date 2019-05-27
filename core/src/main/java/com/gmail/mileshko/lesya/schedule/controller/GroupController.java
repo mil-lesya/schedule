@@ -25,15 +25,13 @@ public class GroupController {
         this.studentService = studentService;
     }
 
-
    @GetMapping("get")
    public List<StudentDto> getGroup(@RequestHeader("token") String token) throws NoSuchEntityException {
         Student student = studentService.validate(token);
        return Mapper.mapAll(groupService.getGroup(student), StudentDto.class);
-
    }
 
-   @PostMapping
+   @PostMapping("expected")
    public List<StudentDto> getGroup(@Valid @RequestBody ExpectedGroupDto expectedGroupDto) throws NoSuchEntityException {
        return Mapper.mapAll(groupService.getExpectedGroup(expectedGroupDto), StudentDto.class);
    }

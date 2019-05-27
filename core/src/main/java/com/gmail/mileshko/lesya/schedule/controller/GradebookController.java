@@ -37,16 +37,13 @@ public class GradebookController {
     }
 
     @GetMapping("student")
-    public List<AssessmentDto> getStudentAssessments(@RequestParam("studentId") Long id) throws NoSuchEntityException {
+    public List<AssessmentDto> getStudentAssessments(@RequestParam("studentId") Long id, @RequestHeader("token") String token) throws NoSuchEntityException {
+        Student headman = studentService.validate(token);
+        studentService.isHeadman(headman);
         Student student = studentRepository.findById(id).orElseThrow(()-> new NoSuchEntityException("Студент не найден") );
         return Mapper.mapAll(assessmentService.getGradebookAssessments(student), AssessmentDto.class);
     }
 
-
-    @PostMapping("add")
-    public void addAssessment(@Valid @RequestBody NewAssessmentDto newAssessmentDto) throws NoSuchEntityException {
-        assessmentService.addAssessment(newAssessmentDto);
-    }
 
     @GetMapping("headman")
     public boolean isHeadman(@RequestHeader("token") String token) throws NoSuchEntityException {

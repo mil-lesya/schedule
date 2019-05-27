@@ -20,7 +20,7 @@ export class AuthStudentService {
 
   validate(token: string): Observable<Student> {
     return this.http.get<Student>(API_URL + 'auth/student/validate', {
-      headers: {token: token}
+      headers: {token: token.toString()}
     });
   }
 

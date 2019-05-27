@@ -17,16 +17,22 @@ export class StudentService {
 
   getStudent(token: string): Observable<Student> {
     return this.http.get<Student>(API_URL + 'student/get', {
-      headers: {token: token}
+      headers: {token: token.toString()}
     });
   }
 
-  saveStudent(newStudent: NewStudent): Observable<void> {
-    return this.http.post<void>(API_URL + 'student/new', newStudent);
+  saveStudent(newStudent: NewStudent, token: string): Observable<void> {
+    return this.http.post<void>(API_URL + 'student/new', newStudent, {
+      responseType: 'text' as 'json',
+      headers: {token: token.toString()}
+    } );
   }
 
-  deleteStudent(studentId: number): Observable<void> {
-    return this.http.post<void>(API_URL + 'student/delete', studentId);
+  deleteStudent(studentId: number, token: string): Observable<void> {
+    return this.http.get<void>(API_URL + 'student/delete', {
+      headers: {token: token.toString()},
+      params: {studentId: studentId.toString()}
+    });
   }
 
   appointHeadman(headmanId: number): Observable<void> {

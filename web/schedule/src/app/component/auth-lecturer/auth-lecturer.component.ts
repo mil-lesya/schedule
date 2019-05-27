@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {AuthStudent} from '../../dto/AuthStudent';
-import {AuthStudentService} from '../../service/auth.student.service';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {TokenProviderService} from '../../service/token.provider.service';
 import {LOCALSTORAGE_TOKEN_NAME} from '../../../global';
@@ -32,7 +30,6 @@ export class AuthLecturerComponent implements OnInit {
     this.authLecturerService.authenticate(this.authLecturer).subscribe(token => {
       this.tokenProviderService.setToken(token);
       localStorage.setItem(LOCALSTORAGE_TOKEN_NAME, token);
-
       this.router.navigate(['/feed/lecturer'], {replaceUrl: true});
     },
       err => this.errorService.raise(err));

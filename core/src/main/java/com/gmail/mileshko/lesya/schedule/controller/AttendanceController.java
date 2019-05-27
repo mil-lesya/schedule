@@ -45,12 +45,16 @@ public class AttendanceController {
 
 
     @PostMapping("add")
-    public void addAttendance(@RequestBody NewAttendanceDto newAttendanceDto) throws NoSuchEntityException {
+    public void addAttendance(@RequestBody NewAttendanceDto newAttendanceDto, @RequestHeader("token") String token) throws NoSuchEntityException {
+        Student headman = studentService.validate(token);
+        studentService.isHeadman(headman);
         attendanceService.addAttendance(newAttendanceDto);
     }
 
     @PostMapping("delete")
-    public void deleteAttendance(@RequestBody Long attendanceId) throws NoSuchEntityException {
+    public void deleteAttendance(@RequestBody Long attendanceId, @RequestHeader("token") String token) throws NoSuchEntityException {
+        Student headman = studentService.validate(token);
+        studentService.isHeadman(headman);
         attendanceService.deleteAttendance(attendanceId);
     }
 }

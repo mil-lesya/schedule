@@ -5,6 +5,7 @@ import com.gmail.mileshko.lesya.schedule.entity.Assessment;
 import com.gmail.mileshko.lesya.schedule.entity.Gradebook;
 import com.gmail.mileshko.lesya.schedule.entity.Session;
 import com.gmail.mileshko.lesya.schedule.entity.Student;
+import com.gmail.mileshko.lesya.schedule.exception.AuthorizationException;
 import com.gmail.mileshko.lesya.schedule.exception.NoSuchEntityException;
 import com.gmail.mileshko.lesya.schedule.repository.AssessmentRepository;
 import com.gmail.mileshko.lesya.schedule.repository.SessionRepository;
@@ -24,18 +25,21 @@ public class AssessmentService {
     private final SessionRepository sessionRepository;
     private final SubjectRepository subjectRepository;
     private final StudentRepository studentRepository;
+    private final StudentService studentService;
 
     @Autowired
-    public AssessmentService(AssessmentRepository assessmentRepository, SessionRepository sessionRepository, SubjectRepository subjectRepository, StudentRepository studentRepository) {
+    public AssessmentService(AssessmentRepository assessmentRepository, SessionRepository sessionRepository, SubjectRepository subjectRepository, StudentRepository studentRepository, StudentService studentService) {
         this.assessmentRepository = assessmentRepository;
         this.sessionRepository = sessionRepository;
         this.subjectRepository = subjectRepository;
         this.studentRepository = studentRepository;
+        this.studentService = studentService;
     }
 
 
-    public void addAssessment(NewAssessmentDto newAssessmentDto) throws NoSuchEntityException {
-
+    public void addAssessment(NewAssessmentDto newAssessmentDto, Student student) throws NoSuchEntityException, AuthorizationException {
+        if (!studentService.isHeadman(student))
+            throw new AuthorizationException("нет доступа");
         Assessment assessment = new Assessment();
         Gradebook gradebook = studentRepository.findById(newAssessmentDto.studentId)
                 .orElseThrow(() -> new NoSuchEntityException("студент не найден"))

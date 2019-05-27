@@ -20,7 +20,7 @@ export class AuthLecturerService {
 
   validate(token: string): Observable<Lecturer> {
     return this.http.get<Lecturer>(API_URL + 'auth/validate', {
-      headers: {token: token}
+      headers: {token: token.toString()}
     });
   }
 
