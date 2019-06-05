@@ -25,13 +25,13 @@ public class GroupService {
     }
 
     public List<Student> getGroup(Student student) {
-        return studentRepository.findAllByGroup(student.getGroup());
+        return studentRepository.findAllByGroupOrderByPersonalCardSurname(student.getGroup());
     }
 
     public List<Student> getExpectedGroup(ExpectedGroupDto expectedGroupDto) throws NoSuchEntityException {
         Group group = groupRepository.findByGroupNumberAndCourse(expectedGroupDto.group, expectedGroupDto.course)
                 .orElseThrow(() -> new NoSuchEntityException("несуществующая группа"));
-        return studentRepository.findAllByGroup(group);
+        return studentRepository.findAllByGroupOrderByPersonalCardSurname(group);
     }
 
     public Long getHeadmanId(ExpectedGroupDto expectedGroupDto) throws NoSuchEntityException {

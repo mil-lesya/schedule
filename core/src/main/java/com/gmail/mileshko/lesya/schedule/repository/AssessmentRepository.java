@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface AssessmentRepository extends CrudRepository<Assessment, Long> {
 
-    List<Assessment> findAllByGradebook(Gradebook gradebook);
+    List<Assessment> findAllByGradebookOrderBySessionSemesterNumber(Gradebook gradebook);
 
 
 }

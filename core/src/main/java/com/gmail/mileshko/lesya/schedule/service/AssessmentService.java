@@ -69,7 +69,7 @@ public class AssessmentService {
 
 
     public List<Assessment> getGradebookAssessments(Student student) {
-        return assessmentRepository.findAllByGradebook(student.getGradebook());
+        return assessmentRepository.findAllByGradebookOrderBySessionSemesterNumber(student.getGradebook());
     }
 
 

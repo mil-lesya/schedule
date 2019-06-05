@@ -11,6 +11,6 @@ import java.util.Optional;
 
 @Repository
 public interface StudentRepository extends CrudRepository<Student, Long> {
-    List<Student> findAllByGroup(Group group);
+    List<Student> findAllByGroupOrderByPersonalCardSurname(Group group);
     Optional<Student> findByPersonalCard(PersonalCard personalCard);
 }
