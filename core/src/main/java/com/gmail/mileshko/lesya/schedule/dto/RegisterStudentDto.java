@@ -21,7 +21,8 @@ public class RegisterStudentDto {
     public String phoneNumber;
 
     @Pattern(regexp ="^([a-z0-9_.-]+)@([a-z0-9_.-]+)\\.([a-z.]{2,6})$", message = "неверный формат поля mail")
-    public String mail;
+    public String email;
+
     public String gradebookNumber;
 
     @Range(min = 1, max = 10, message = "несуществующий номер группы")
@@ -36,14 +37,14 @@ public class RegisterStudentDto {
     public RegisterStudentDto() {
     }
 
-    public RegisterStudentDto(String name, String surname, String patronymic, String parentContact, String address, String phoneNumber, String mail, String gradebookNumber, Integer groupNumber, Integer course, String password) {
+    public RegisterStudentDto(String name, String surname, String patronymic, String parentContact, String address, String phoneNumber, String email, String gradebookNumber, Integer groupNumber, Integer course, String password) {
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;
         this.parentContact = parentContact;
         this.address = address;
         this.phoneNumber = phoneNumber;
-        this.mail = mail;
+        this.email = email;
         this.gradebookNumber = gradebookNumber;
         this.groupNumber = groupNumber;
         this.course = course;

@@ -1,20 +1,16 @@
 package com.gmail.mileshko.lesya.schedule.service;
 
-import com.gmail.mileshko.lesya.schedule.dto.AuthStudentDto;
 import com.gmail.mileshko.lesya.schedule.dto.NewStudent;
 import com.gmail.mileshko.lesya.schedule.dto.RegisterStudentDto;
 import com.gmail.mileshko.lesya.schedule.entity.Group;
 import com.gmail.mileshko.lesya.schedule.entity.PersonalCard;
 import com.gmail.mileshko.lesya.schedule.entity.Student;
-import com.gmail.mileshko.lesya.schedule.entity.StudentToken;
-import com.gmail.mileshko.lesya.schedule.exception.AuthenticationException;
-import com.gmail.mileshko.lesya.schedule.exception.AuthorizationException;
+import com.gmail.mileshko.lesya.schedule.entity.User;
 import com.gmail.mileshko.lesya.schedule.exception.NoSuchEntityException;
 import com.gmail.mileshko.lesya.schedule.exception.RegistrationException;
 import com.gmail.mileshko.lesya.schedule.repository.*;
-import com.gmail.mileshko.lesya.schedule.security.Hasher;
-import com.gmail.mileshko.lesya.schedule.security.TokenGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,58 +19,49 @@ import org.springframework.transaction.annotation.Transactional;
 public class StudentService {
     private final StudentRepository studentRepository;
     private final GradebookRepository gradebookRepository;
-    private final StudentTokenRepository studentTokenRepository;
     private final GroupRepository groupRepository;
     private final PersonalCardRepository personalCardRepository;
+    private final UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public StudentService(StudentRepository studentRepository, GradebookRepository gradebookRepository, StudentTokenRepository studentTokenRepository, GroupRepository groupRepository, PersonalCardRepository personalCardRepository, AssessmentRepository assessmentRepository) {
+    public StudentService(StudentRepository studentRepository, GradebookRepository gradebookRepository, GroupRepository groupRepository, PersonalCardRepository personalCardRepository, AssessmentRepository assessmentRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.studentRepository = studentRepository;
         this.gradebookRepository = gradebookRepository;
-        this.studentTokenRepository = studentTokenRepository;
         this.groupRepository = groupRepository;
         this.personalCardRepository = personalCardRepository;
-    }
-
-
-    public String authenticate(AuthStudentDto authStudentDto) throws NoSuchEntityException, AuthenticationException {
-        Student student = gradebookRepository.findByGradebookNumber(authStudentDto.gradebookNumber)
-                .orElseThrow(() -> new NoSuchEntityException("нет студента с таким номером зачётки"))
-                .getStudent();
-        if (!Hasher.check(authStudentDto.password, student.getPassword())) {
-            throw new AuthenticationException("недействительный студент");
-        }
-
-        StudentToken token = new StudentToken(student, TokenGenerator.generate());
-        return studentTokenRepository.save(token).getToken();
-    }
-
-    public Student validate(String tokenValue) throws NoSuchEntityException {
-        return studentTokenRepository.findByToken(tokenValue)
-                .orElseThrow(() -> new NoSuchEntityException("no such token"))
-                .getStudent();
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public void register(RegisterStudentDto registerStudentDto) throws RegistrationException {
+        if (userRepository.findByLogin(registerStudentDto.gradebookNumber).isPresent())
+            throw new RegistrationException("пользователь с таким номером зачётки уже существует.");
+
+        User newUser = new User();
+        newUser.setLogin(registerStudentDto.gradebookNumber);
+        newUser.setEmail(registerStudentDto.email);
+        newUser.setPassword(passwordEncoder.encode(registerStudentDto.password));
+        User user = userRepository.save(newUser);
 
         Student student = new Student();
 
-        PersonalCard personalCard = new PersonalCard(
+        PersonalCard personalCard = personalCardRepository.save(new PersonalCard(
                 registerStudentDto.surname,
                 registerStudentDto.name,
                 registerStudentDto.patronymic,
                 registerStudentDto.phoneNumber,
                 registerStudentDto.parentContact,
-                registerStudentDto.address,
-                registerStudentDto.mail);
+                registerStudentDto.address
+        ));
 
         student.setGradebook(gradebookRepository.findByGradebookNumber(registerStudentDto.gradebookNumber)
                 .orElseThrow(() -> new RegistrationException("зачётка не найдена")));
         student.setGroup(groupRepository.findByGroupNumberAndCourse(registerStudentDto.groupNumber, registerStudentDto.course)
                 .orElseThrow(() -> new RegistrationException("группа не найдена")));
         student.setPersonalCard(personalCard);
-        personalCardRepository.save(personalCard);
-        student.setPassword(Hasher.getHash(registerStudentDto.password));
+        student.setUser(user);
+
         studentRepository.save(student);
     }
 

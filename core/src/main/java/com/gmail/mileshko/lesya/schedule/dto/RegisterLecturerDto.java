@@ -19,7 +19,7 @@ public class RegisterLecturerDto {
     public String phoneNumber;
 
     @Pattern(regexp ="^([a-z0-9_.-]+)@([a-z0-9_.-]+)\\.([a-z.]{2,6})$", message = "неверный формат поля mail")
-    public String mail;
+    public String email;
 
     public Integer auditory;
 
@@ -29,13 +29,13 @@ public class RegisterLecturerDto {
     public RegisterLecturerDto() {
     }
 
-    public RegisterLecturerDto(String passNumber, String surname, String name, String patronymic, String phoneNumber, String mail, Integer auditory, String password) {
+    public RegisterLecturerDto(String passNumber, String surname, String name, String patronymic, String phoneNumber, String email, Integer auditory, String password) {
         this.passNumber = passNumber;
         this.surname = surname;
         this.name = name;
         this.patronymic = patronymic;
         this.phoneNumber = phoneNumber;
-        this.mail = mail;
+        this.email = email;
         this.auditory = auditory;
         this.password = password;
     }

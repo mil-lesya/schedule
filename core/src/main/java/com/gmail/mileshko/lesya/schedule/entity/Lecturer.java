@@ -30,32 +30,21 @@ public class Lecturer {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "mail")
-    private String mail;
-
-    @Column(name = "password")
-    private String password;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Lecturer() {
     }
 
-    public Lecturer(Department department, Pass pass, String surname, String name, String patronymic, String phoneNumber, String mail, String password) {
+    public Lecturer(Department department, Pass pass, String surname, String name, String patronymic, String phoneNumber, User user) {
         this.department = department;
         this.pass = pass;
         this.surname = surname;
         this.name = name;
         this.patronymic = patronymic;
         this.phoneNumber = phoneNumber;
-        this.mail = mail;
-        this.password = password;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+        this.user = user;
     }
 
     public Long getId() {
@@ -114,11 +103,11 @@ public class Lecturer {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getMail() {
-        return mail;
+    public User getUser() {
+        return user;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

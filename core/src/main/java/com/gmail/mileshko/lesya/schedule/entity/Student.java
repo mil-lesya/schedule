@@ -19,9 +19,6 @@ public class Student {
     @JoinColumn(name = "personal_card_id")
     private PersonalCard personalCard;
 
-    @Column(name = "password")
-    private String password;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "gradebook_id")
     private Gradebook gradebook;
@@ -29,18 +26,19 @@ public class Student {
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Attendance> attendances;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<StudentToken> tokens;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Student() {
     }
 
-    public Student(Gradebook gradebook, Group group, PersonalCard personalCard, String password, List<Attendance> attendances) {
-        this.gradebook = gradebook;
+    public Student(Group group, PersonalCard personalCard, Gradebook gradebook, List<Attendance> attendances, User user) {
         this.group = group;
         this.personalCard = personalCard;
-        this.password = password;
+        this.gradebook = gradebook;
         this.attendances = attendances;
+        this.user = user;
     }
 
     public List<Attendance> getAttendances() {
@@ -49,14 +47,6 @@ public class Student {
 
     public void setAttendances(List<Attendance> attendances) {
         this.attendances = attendances;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public Long getId() {
@@ -91,11 +81,11 @@ public class Student {
         this.personalCard = personalCard;
     }
 
-    public List<StudentToken> getTokens() {
-        return tokens;
+    public User getUser() {
+        return user;
     }
 
-    public void setTokens(List<StudentToken> tokens) {
-        this.tokens = tokens;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

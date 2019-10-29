@@ -16,23 +16,12 @@ public class Pass {
     @Column
     private  String passNumber;
 
-    @Column
-    private String surname;
-
-    @Column
-    private String name;
-
-    @Column
-    private  String patronymic;
-
     public Pass() {
     }
 
-    public Pass(String passNumber, String surname, String name, String patronymic) {
+    public Pass(Lecturer lecturer, String passNumber) {
+        this.lecturer = lecturer;
         this.passNumber = passNumber;
-        this.surname = surname;
-        this.name = name;
-        this.patronymic = patronymic;
     }
 
     public Long getId() {
@@ -51,26 +40,6 @@ public class Pass {
         this.passNumber = passNumber;
     }
 
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPatronymic() {
-        return patronymic;
-    }
-
     public Lecturer getLecturer() {
         return lecturer;
     }
@@ -79,7 +48,4 @@ public class Pass {
         this.lecturer = lecturer;
     }
 
-    public void setPatronymic(String patronymic) {
-        this.patronymic = patronymic;
-    }
 }
