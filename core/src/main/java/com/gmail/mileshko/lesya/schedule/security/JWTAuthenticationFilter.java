@@ -1,13 +1,14 @@
 package com.gmail.mileshko.lesya.schedule.security;
 
-import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gmail.mileshko.lesya.schedule.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -17,8 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
-import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static com.gmail.mileshko.lesya.schedule.security.SecurityConstants.*;
 
 
@@ -54,10 +56,20 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
 
-        String token = JWT.create()
-                .withSubject((( org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .sign(HMAC512(SECRET.getBytes()));
+        org.springframework.security.core.userdetails.User user = (( org.springframework.security.core.userdetails.User) auth.getPrincipal());
+
+        List<String> roles = user.getAuthorities()
+                .stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
+
+        byte[] signingKey = SECRET.getBytes();
+       String token = Jwts.builder()
+                .signWith(SignatureAlgorithm.HS512, signingKey)
+                .setSubject(user.getUsername())
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .claim("roles", roles)
+                .compact();
         res.addHeader("Access-Control-Expose-Headers",HEADER_STRING);
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
     }
