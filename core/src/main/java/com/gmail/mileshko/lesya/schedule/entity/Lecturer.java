@@ -30,6 +30,9 @@ public class Lecturer {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @Column(name = "email")
+    private String email;
+
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -37,13 +40,14 @@ public class Lecturer {
     public Lecturer() {
     }
 
-    public Lecturer(Department department, Pass pass, String surname, String name, String patronymic, String phoneNumber, User user) {
+    public Lecturer(Department department, Pass pass, String surname, String name, String patronymic, String phoneNumber, String email, User user) {
         this.department = department;
         this.pass = pass;
         this.surname = surname;
         this.name = name;
         this.patronymic = patronymic;
         this.phoneNumber = phoneNumber;
+        this.email = email;
         this.user = user;
     }
 
@@ -109,5 +113,13 @@ public class Lecturer {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

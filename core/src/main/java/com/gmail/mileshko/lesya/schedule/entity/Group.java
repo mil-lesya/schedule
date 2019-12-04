@@ -25,13 +25,6 @@ public class Group {
     @JoinColumn(name = "curator_id")
     private Lecturer curator;
 
-    @ManyToMany
-    @JoinTable(
-            name = "group_schedule",
-            joinColumns = @JoinColumn(name = "group_id"),
-            inverseJoinColumns = @JoinColumn(name = "schedule_id")
-    )
-    private List<Schedule> scheduleList;
 
     public Group() {
     }
@@ -41,12 +34,11 @@ public class Group {
         this.course = course;
     }
 
-    public Group(Integer groupNumber, Integer course, Student headman, Lecturer curator, List<Schedule> scheduleList) {
+    public Group(Integer groupNumber, Integer course, Student headman, Lecturer curator) {
         this.groupNumber = groupNumber;
         this.course = course;
         this.headman = headman;
         this.curator = curator;
-        this.scheduleList = scheduleList;
     }
 
     public Long getId() {
@@ -83,14 +75,6 @@ public class Group {
 
     public Lecturer getCurator() {
         return curator;
-    }
-
-    public List<Schedule> getScheduleList() {
-        return scheduleList;
-    }
-
-    public void setScheduleList(List<Schedule> scheduleList) {
-        this.scheduleList = scheduleList;
     }
 
     public void setCurator(Lecturer curator) {

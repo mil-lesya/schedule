@@ -17,18 +17,17 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "email")
-    private String email;
-
-
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     public User() {
     }
 
-    public User(String login, String password, String email) {
+    public User(String login, String password, Role role) {
         this.login = login;
         this.password = password;
-        this.email = email;
+        this.role = role;
     }
 
     public Long getId() {
@@ -55,13 +54,11 @@ public class User {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public Role getRole() {
+        return role;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setRole(Role role) {
+        this.role = role;
     }
-
-
 }

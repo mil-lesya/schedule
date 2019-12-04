@@ -3,29 +3,27 @@ package com.gmail.mileshko.lesya.schedule.entity;
 import com.gmail.mileshko.lesya.schedule.entity.enums.UserRole;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "user_role")
+@Table(name = "role")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Enumerated
     @Column(name = "role")
-    private UserRole role;
+    private String role;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<User> users;
 
     public Role() {
     }
 
-    public Role(UserRole role, User user) {
+    public Role(String role) {
         this.role = role;
-        this.user = user;
     }
 
     public Long getId() {
@@ -36,19 +34,19 @@ public class Role {
         this.id = id;
     }
 
-    public UserRole getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(UserRole role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
-    public User getUser() {
-        return user;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

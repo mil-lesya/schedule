@@ -1,6 +1,7 @@
 package com.gmail.mileshko.lesya.schedule.entity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "attendance")

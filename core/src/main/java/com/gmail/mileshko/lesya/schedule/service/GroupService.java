@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.StoredProcedureQuery;
 import java.util.List;
 
 @Service
@@ -17,6 +20,8 @@ import java.util.List;
 public class GroupService {
     private final StudentRepository studentRepository;
     private final GroupRepository groupRepository;
+    @PersistenceContext
+    EntityManager em;
 
     @Autowired
     public GroupService(StudentRepository studentRepository, GroupRepository groupRepository) {
@@ -25,7 +30,13 @@ public class GroupService {
     }
 
     public List<Student> getGroup(Student student) {
-        return studentRepository.findAllByGroupOrderByPersonalCardSurname(student.getGroup());
+        StoredProcedureQuery query = em.createNamedStoredProcedureQuery("GetGroup");
+        query.setParameter(2, student.getGroup().getId());
+
+        query.execute();
+        @SuppressWarnings("unchecked")
+        List<Student> group = query.getResultList();
+        return group;
     }
 
     public List<Student> getExpectedGroup(ExpectedGroupDto expectedGroupDto) throws NoSuchEntityException {

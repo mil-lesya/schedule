@@ -11,14 +11,19 @@ public class Auditory {
     private Long id;
 
     @Column(name = "auditory_number")
-    private Integer auditoryNumber;
+    private String auditoryNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "case_id")
+    private Corpus corpus;
 
 
     public Auditory() {
     }
 
-    public Auditory(Integer auditoryNumber) {
+    public Auditory(String auditoryNumber, Corpus corpus) {
         this.auditoryNumber = auditoryNumber;
+        this.corpus = corpus;
     }
 
     public Long getId() {
@@ -29,11 +34,19 @@ public class Auditory {
         this.id = id;
     }
 
-    public Integer getAuditoryNumber() {
+    public String getAuditoryNumber() {
         return auditoryNumber;
     }
 
-    public void setAuditoryNumber(Integer auditoryNumber) {
+    public void setAuditoryNumber(String auditoryNumber) {
         this.auditoryNumber = auditoryNumber;
+    }
+
+    public Corpus getCorpus() {
+        return corpus;
+    }
+
+    public void setCorpus(Corpus corpus) {
+        this.corpus = corpus;
     }
 }

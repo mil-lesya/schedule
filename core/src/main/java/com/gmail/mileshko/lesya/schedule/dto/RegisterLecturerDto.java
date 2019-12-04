@@ -21,7 +21,9 @@ public class RegisterLecturerDto {
     @Pattern(regexp ="^([a-z0-9_.-]+)@([a-z0-9_.-]+)\\.([a-z.]{2,6})$", message = "неверный формат поля mail")
     public String email;
 
-    public Integer auditory;
+    public String auditory;
+
+    public String corpus;
 
     @NotEmpty(message = "Поле \"пароль\" не должно быть пустым")
     public String password;
@@ -29,7 +31,7 @@ public class RegisterLecturerDto {
     public RegisterLecturerDto() {
     }
 
-    public RegisterLecturerDto(String passNumber, String surname, String name, String patronymic, String phoneNumber, String email, Integer auditory, String password) {
+    public RegisterLecturerDto(String passNumber, String surname, String name, String patronymic, String phoneNumber, String email, String auditory, String corpus, String password) {
         this.passNumber = passNumber;
         this.surname = surname;
         this.name = name;
@@ -37,6 +39,7 @@ public class RegisterLecturerDto {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.auditory = auditory;
+        this.corpus = corpus;
         this.password = password;
     }
 }

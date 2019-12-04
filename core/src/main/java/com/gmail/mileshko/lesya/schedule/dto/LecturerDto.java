@@ -6,19 +6,19 @@ public class LecturerDto {
     public String name;
     public String patronymic;
     public String phoneNumber;
-    public String mail;
+    public String email;
     public DepartmentDto department;
 
     public LecturerDto() {
     }
 
-    public LecturerDto(String passNumber, String surname, String name, String patronymic, String phoneNumber, String mail, DepartmentDto department) {
+    public LecturerDto(String passNumber, String surname, String name, String patronymic, String phoneNumber, String email, DepartmentDto department) {
         this.passNumber = passNumber;
         this.surname = surname;
         this.name = name;
         this.patronymic = patronymic;
         this.phoneNumber = phoneNumber;
-        this.mail = mail;
+        this.email = email;
         this.department = department;
     }
 }

@@ -29,16 +29,20 @@ public class PersonalCard {
     @Column(name = "address")
     private String address;
 
+    @Column(name = "email")
+    private String email;
+
     public PersonalCard() {
     }
 
-    public PersonalCard(String surname, String name, String patronymic, String phoneNumber, String parentContact, String address) {
+    public PersonalCard(String surname, String name, String patronymic, String phoneNumber, String parentContact, String address, String email) {
         this.surname = surname;
         this.name = name;
         this.patronymic = patronymic;
         this.phoneNumber = phoneNumber;
         this.parentContact = parentContact;
         this.address = address;
+        this.email = email;
     }
 
     public Long getId() {
@@ -97,4 +101,11 @@ public class PersonalCard {
         this.address = address;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

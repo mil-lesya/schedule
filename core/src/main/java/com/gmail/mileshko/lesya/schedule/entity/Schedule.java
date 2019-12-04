@@ -4,10 +4,19 @@ import com.gmail.mileshko.lesya.schedule.entity.enums.Week;
 
 import javax.persistence.*;
 import java.util.List;
-
+@NamedStoredProcedureQuery(
+        name = "Schedule.GetSchedule",
+        procedureName = "take_group_schedule",
+        resultClasses = Schedule.class,
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, type = void.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, type = Long.class)
+        }
+)
 @Entity
 @Table(name = "schedule")
-public class Schedule {
+public class
+Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -28,31 +37,24 @@ public class Schedule {
     @Column(name = "class_number")
     private Integer classNumber;
 
-    @Column(name = "periodicity")
-    private Integer periodicity;
-
+    @Enumerated
     @Column(name = "week")
     private Week week;
 
-    @ManyToMany
-    @JoinTable(
-            name = "group_schedule",
-            joinColumns = @JoinColumn(name = "schedule_id"),
-            inverseJoinColumns = @JoinColumn(name = "group_id")
-    )
-    private List<Group> groupList;
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    private Group group;
 
     public Schedule() {
     }
 
-    public Schedule(Subject subject, Auditory auditory, Lecturer lecturer, Integer classNumber, Integer periodicity, Week week, List<Group> groupList) {
+    public Schedule(Subject subject, Auditory auditory, Lecturer lecturer, Integer classNumber, Week week, Group group) {
         this.subject = subject;
         this.auditory = auditory;
         this.lecturer = lecturer;
         this.classNumber = classNumber;
-        this.periodicity = periodicity;
         this.week = week;
-        this.groupList = groupList;
+        this.group = group;
     }
 
     public Long getId() {
@@ -95,14 +97,6 @@ public class Schedule {
         this.classNumber = classNumber;
     }
 
-    public Integer getPeriodicity() {
-        return periodicity;
-    }
-
-    public void setPeriodicity(Integer periodicity) {
-        this.periodicity = periodicity;
-    }
-
     public Week getWeek() {
         return week;
     }
@@ -111,11 +105,11 @@ public class Schedule {
         this.week = week;
     }
 
-    public List<Group> getGroupList() {
-        return groupList;
+    public Group getGroup() {
+        return group;
     }
 
-    public void setGroupList(List<Group> groupList) {
-        this.groupList = groupList;
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }

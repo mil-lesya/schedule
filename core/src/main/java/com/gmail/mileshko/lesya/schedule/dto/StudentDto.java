@@ -10,7 +10,6 @@ public class StudentDto {
 
     public StudentDto(Long id, GroupDto group, PersonalCardDto personalCard) {
         this.id = id;
-
         this.group = group;
         this.personalCard = personalCard;
     }
