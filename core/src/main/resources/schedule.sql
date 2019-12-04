@@ -370,3 +370,175 @@ $$;
 
 alter function take_group_schedule(bigint) owner to postgres;
 
+create function get_student(p_user_id bigint) returns refcursor
+    language plpgsql
+as
+$$
+DECLARE
+    student REFCURSOR;
+BEGIN
+    OPEN student FOR
+        SELECT *
+        FROM student
+        WHERE student.user_id = p_user_id;
+    RETURN student;
+END;
+$$;
+
+alter function get_student(bigint) owner to postgres;
+
+create function get_group(p_group_id bigint) returns refcursor
+    language plpgsql
+as
+$$
+DECLARE
+    p_group REFCURSOR;
+BEGIN
+    OPEN p_group FOR
+        SELECT *
+        FROM student f_student
+                 left outer join personal_card f_personal_card on f_student.personal_card_id = f_personal_card.id
+        where f_student.group_id = p_group_id
+        order by f_personal_card.surname asc;
+    RETURN p_group;
+END;
+$$;
+
+alter function get_group(bigint) owner to postgres;
+
+create function add_attendance(f_student_id bigint, f_date_class date, f_subject_name character varying,
+                               f_week_day integer) returns boolean
+    language plpgsql
+as
+$$
+DECLARE
+    f_id_class   bigint;
+    f_id_shedule bigint;
+BEGIN
+    select schedule.id
+    from schedule
+             left outer join subject on schedule.subject_id = subject.id
+    where subject.name = f_subject_name
+      and schedule.week = f_week_day
+    INTO STRICT f_id_shedule;
+    if exists(select public.class.id
+              from public.class
+              where public.class.date = f_date_class
+                and public.class.schedule_id = f_id_shedule) then
+        select public.class.id
+        from public.class
+        where public.class.date = f_date_class
+          and public.class.schedule_id = f_id_shedule
+        INTO STRICT f_id_class;
+    else
+        insert into public.class(date, schedule_id) values (f_date_class, f_id_shedule);
+    end if;
+    insert into attendance (class_id, presence, student_id) values (f_id_class, false, f_student_id);
+    return true;
+END;
+$$;
+
+alter function add_attendance(bigint, date, varchar, integer) owner to postgres;
+
+create function add_attendance(f_date_class date, f_schedule bigint) returns bigint
+    language plpgsql
+as
+$$
+DECLARE
+    f_id_class bigint;
+BEGIN
+    select public.class.id
+    INTO STRICT f_id_class
+    from public.class
+    where public.class.date = f_date_class
+      and public.class.schedule_id = f_id_shedule;
+    return f_id_class;
+END
+$$;
+
+alter function add_attendance(date, bigint) owner to postgres;
+
+create function test(f_date_class date, f_schedule bigint) returns bigint
+    language plpgsql
+as
+$$
+DECLARE
+    f_id_class bigint;
+BEGIN
+    select public.class.id
+    INTO STRICT f_id_class
+    from public.class
+    where public.class.date = '2019-11-02'
+      and public.class.schedule_id = 5;
+    return f_id_class;
+END
+$$;
+
+alter function test(date, bigint) owner to postgres;
+
+create function test() returns bigint
+    language plpgsql
+as
+$$
+DECLARE
+    f_id_class bigint;
+BEGIN
+    select public.class.id
+    INTO STRICT f_id_class
+    from public.class
+    where public.class.date = '2019-11-02'
+      and public.class.schedule_id = 5;
+    return f_id_class;
+END
+$$;
+
+alter function test() owner to postgres;
+
+create function add_attendance(f_student_id bigint, f_date_class date, f_subject_name character varying,
+                               f_week_day integer, f_class_number integer) returns bigint
+    language plpgsql
+as
+$$
+DECLARE
+    f_id_class      bigint;
+    f_id_shedule    bigint;
+    f_id_attendance bigint;
+BEGIN
+    select schedule.id
+    INTO STRICT f_id_shedule
+    from schedule
+             left outer join subject on schedule.subject_id = subject.id
+    where (subject.name = f_subject_name and schedule.week = f_week_day and schedule.class_number = f_class_number - 1);
+    if exists(select public.class.id
+              from public.class
+              where public.class.date = f_date_class
+                and public.class.schedule_id = f_id_shedule) then
+        select public.class.id
+        INTO STRICT f_id_class
+        from public.class
+        where public.class.date = f_date_class
+          and public.class.schedule_id = f_id_shedule;
+    else
+        insert into public.class ("date", schedule_id) values (f_date_class, f_id_shedule) RETURNING id INTO f_id_class;
+    end if;
+    insert into attendance (class_id, presence, student_id)
+    values (f_id_class, false, f_student_id)
+    RETURNING id INTO f_id_attendance;
+    return f_id_attendance;
+END;
+$$;
+
+alter function add_attendance(bigint, date, varchar, integer, integer) owner to postgres;
+
+create function delete_attendance(attendance_id bigint) returns boolean
+    language plpgsql
+as
+$$
+BEGIN
+    delete from attendance where attendance.id = attendance_id;
+    return true;
+END;
+$$;
+
+alter function delete_attendance(bigint) owner to postgres;
+
