@@ -5,7 +5,7 @@ export class VerifiableRegisterStudent {
   parentContact: string;
   address: string;
   phoneNumber: string;
-  mail: string;
+  email: string;
   gradebookNumber: string;
   groupNumber: number;
   course: number;

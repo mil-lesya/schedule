@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {TokenProviderService} from '../../service/token.provider.service';
 import {LecturerService} from '../../service/lecturer.service';
-import {GroupService} from '../../service/group.service';
 import {ExpectedGroup} from '../../dto/ExpectedGroup';
 import {ScheduleService} from '../../service/schedule.service';
 import {Schedule} from '../../dto/Schedule';
 import {ErrorService} from '../../service/error.service';
+import {sortBy} from "sort-by-typescript";
 
 @Component({
   selector: 'app-group-schedule',
@@ -25,6 +25,7 @@ export class GroupScheduleComponent implements OnInit {
   friday: Schedule[] = [];
   saturday: Schedule[] = [];
   time: string[] = ['8:00', '9:50', '11:40', '13:50', '15:40'];
+  token: string;
 
   constructor(
     private tokenProviderService: TokenProviderService,
@@ -37,16 +38,14 @@ export class GroupScheduleComponent implements OnInit {
   ngOnInit() {
     this.tokenProviderService.token.subscribe(token => {
       console.log(token);
-      this.lecturerService.authorize(token).subscribe(authorize => {
-        this.authorize = authorize;
-      }, err => this.errorService.raise(err));
+      this.token = token;
     }, err => this.errorService.raise(err));
   }
 
   getSchedule() {
     console.log(this.expectedGroup);
-    this.scheduleService.getGroupSchedule(this.expectedGroup).subscribe(schedule => {
-      this.schedule = JSON.parse(schedule.toString());
+    this.scheduleService.getGroupSchedule(this.expectedGroup, this.token).subscribe(schedule => {
+      this.schedule = JSON.parse(schedule.toString()).sort(sortBy('classNumber'));
       console.log(this.schedule);
       for (const s of this.schedule) {
         switch (s.week) {

@@ -67,7 +67,7 @@
     align-self: center;
     border-radius: 3px;
     -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
+    -webkit-border-radius: 10px;
     font-size: 20px;
     cursor:pointer;
     width: 200px;
@@ -76,6 +76,7 @@
     margin: 1%;
     padding: 10px;
   }
+
   .group-table {
     width: 100%;
     margin-top: 4px;

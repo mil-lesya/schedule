@@ -14,34 +14,20 @@
 
   }
 
-  button{
-
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    margin-bottom: 5em;
-    font-size: 20px;
-    cursor:pointer;
-    width: 280px;
-    height: 100px;
-
-  }
-
   .text{
     color: var(--dark);
     font-size: 20px;
     padding: 10px;
     font-family: Garamond, monospace;
-
-
   }
-
 
   .clearfix { *zoom: 1;
     background: whitesmoke;
     max-width: 1000px;
     align-items: flex-start;
     margin: 5% auto;
+    -webkit-border-radius: 20px;
+
     .wrapper {
       margin: 20px auto;
       display: grid;
@@ -87,6 +73,4 @@
   }
 
   animation: appear .2s;
-
-
 }

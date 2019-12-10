@@ -16,6 +16,7 @@ import {GroupScheduleComponent} from './component/group-schedule/group-schedule.
 import {AuthAdminComponent} from './component/auth-admin/auth-admin.component';
 import {GroupChangeComponent} from './component/group-change/group-change.component';
 import {AdminScheduleComponent} from './component/admin-schedule/admin-schedule.component';
+import {GradebookNewAssessmentComponent} from "./component/gradebook-new-assessment/gradebook-new-assessment.component";
 
 const routes: Routes = [
   {
@@ -36,24 +37,30 @@ const routes: Routes = [
   {
     path: 'auth/student',
     component: AuthStudentComponent,
-    data: {title: 'Auth'}
+    data: {title: 'Login.ts'}
 
   },
 
   {
     path: 'auth/lecturer',
     component: AuthLecturerComponent,
-    data: {title: 'Auth'}
+    data: {title: 'Login.ts'}
   },
   {
     path: 'auth/admin',
     component: AuthAdminComponent,
-    data: {title: 'Auth'}
+    data: {title: 'Login.ts'}
   },
 
   {
     path: 'gradebook',
     component: GradebookComponent,
+    data: {title: 'Gradebook'}
+  },
+
+  {
+    path: 'assessment/new',
+    component: GradebookNewAssessmentComponent,
     data: {title: 'Gradebook'}
   },
 

@@ -19,21 +19,21 @@ export class GradebookService {
 
   getGradebookAssessments(token: string): Observable<Assessment[]> {
     return this.http.get<Assessment[]>(API_URL + 'gradebook', {
-      headers: {token: token.toString()}
+      headers: {Authorization: token.toString()}
     });
   }
 
   getStudentAssessments(studentId: number, token: string): Observable<Assessment[]> {
     return this.http.get<Assessment[]>(API_URL + 'gradebook/student', {
       params: {studentId: studentId.toString()},
-      headers: {token: token.toString()}
+      headers: {Authorization: token.toString()}
     });
   }
 
 
   isHeadman(token: string) {
     return this.http.get<boolean>(API_URL + 'gradebook/headman', {
-      headers: {token: token.toString()}
+      headers: {Authorization: token.toString()}
     });
   }
 

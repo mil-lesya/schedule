@@ -16,13 +16,8 @@ export class LecturerService {
 
   getLecturer(token: string): Observable<Lecturer> {
     return this.http.get<Lecturer>(API_URL + 'lecturer', {
-      headers: {token: token}
+      headers: {Authorization: token.toString()}
     });
   }
 
-  authorize(token: string): Observable<boolean> {
-    return this.http.get<boolean>(API_URL + 'lecturer/authorize', {
-      headers: {token: token}
-    });
-  }
 }

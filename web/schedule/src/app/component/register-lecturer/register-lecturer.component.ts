@@ -35,8 +35,9 @@ export class RegisterLecturerComponent implements OnInit {
       this.verifiableRegisterLecturer.name,
       this.verifiableRegisterLecturer.patronymic,
       this.verifiableRegisterLecturer.phoneNumber,
-      this.verifiableRegisterLecturer.mail,
+      this.verifiableRegisterLecturer.email,
       this.verifiableRegisterLecturer.auditory,
+      this.verifiableRegisterLecturer.corpus,
       this.verifiableRegisterLecturer.password);
 
     this.registerStudentService.register(registerLecturer).subscribe(() => {

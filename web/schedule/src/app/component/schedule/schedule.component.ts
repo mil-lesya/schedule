@@ -5,6 +5,8 @@ import {TokenProviderService} from '../../service/token.provider.service';
 import {ScheduleService} from '../../service/schedule.service';
 import {Schedule} from '../../dto/Schedule';
 import {ErrorService} from '../../service/error.service';
+import { sortBy } from 'sort-by-typescript';
+
 
 @Component({
   selector: 'app-schedule',
@@ -36,7 +38,7 @@ export class ScheduleComponent implements OnInit {
     this.tokenProviderService.token.subscribe(token => {
       console.log(token);
       this.scheduleService.getSchedule(token).subscribe(schedule => {
-        this.schedule = schedule;
+        this.schedule = schedule.sort(sortBy('classNumber'));
         console.log(schedule);
         for (const s of schedule) {
           switch (s.week) {

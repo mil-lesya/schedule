@@ -37,7 +37,7 @@ export class RegisterStudentComponent implements OnInit {
       this.verifiableRegisterStudent.parentContact,
       this.verifiableRegisterStudent.address,
       this.verifiableRegisterStudent.phoneNumber,
-      this.verifiableRegisterStudent.mail,
+      this.verifiableRegisterStudent.email,
       this.verifiableRegisterStudent.gradebookNumber,
       this.verifiableRegisterStudent.groupNumber,
       this.verifiableRegisterStudent.course,

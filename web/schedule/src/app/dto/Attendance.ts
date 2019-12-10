@@ -5,5 +5,4 @@ export class Attendance {
   id: number;
   student: Student;
   _class: Class;
-  preseance: boolean;
 }

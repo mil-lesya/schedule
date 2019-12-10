@@ -9,6 +9,6 @@ export class Lecturer {
   name: string;
   patronymic: string;
   phoneNumber: string;
-  mail: string;
+  email: string;
   password: string;
 }

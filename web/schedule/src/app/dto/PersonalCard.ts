@@ -6,5 +6,5 @@ export class PersonalCard {
   phoneNumber: string;
   parentContact: string;
   address: string;
-  mail: string;
+  email: string;
 }

@@ -3,6 +3,7 @@
 a {
   color: #382e33;
   text-decoration: none;
+  font-family: Garamond, monospace;
 }
 
 a:hover {
@@ -15,7 +16,7 @@ a:hover {
 
   .text {
     margin: 0 5px;
-
+    font-family: Garamond, monospace;
     color: var(--dark);
     font-size: 18px;
   }
@@ -25,7 +26,6 @@ a:hover {
     font-size: 18px;
     text-decoration-line: underline;
     font-family: Garamond, monospace;
-
   }
 }
 input {
@@ -38,6 +38,8 @@ input {
 
 p {
   line-height: 1.5em;
+  font-family: Garamond, monospace;
+
 }
 
 .clearfix { *zoom: 1;
@@ -46,12 +48,16 @@ p {
   align-items: flex-start;
   margin: 3%;
   text-align: center;
+  -moz-border-radius:5px;
+  border-radius: 5px;
+  -webkit-border-radius: 20px; //edit :D
+
   button {
     background-color: rgba(178, 149, 166, 0.96);
     align-self: center;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
+    -moz-border-radius:5px;
+    border-radius: 5px;
+    -webkit-border-radius: 10px; //edit :D
     margin: 30px;
     padding: 10px;
     max-width: 100px;
@@ -74,30 +80,25 @@ p {
   max-width: 1000px;
   align-items: flex-start;
   margin: 0 auto;
-  background-image:  url("../../../assets/auth.jpg");
-  padding: 5px 5px;
-  height: 100%;
   min-height: calc(100vh - 50px);
+
 }
 .text{
   text-align: center;
   font-size: 20px;
   margin: 20px;
   font-family: Garamond, monospace;
-
 }
 
 
 #register {
-
   max-width: 1000px;
   margin: 0 auto;
   flex-direction: column;
   justify-content: center;
   background-size: cover;
-  padding: 4%;
+  padding: 20px;
   width: 280px;
-
 }
 
 #register form span {
@@ -124,12 +125,13 @@ p {
   margin-bottom: 1em;
   padding: 0 16px;
   width: 280px;
-
+  font-family: Garamond, monospace;
 }
 
 #register form input:focus {
   color: #2e2328;
 }
+
 
 
 

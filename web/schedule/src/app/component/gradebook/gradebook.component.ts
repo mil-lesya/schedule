@@ -17,7 +17,7 @@ export class GradebookComponent implements OnInit {
 
   received: boolean;
   assessments: Assessment[];
-  isHeadman: boolean;
+  isLecturer: boolean;
   studentId: number;
   buttonType: string;
   newAssessment: NewAssessment = new NewAssessment();
@@ -40,54 +40,7 @@ export class GradebookComponent implements OnInit {
       this.gradebookService.getGradebookAssessments(token).subscribe(assessments => {
         this.assessments = assessments;
       }, err => this.errorService.raise(err));
-      this.gradebookService.isHeadman(token).subscribe(isHeadman => {
-        this.isHeadman = isHeadman;
-        console.log(isHeadman);
-        if (isHeadman) {
-          this.route.queryParams.subscribe(params => {
-            this.studentId = params.id;
-            console.log(this.studentId);
-            this.gradebookService.getStudentAssessments(params.id, this.token).subscribe(assessments => {
-              this.assessments = assessments;
-              console.log(assessments);
-            });
-          });
-        }
-      }, err => this.errorService.raise(err));
     }, err => this.errorService.raise(err));
-  }
-
-
-  onSubmit(): void {
-    if (this.buttonType === 'add') {
-      this.received = true;
-      this.route.queryParams.subscribe(params => {
-        this.studentId = params.id;
-        this.newAssessment.studentId = this.studentId;
-        console.log(this.newAssessment);
-      }, err => this.errorService.raise(err));
-    } else if (this.buttonType === 'save') {
-      this.assessmentService.addAssessment(this.newAssessment, this.token).subscribe(() => {
-        this.gradebookService.getStudentAssessments(this.studentId, this.token).subscribe(assessments => {
-          this.assessments = assessments;
-          console.log(assessments);
-          this.received = false;
-          this.newAssessment = new NewAssessment();
-        });
-      }, err => this.errorService.raise(err));
-    } else if (this.buttonType === 'delete') {
-      this.assessmentService.deleteAssessment(this.assessmentId, this.token).subscribe(() => {
-        console.log('delete');
-        this.gradebookService.getStudentAssessments(this.studentId, this.token).subscribe(assessments => {
-          this.assessments = assessments;
-        });
-      }, err => this.errorService.raise(err));
-    }
-
-  }
-
-  takeAssessmentId(assessmentId) {
-    this.assessmentId = assessmentId;
   }
 
 }

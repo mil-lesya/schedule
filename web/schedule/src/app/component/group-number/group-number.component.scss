@@ -15,73 +15,76 @@
     height: 100%;
     text-align: center;
   }
-.group-form{
-  input[type=text] {
-    border: 1px solid #2e2328;
-    border-radius: 4px;
-    padding: 10px;
-    width: 20%;
-  }
-
-  .clearfix { *zoom: 2;
-    background: whitesmoke;
-    max-width: 1000px;
-    align-items: flex-start;
-    .text{
-      color: var(--dark);
+  .group-form{
+    input {
+      border: 1px solid #2e2328;
+      border-radius: 4px;
       padding: 10px;
-      font-family: Garamond, monospace;
-    }
-    .wrapper {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-    }
-    .box1 {
-      grid-column-start: 1;
-      grid-column-end: 2;
-      margin-left: auto;
-      margin-right: auto;
-      min-width: 10px;
+      width: 20%;
+      margin: 10px;
 
     }
-    .box2 {
-      grid-column-start: 2;
-      grid-column-end: 3;
-      margin-left: auto;
-      margin-right: auto;
-      min-width: 10px;
 
-    }
-    .box3 {
-      grid-column-start: 3;
-      grid-column-end: 4;
-      margin-left: auto;
-      margin-right: auto;
+    .clearfix { *zoom: 2;
+      background: whitesmoke;
+      max-width: 1000px;
+      align-items: flex-start;
+      .text{
+        color: var(--dark);
+        font-family: Garamond, monospace;
+      }
+      .wrapper {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .box1 {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        margin-left: auto;
+        margin-right: auto;
+        min-width: 10px;
+
+      }
+      .box2 {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        margin-left: auto;
+        margin-right: auto;
+        min-width: 10px;
+
+      }
+      .box3 {
+        grid-column-start: 3;
+        grid-column-end: 4;
+        margin-left: auto;
+        margin-right: auto;
+      }
     }
   }
-}
 
   button {
     background-color: rgba(178, 149, 166, 0.96);
     align-self: center;
     border-radius: 3px;
     -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
+    -webkit-border-radius: 10px;
     font-size: 20px;
     cursor:pointer;
-    padding: 3%;
     width: 200px;
+    height: 50px;
     font-family: Garamond, monospace;
+    margin: 1%;
+    padding: 10px;
   }
+
   .group-table {
     width: 100%;
     margin-top: 4px;
     background-color: #fbfbfb;
-
     border-collapse: collapse;
     vertical-align: top;
     max-width: 100%;
-
+    table-layout: fixed;
     overflow-x: auto;
 
     // optional - looks better for small cell values
@@ -106,7 +109,21 @@
         padding: 6px 12px;
         border: 1px solid #d9d7ce;
         font-size: 20px;
+
+        .input {
+          width: 85%;
+          height: 100%;
+        }
       }
+    }
+
+    tr.active {
+      background: #9c6ea6;
+    }
+
+    .row:hover{
+      background-color: rgba(178, 149, 166, 0.73);
+
     }
 
     .row:hover {

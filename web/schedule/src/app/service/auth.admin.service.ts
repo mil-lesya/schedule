@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Admin} from '../dto/Admin';
 import {Observable} from 'rxjs';
 import {API_URL} from '../../global';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {Login} from "../dto/Login";
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +11,8 @@ export class AuthAdminService {
 
   constructor(private http: HttpClient) { }
 
-  authenticate(admin: Admin): Observable<string> {
-    return this.http.post<string>(API_URL + 'admin/auth', admin, {responseType: 'text' as 'json'});
-
+  authenticate(admin: Login): Observable<HttpResponse<object>> {
+    return this.http.post<HttpResponse<object>>(API_URL + 'login', admin, {observe: 'response'});
   }
 
 }

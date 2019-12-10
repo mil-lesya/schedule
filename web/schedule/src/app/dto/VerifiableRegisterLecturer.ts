@@ -4,8 +4,9 @@ export class VerifiableRegisterLecturer {
   name: string;
   patronymic: string;
   phoneNumber: string;
-  mail: string;
-  auditory: number;
+  email: string;
+  auditory: string;
+  corpus: string;
   password: string;
   confirmPassword: string;
 }

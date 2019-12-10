@@ -3,7 +3,7 @@
     <form class="auth-form" (ngSubmit)="authenticate()">
       <fieldset class="clearfix">
         <div class="text">Вход</div>
-        <input type="text" placeholder="Номер зачётки" [(ngModel)]="authStudent.gradebookNumber" name="gradebookNumber">
+        <input type="text" placeholder="Номер зачётки" [(ngModel)]="authStudent.login" name="gradebookNumber">
         <input type="password" placeholder="Пароль" [(ngModel)]="authStudent.password" name="password">
         <div class="register-hint">
           <div class="text" style="font-size: 16px">Не зарегистрированы?</div>

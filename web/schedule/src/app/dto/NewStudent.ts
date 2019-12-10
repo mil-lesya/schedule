@@ -4,4 +4,5 @@ export class NewStudent {
   patronymic: string;
   course: number;
   group: number;
+  email: string;
 }

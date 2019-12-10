@@ -4,18 +4,21 @@ export class RegisterLecturer {
   name: string;
   patronymic: string;
   phoneNumber: string;
-  mail: string;
-  auditory: number;
+  email: string;
+  auditory: string;
+  corpus: string;
   password: string;
 
-  constructor(passNumber: string, surname: string, name: string, patronymic: string, phoneNumber: string, mail: string,  auditory: number, password: string) {
+
+  constructor(passNumber: string, surname: string, name: string, patronymic: string, phoneNumber: string, mail: string, auditory: string, corpus: string, password: string) {
     this.passNumber = passNumber;
-    this.name = name;
     this.surname = surname;
+    this.name = name;
     this.patronymic = patronymic;
     this.phoneNumber = phoneNumber;
-    this.mail = mail;
+    this.email = mail;
     this.auditory = auditory;
+    this.corpus = corpus;
     this.password = password;
   }
 }

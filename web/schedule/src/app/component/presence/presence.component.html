@@ -1,16 +1,18 @@
 <app-navigation-student></app-navigation-student>
 <div class="content-container">
   <div class="presence-container">
-    <form class="presence-form">
-      <a [routerLink]="'/gradebook' " [queryParams]="{id: studentId, name: studentName}" *ngIf="studentId != null">
-        Перейти к зачётке студента {{studentName}}
-      </a>
-      <table class="presence-table">
+    <form class="presence-form" *ngIf="attendance.length!=0">
+      <table class="presence-table" >
         <tr>
+          <th>Пара</th>
+          <th>Время</th>
           <th>Дата</th>
           <th>Предмет</th>
         </tr>
-        <tr *ngFor="let a of attendance" class="row" (click)="takeAttendanceId(a.id)" [ngClass]="{active : a.id == attendanceId}">
+        <tr *ngFor="let a of attendance" class="row" (click)="takeAttendanceId(a.id)"
+            [ngClass]="{active : a.id == attendanceId}">
+          <td>{{a._class.schedule.classNumber + 1}}</td>
+          <td>{{time[a._class.schedule.classNumber]}}</td>
           <td>{{a._class.date | date:"dd.MM.yyyy"}}</td>
           <td>{{a._class.schedule.subject.name}}</td>
         </tr>
@@ -19,14 +21,17 @@
     <form class="presence-form" *ngIf="isHeadman" (ngSubmit)="onSubmit()">
       <table class="presence-table" *ngIf="received">
         <tr class="row">
+          <td><input type="number" [(ngModel)]="newAttendance.classNumber" name="classNumber"></td>
+          <td>{{time[newAttendance.classNumber - 1]}}</td>
           <td><input type="date" [(ngModel)]="newAttendance.dateClass" name="dateClass"></td>
           <td><input type="text" [(ngModel)]="newAttendance.subjectName" name="subjectName"></td>
         </tr>
       </table>
-      <button type="submit" (click)="buttonType = 'add'">Добавить</button>
-      <button type="submit" (click)="buttonType = 'save'"> Сохранить</button>
-      <button type="submit" (click)="buttonType = 'delete'">Удалить</button>
-
+      <div *ngIf="studentId!=null">
+        <button type="submit" (click)="buttonType = 'add'">Добавить</button>
+        <button type="submit" (click)="buttonType = 'save'"> Сохранить</button>
+        <button type="submit" (click)="buttonType = 'delete'">Удалить</button>
+      </div>
     </form>
   </div>
 </div>

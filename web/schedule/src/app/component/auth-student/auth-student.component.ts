@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthStudent} from '../../dto/AuthStudent';
 import {AuthStudentService} from '../../service/auth.student.service';
 import {Router} from '@angular/router';
 import {TokenProviderService} from '../../service/token.provider.service';
 import {LOCALSTORAGE_TOKEN_NAME} from '../../../global';
 import {ErrorService} from '../../service/error.service';
+import {Login} from "../../dto/Login";
 
 
 @Component({
@@ -15,7 +15,7 @@ import {ErrorService} from '../../service/error.service';
 export class AuthStudentComponent implements OnInit {
 
   error: any;
-  authStudent: AuthStudent = new AuthStudent();
+  authStudent: Login = new Login();
 
   constructor(
     private authStudentService: AuthStudentService,
@@ -29,13 +29,14 @@ export class AuthStudentComponent implements OnInit {
   }
 
   authenticate() {
-    this.authStudentService.authenticate(this.authStudent).subscribe(token => {
+    this.authStudentService.authenticate(this.authStudent).subscribe(resp => {
+        const token = resp.headers.get('Authorization');
         this.tokenProviderService.setToken(token);
         console.log('set token', token);
         localStorage.setItem(LOCALSTORAGE_TOKEN_NAME, token);
 
         this.router.navigate(['/feed/student'], {replaceUrl: true});
       },
-        er => this.errorService.raise(er));
+      er => this.errorService.raise(er));
   }
 }

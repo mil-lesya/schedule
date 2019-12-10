@@ -8,6 +8,7 @@
         <th>Предмет</th>
         <th>Преподаватель</th>
         <th>Аудитория</th>
+        <th>Корпус</th>
       </tr>
       <tr>
       <td class="day" [rowSpan]="monday.length + 1">Пн</td>
@@ -17,6 +18,7 @@
         <td>{{s.subject.name}}</td>
         <td>{{s.lecturer.surname}} {{s.lecturer.name}} {{s.lecturer.patronymic}} </td>
         <td>{{s.auditory.auditoryNumber}}</td>
+        <td>{{s.auditory.corpus.number}}</td>
       </tr>
       <tr>
         <td class="day" [rowSpan]="tuesday.length + 1">Вт</td>
@@ -26,6 +28,7 @@
         <td >{{s.subject.name}}</td>
         <td>{{s.lecturer.surname}} {{s.lecturer.name}} {{s.lecturer.patronymic}} </td>
         <td>{{s.auditory.auditoryNumber}}</td>
+        <td>{{s.auditory.corpus.number}}</td>
       </tr>
       <tr>
         <td class="day" [rowSpan]="wednesday.length + 1">Ср</td>
@@ -35,6 +38,7 @@
         <td>{{s.subject.name}}</td>
         <td>{{s.lecturer.surname}} {{s.lecturer.name}} {{s.lecturer.patronymic}} </td>
         <td>{{s.auditory.auditoryNumber}}</td>
+        <td>{{s.auditory.corpus.number}}</td>
       </tr>
       <tr>
         <td class="day" [rowSpan]="thursday.length + 1">Чт</td>
@@ -44,6 +48,7 @@
         <td>{{s.subject.name}}</td>
         <td>{{s.lecturer.surname}} {{s.lecturer.name}} {{s.lecturer.patronymic}} </td>
         <td>{{s.auditory.auditoryNumber}}</td>
+        <td>{{s.auditory.corpus.number}}</td>
       </tr>
       <tr>
         <td class="day" [rowSpan]="friday.length + 1">Пт</td>
@@ -53,6 +58,7 @@
         <td>{{s.subject.name}}</td>
         <td>{{s.lecturer.surname}} {{s.lecturer.name}} {{s.lecturer.patronymic}} </td>
         <td>{{s.auditory.auditoryNumber}}</td>
+        <td>{{s.auditory.corpus.number}}</td>
       </tr>
       <tr>
         <td class="day" [rowSpan]="saturday.length + 1">Сб</td>
@@ -62,6 +68,7 @@
         <td>{{s.subject.name}}</td>
         <td>{{s.lecturer.surname}} {{s.lecturer.name}} {{s.lecturer.patronymic}} </td>
         <td>{{s.auditory.auditoryNumber}}</td>
+        <td>{{s.auditory.corpus.number}}</td>
       </tr>
     </table>
   </div>

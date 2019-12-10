@@ -1,27 +1,23 @@
 .content-container {
   width: 100%;
+
   display: flex;
   align-items: flex-start;
-  max-width: 1000px;
+  max-width: 1280px;
   min-height: calc(100vh - 50px);
-  margin: 0 auto;
-  background-image: url("../../../assets/auth.jpg");
-  padding: 3%;
 
-  a {
+  margin: 50px auto 0 auto;
+
+a {
     border: none;
     padding: 10px;
   }
-
-
-
 
   .text {
     color: var(--dark);
     text-align: center;
     font-size: 26px;
     padding: 50px;
-    font-family: Garamond, monospace;
   }
 
   button {
@@ -29,25 +25,27 @@
     align-self: center;
     border-radius: 3px;
     -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
+    -webkit-border-radius: 10px;
     font-size: 20px;
     cursor: pointer;
-    width: 180px;
-    height: 80px;
-    font-family: Garamond, monospace;
+    width: 80%;
+    height: 30%;
     padding: 10px;
-
+    font-family: Garamond, monospace;
   }
 
   .clearfix {
-    *zoom: 1;
     background: whitesmoke;
     min-width: 200px;
     max-width: 1000px;
     align-items: flex-start;
+    display: block;
     margin: 0 auto;
-    height: 500px;
-    padding: 20px;
+    height: 450px;
+
+    -moz-border-radius:5px;
+    border-radius: 5px;
+    -webkit-border-radius: 20px; //edit :D
 
     .wrapper {
       display: grid;

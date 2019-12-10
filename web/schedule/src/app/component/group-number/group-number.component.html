@@ -17,14 +17,14 @@
           </div>
         </div>
       </fieldset>
-    <table *ngIf="received && authorize" class="group-table">
+    <table *ngIf="received" class="group-table">
       <tr>
         <th>№</th>
         <th>Фамилия</th>
         <th>Имя</th>
         <th>Отчество</th>
       </tr>
-      <tr class="row" *ngFor="let s of students; let i = index">
+      <tr class="row" *ngFor="let s of students; let i = index" (click)="putAssessment(s.id)">
         <td>{{i + 1}}</td>
         <td>{{s.personalCard.surname}}</td>
         <td>{{s.personalCard.name}}</td>

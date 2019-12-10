@@ -7,6 +7,7 @@ import {AppComponent} from '../../app.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NewAttendance} from '../../dto/NewAttendance';
 import {ErrorService} from '../../service/error.service';
+import {sortBy} from "sort-by-typescript";
 
 @Component({
   selector: 'app-presence',
@@ -19,10 +20,10 @@ export class PresenceComponent implements OnInit {
   attendance: Attendance[];
   isHeadman: boolean;
   buttonType: string;
-  studentName: string;
   studentId: number;
   attendanceId: number;
   newAttendance: NewAttendance = new NewAttendance();
+  time: string[] = ['8:00', '9:50', '11:40', '13:50', '15:40'];
   token: string;
 
   constructor(
@@ -49,9 +50,8 @@ export class PresenceComponent implements OnInit {
           if (isHeadman) {
             this.route.queryParams.subscribe(params => {
               this.studentId = params.id;
-              this.studentName = params.name;
               console.log(this.studentId);
-              this.attendanceService.getStudentAttendance(this.studentId).subscribe(attendance  => {
+              this.attendanceService.getStudentAttendance(this.studentId, this.token).subscribe(attendance  => {
                 this.attendance = attendance;
                 console.log(attendance);
               }, err => this.errorService.raise(err));
@@ -72,7 +72,7 @@ export class PresenceComponent implements OnInit {
       }, err => this.errorService.raise(err));
     } else if (this.buttonType === 'save') {
       this.attendanceService.addAttendance(this.newAttendance, this.token).subscribe(() => {
-        this.attendanceService.getStudentAttendance(this.studentId).subscribe(attendance => {
+        this.attendanceService.getStudentAttendance(this.studentId, this.token).subscribe(attendance => {
           this.attendance = attendance;
           console.log(attendance);
           this.received = false;
@@ -82,7 +82,7 @@ export class PresenceComponent implements OnInit {
     } else if (this.buttonType === 'delete') {
       this.attendanceService.deleteAttendance(this.attendanceId, this.token).subscribe(() => {
         console.log('delete');
-        this.attendanceService.getStudentAttendance(this.studentId).subscribe(attendance => {
+        this.attendanceService.getStudentAttendance(this.studentId, this.token).subscribe(attendance => {
           this.attendance = attendance;
         }, err => this.errorService.raise(err));
       }, err => this.errorService.raise(err));

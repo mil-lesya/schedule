@@ -4,30 +4,30 @@
       <form class="register-form" (ngSubmit)="register()">
         <fieldset class="clearfix">
           <div class="text">Регистрация</div>
-
+          <input type="text" placeholder="Фамилия" [(ngModel)]="verifiableRegisterStudent.surname" name="surname">
           <input type="text" placeholder="Имя" [(ngModel)]="verifiableRegisterStudent.name" name="name">
-        <input type="text" placeholder="Фамилия" [(ngModel)]="verifiableRegisterStudent.surname" name="surname">
-        <input type="text" placeholder="Отчество" [(ngModel)]="verifiableRegisterStudent.patronymic"
-               name="patronymic">
-        <input type="text" placeholder="Номер телефона родителя" [(ngModel)]="verifiableRegisterStudent.parentContact"
-               name="parentContact">
-        <input type="text" placeholder="Домашний адрес" [(ngModel)]="verifiableRegisterStudent.address" name="address">
-        <input type="text" placeholder="Номер мобильного телефона" [(ngModel)]="verifiableRegisterStudent.phoneNumber"
-               name="phoneNumber">
-        <input type="text" placeholder="mail" [(ngModel)]="verifiableRegisterStudent.mail" name="mail">
-        <input type="text" placeholder="Номер зачетной книжки" [(ngModel)]="verifiableRegisterStudent.gradebookNumber"
-               name="gradebookNumber">
-        <input type="number" placeholder="Номер группы" [(ngModel)]="verifiableRegisterStudent.groupNumber"
-               name="groupNumber">
-        <input type="number" placeholder="Курс" [(ngModel)]="verifiableRegisterStudent.course" name="course">
-        <input type="password" placeholder="Пароль" [(ngModel)]="verifiableRegisterStudent.password" name="password">
-        <input type="password" placeholder="Повторите пароль" [(ngModel)]="verifiableRegisterStudent.confirmPassword"
-               name="confirmPassword">
-        <div class="auth-hint">
-          <div class="text">Уже зарегистрированы?</div>
-          <a [routerLink]="'/auth/student'">Войти</a>
-        </div>
-        <button type="submit">Отправить</button>
+          <input type="text" placeholder="Отчество" [(ngModel)]="verifiableRegisterStudent.patronymic"
+                 name="patronymic">
+          <input type="text" placeholder="Номер телефона родителя" [(ngModel)]="verifiableRegisterStudent.parentContact"
+                 name="parentContact">
+          <input type="text" placeholder="Домашний адрес" [(ngModel)]="verifiableRegisterStudent.address"
+                 name="address">
+          <input type="text" placeholder="Номер мобильного телефона" [(ngModel)]="verifiableRegisterStudent.phoneNumber"
+                 name="phoneNumber">
+          <input type="text" placeholder="mail" [(ngModel)]="verifiableRegisterStudent.email" name="mail">
+          <input type="text" placeholder="Номер зачетной книжки" [(ngModel)]="verifiableRegisterStudent.gradebookNumber"
+                 name="gradebookNumber">
+          <input type="number" placeholder="Номер группы" [(ngModel)]="verifiableRegisterStudent.groupNumber"
+                 name="groupNumber">
+          <input type="number" placeholder="Курс" [(ngModel)]="verifiableRegisterStudent.course" name="course">
+          <input type="password" placeholder="Пароль" [(ngModel)]="verifiableRegisterStudent.password" name="password">
+          <input type="password" placeholder="Повторите пароль" [(ngModel)]="verifiableRegisterStudent.confirmPassword"
+                 name="confirmPassword">
+          <div class="auth-hint">
+            <div class="text">Уже зарегистрированы?</div>
+            <a [routerLink]="'/auth/student'">Войти</a>
+          </div>
+          <button type="submit">Отправить</button>
           <div class="auth-hint">
             <a [routerLink]="'/home'">Вернуться назад</a>
           </div>

@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {TokenProviderService} from '../../service/token.provider.service';
 import {LOCALSTORAGE_TOKEN_NAME} from '../../../global';
-import {AuthLecturer} from '../../dto/AuthLecturer';
 import {AuthLecturerService} from '../../service/auth.lecturer.service';
 import {ErrorService} from '../../service/error.service';
+import {Login} from "../../dto/Login";
 
 @Component({
   selector: 'app-auth-lecturer',
@@ -13,7 +13,7 @@ import {ErrorService} from '../../service/error.service';
 })
 export class AuthLecturerComponent implements OnInit {
 
-  authLecturer: AuthLecturer = new AuthLecturer();
+  authLecturer: Login = new Login();
 
   constructor(
     private authLecturerService: AuthLecturerService,
@@ -27,10 +27,13 @@ export class AuthLecturerComponent implements OnInit {
   }
 
   authenticate() {
-    this.authLecturerService.authenticate(this.authLecturer).subscribe(token => {
-      this.tokenProviderService.setToken(token);
-      localStorage.setItem(LOCALSTORAGE_TOKEN_NAME, token);
-      this.router.navigate(['/feed/lecturer'], {replaceUrl: true});
+    this.authLecturerService.authenticate(this.authLecturer).subscribe(resp => {
+        const token = resp.headers.get('Authorization');
+        this.tokenProviderService.setToken(token);
+        console.log('set token', token);
+        localStorage.setItem(LOCALSTORAGE_TOKEN_NAME, token);
+
+        this.router.navigate(['/feed/lecturer'], {replaceUrl: true});
     },
       err => this.errorService.raise(err));
   }

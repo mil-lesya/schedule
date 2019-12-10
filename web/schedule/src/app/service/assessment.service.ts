@@ -17,14 +17,14 @@ export class AssessmentService {
 
   addAssessment(newAssessment: NewAssessment, token: string): Observable<void> {
     return this.http.post<void>(API_URL + 'assessment/add', newAssessment, {
-      headers: {token: token.toString()}
+      headers: {Authorization: token.toString()}
     });
   }
 
   deleteAssessment(assessmentId: number, token: string): Observable<void> {
     return this.http.post<void>(API_URL + 'assessment/delete', assessmentId,
       {
-        headers: {token: token.toString()}
+        headers: {Authorization: token.toString()}
       });
   }
 }

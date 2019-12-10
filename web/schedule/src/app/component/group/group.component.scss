@@ -15,7 +15,8 @@
 
   .group-table {
     width: 100%;
-    margin-top: 4px;
+    margin: 0 auto;
+
     background-color: #fbfbfb;
 
     border-collapse: collapse;
@@ -28,7 +29,6 @@
     white-space: nowrap;
     border-spacing: 0;
 
-
     th {
       padding: 6px 12px;
       border: 1px solid #d9d7ce;
@@ -36,18 +36,19 @@
       text-align: left;
     }
 
+    tr.active {
+      background: #9c6ea6;
+    }
+
     .row:hover{
       background-color: rgba(178, 149, 166, 0.73);
-
     }
 
     .row {
       cursor: pointer;
-
       transition: border linear 2s;
 
       td {
-
         padding: 6px 12px;
         border: 1px solid #d9d7ce;
         font-size: 20px;
