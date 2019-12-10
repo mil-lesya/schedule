@@ -317,8 +317,7 @@ create table attendance
             references student,
     class_id   bigint    not null
         constraint attendance_class_id_fk
-            references class,
-    presence   boolean   not null
+            references class
 );
 
 alter table attendance
@@ -433,8 +432,8 @@ BEGIN
     else
         insert into public.class ("date", schedule_id) values (f_date_class, f_id_shedule) RETURNING id INTO f_id_class;
     end if;
-    insert into attendance (class_id, presence, student_id)
-    values (f_id_class, false, f_student_id)
+    insert into attendance (class_id, student_id)
+    values (f_id_class, f_student_id)
     RETURNING id INTO f_id_attendance;
     return f_id_attendance;
 END;
@@ -453,4 +452,97 @@ END;
 $$;
 
 alter function delete_attendance(bigint) owner to postgres;
+
+create function get_attendance(f_student_id bigint) returns refcursor
+    language plpgsql
+as
+$$
+DECLARE
+    ref_attendance REFCURSOR;
+BEGIN
+    OPEN ref_attendance FOR
+        SELECT *
+        FROM attendance as a
+                 JOIN public.class as c ON c.id = a.class_id
+        where a.student_id = f_student_id
+        order by c.date;
+    RETURN ref_attendance;
+END;
+$$;
+
+alter function get_attendance(bigint) owner to postgres;
+
+create function add_assessment(f_semester integer, f_subject character varying, f_mark integer, f_year integer,
+                               f_student_id bigint) returns bigint
+    language plpgsql
+as
+$$
+DECLARE
+    f_id_gradebook  bigint;
+    f_id_session    bigint;
+    f_id_subject    bigint;
+    f_id_assessment bigint;
+BEGIN
+    select gradebook.id
+    INTO STRICT f_id_gradebook
+    from gradebook
+             left outer join student on student.gradebook_id = gradebook.id
+    where (student.id = f_student_id);
+
+    if exists(select public.session.id
+              from public.session
+              where (semester_number = f_semester and public.session.year = f_year)) then
+        select public.session.id
+        INTO STRICT f_id_session
+        from public.session
+        where (semester_number = f_semester and public.session.year = f_year);
+
+    else
+        insert into public.session (semester_number, "year") values (f_semester, f_year) RETURNING id INTO f_id_session;
+    end if;
+
+    select subject.id
+    INTO STRICT f_id_subject
+    from subject
+    where subject.name = f_subject;
+
+    insert into assessment (subject_id, session_id, mark, gradebook_id)
+    values (f_id_subject, f_id_session, f_mark, f_id_gradebook)
+    RETURNING id INTO f_id_assessment;
+    return f_id_assessment;
+END;
+$$;
+
+alter function add_assessment(integer, varchar, integer, integer, bigint) owner to postgres;
+
+create function delete_assessment(assessment_id bigint) returns boolean
+    language plpgsql
+as
+$$
+BEGIN
+    delete from assessment where assessment.id = assessment_id;
+    return true;
+END;
+$$;
+
+alter function delete_assessment(bigint) owner to postgres;
+
+create function get_student_assessments(f_gradebook_id bigint) returns refcursor
+    language plpgsql
+as
+$$
+DECLARE
+    ref_assessment REFCURSOR;
+BEGIN
+    OPEN ref_assessment FOR
+        SELECT *
+        FROM assessment as a
+                 JOIN public.session as c ON c.id = a.session_id
+        where a.gradebook_id = f_gradebook_id
+        order by c.semester_number;
+    RETURN ref_assessment;
+END;
+$$;
+
+alter function get_student_assessments(bigint) owner to postgres;
 
