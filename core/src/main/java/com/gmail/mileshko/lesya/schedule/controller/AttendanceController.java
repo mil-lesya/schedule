@@ -24,14 +24,12 @@ public class AttendanceController {
     private final AttendanceService attendanceService;
     private final UserService userService;
 
-
     @Autowired
     public AttendanceController(StudentService studentService, AttendanceService attendanceService, UserService userService) {
         this.studentService = studentService;
         this.attendanceService = attendanceService;
         this.userService = userService;
     }
-
 
     @GetMapping("get")
     @PreAuthorize("hasRole('STUDENT')")
@@ -48,16 +46,18 @@ public class AttendanceController {
         return Mapper.mapAll(attendanceService.getAttendance(student), AttendanceDto.class);
     }
 
-
     @PostMapping("add")
+    @PreAuthorize("hasRole('STUDENT')")
     public void addAttendance(@RequestBody NewAttendanceDto newAttendanceDto, @RequestHeader(HEADER_STRING) String token) throws Throwable {
         User user = userService.getUser(token);
         Student student = studentService.getStudent(user);
-        studentService.isHeadman(student);
-        attendanceService.addAttendance(newAttendanceDto);
+        if (studentService.isHeadman(student)) {
+            attendanceService.addAttendance(newAttendanceDto);
+        }
     }
 
     @PostMapping("delete")
+    @PreAuthorize("hasRole('STUDENT')")
     public void deleteAttendance(@RequestBody Long attendanceId, @RequestHeader(HEADER_STRING) String token) throws NoSuchEntityException {
         User user = userService.getUser(token);
         Student student = studentService.getStudent(user);

@@ -6,9 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
 public interface PassRepository extends CrudRepository<Pass, Long> {
-
     Optional<Pass> findByPassNumber(String passNumber);
-
 }

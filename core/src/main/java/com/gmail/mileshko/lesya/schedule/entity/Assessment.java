@@ -2,6 +2,15 @@ package com.gmail.mileshko.lesya.schedule.entity;
 
 import javax.persistence.*;
 
+@NamedStoredProcedureQuery(
+        name = "GetStudentAssessment",
+        procedureName = "get_student_assessments",
+        resultClasses = Assessment.class,
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, type = void.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, type = Long.class)
+        }
+)
 @Entity
 @Table(name = "assessment")
 public class Assessment {

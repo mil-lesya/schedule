@@ -7,8 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
 public interface DepartmentRepository  extends CrudRepository<Department, Long> {
     Optional<Department> findByAuditory(Auditory auditory);
-
 }

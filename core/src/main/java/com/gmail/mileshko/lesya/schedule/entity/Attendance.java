@@ -1,8 +1,15 @@
 package com.gmail.mileshko.lesya.schedule.entity;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-
+@NamedStoredProcedureQuery(
+        name = "GetAttendance",
+        procedureName = "get_attendance",
+        resultClasses = Attendance.class,
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, type = void.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, type = Long.class)
+        }
+)
 @Entity
 @Table(name = "attendance")
 public class Attendance {
@@ -19,16 +26,12 @@ public class Attendance {
     @JoinColumn(name = "class_id")
     private Class _class;
 
-    @Column(name = "presence")
-    private Boolean presence;
-
     public Attendance() {
     }
 
-    public Attendance(Student student, Class _class, Boolean presence) {
+    public Attendance(Student student, Class _class) {
         this.student = student;
         this._class = _class;
-        this.presence = presence;
     }
 
     public Long getId() {
@@ -53,13 +56,5 @@ public class Attendance {
 
     public void set_class(Class _class) {
         this._class = _class;
-    }
-
-    public Boolean getPresence() {
-        return presence;
-    }
-
-    public void setPresence(Boolean presence) {
-        this.presence = presence;
     }
 }

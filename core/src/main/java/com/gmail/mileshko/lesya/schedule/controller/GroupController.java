@@ -41,7 +41,7 @@ public class GroupController {
    }
 
    @PostMapping("expected")
-   @PreAuthorize("hasRole('ADMIN')")
+   @PreAuthorize("hasAnyRole('ADMIN','LECTURER')")
    public List<StudentDto> getGroup(@Valid @RequestBody ExpectedGroupDto expectedGroupDto) throws NoSuchEntityException {
        return Mapper.mapAll(groupService.getExpectedGroup(expectedGroupDto), StudentDto.class);
    }

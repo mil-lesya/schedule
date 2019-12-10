@@ -7,9 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
 public interface GroupRepository extends CrudRepository<Group, Long> {
     Optional<Group> findByGroupNumberAndCourse(Integer groupNumber, Integer course);
     Optional<Group> findByHeadman(Student student);
-
 }
