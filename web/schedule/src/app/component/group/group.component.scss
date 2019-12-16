@@ -3,7 +3,6 @@
   min-height: calc(100vh - 50px);
   overflow: hidden;
   padding: 5px 5px;
-  max-width: 1000px;
   align-items: flex-start;
   margin: 0 auto;
   font-family: Garamond, monospace;
@@ -14,15 +13,12 @@
   }
 
   .group-table {
-    width: 100%;
     margin: 0 auto;
-
+    width: 80%;
     background-color: #fbfbfb;
-
     border-collapse: collapse;
     vertical-align: top;
     max-width: 100%;
-
     overflow-x: auto;
 
     // optional - looks better for small cell values

@@ -4,6 +4,7 @@ import {API_URL} from '../../global';
 import {Student} from '../dto/Student';
 import {Observable} from 'rxjs';
 import {NewStudent} from '../dto/NewStudent';
+import {Lecturer} from "../dto/Lecturer";
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,13 @@ export class StudentService {
   appointHeadman(headmanId: number, token: string): Observable<void> {
     return this.http.post<void>(API_URL + 'student/headman', headmanId, {
       headers: {Authorization: token.toString()}
+    });
+  }
+
+  searchLecturer(lecturer: string, token: string): Observable<Lecturer[]> {
+    return this.http.get<Lecturer[]>(API_URL + 'student/lecturer', {
+      headers: {Authorization: token.toString()},
+      params: {lecturer: lecturer}
     });
   }
 

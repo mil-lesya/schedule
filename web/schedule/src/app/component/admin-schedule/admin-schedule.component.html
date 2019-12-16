@@ -1,4 +1,27 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <app-navigation-admin></app-navigation-admin>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" *ngIf="search">
+<div id="id01" class="w3-modal">
+  <div class="w3-modal-content w3-animate-top w3-card-8" *ngIf="subjects.length!=0">
+    <header class="w3-container w3-teal">
+      <span (click)="modalSubject()"
+            class="w3-closebtn" >&times;</span>
+      <h2>Найденные предметы</h2>
+    </header>
+    <div class="w3-container">
+           <tr class="row" *ngFor="let s of subjects">
+              <td>{{s.name}}</td>
+            </tr>
+    </div>
+  </div>
+  <div class="w3-modal-content w3-animate-top w3-card-8" *ngIf="subjects.length==0 && search">
+    <header class="w3-container w3-teal">
+      <span (click)="modalSubject()"
+            class="w3-closebtn">&times;</span>
+      <h2>Предметы не найдены</h2>
+    </header>
+  </div>
+</div>
 <div class="content-container">
   <div class="schedule-container">
     <form class="schedule-form" (ngSubmit)="onSubmit()">
@@ -15,6 +38,12 @@
           <div class="box3">
             <button type="submit" (click)="buttonType = 'view'">Посмотреть</button>
           </div>
+          <div class="box4">
+            <div class="search-container">
+                <input [(ngModel)]="subject" type="text" placeholder="Найти предмет.." name="search">
+                <button (click)="searchSubject()" ><i class="fa fa-search"></i></button>
+            </div>
+          </div>
         </div>
       </fieldset>
       <table *ngIf="received" class="schedule-table">
@@ -24,6 +53,7 @@
           <th>Предмет</th>
           <th>Преподаватель</th>
           <th>Аудитория</th>
+          <th>Корпус</th>
         </tr>
         <tr>
           <td class="day" [rowSpan]="monday.length + 1">Пн</td>
@@ -42,6 +72,10 @@
           <td *ngIf="view">
             <input class="input" [(ngModel)]="s.auditory.auditoryNumber" name="{{s.auditory.auditoryNumber}}">
           </td>
+          <td *ngIf="!view">{{s.auditory.corpus.number}}</td>
+          <td *ngIf="view">
+            <input class="input" [(ngModel)]="s.auditory.corpus.number" name="{{s.auditory.corpus.number}}">
+          </td>
         </tr>
         <tr>
           <td class="day" [rowSpan]="tuesday.length + 1">Вт</td>
@@ -50,15 +84,22 @@
           <td>{{time[s.classNumber]}}</td>
           <td *ngIf="!view">{{s.subject.name}}</td>
           <td *ngIf="view"><input class="input" [(ngModel)]="s.subject.name" name="{{s.subject.name}}"></td>
+
           <td *ngIf="!view">{{s.lecturer.surname}} {{s.lecturer.name}} {{s.lecturer.patronymic}} </td>
           <td *ngIf="view">
             <input type="text" [(ngModel)]="s.lecturer.surname" name="{{s.lecturer.surname}}">
             <input type="text" [(ngModel)]="s.lecturer.name" name="{{s.lecturer.name}}">
             <input type="text" [(ngModel)]="s.lecturer.patronymic" name="{{s.lecturer.patronymic}}">
           </td>
+
           <td *ngIf="!view">{{s.auditory.auditoryNumber}}</td>
           <td *ngIf="view">
             <input class="input" [(ngModel)]="s.auditory.auditoryNumber" name="{{s.auditory.auditoryNumber}}">
+          </td>
+
+          <td *ngIf="!view">{{s.auditory.corpus.number}}</td>
+          <td *ngIf="view">
+            <input class="input" [(ngModel)]="s.auditory.corpus.number" name="{{s.auditory.corpus.number}}">
           </td>
         </tr>
         <tr>
@@ -78,6 +119,10 @@
           <td *ngIf="view">
             <input class="input" [(ngModel)]="s.auditory.auditoryNumber" name="{{s.auditory.auditoryNumber}}">
           </td>
+          <td *ngIf="!view">{{s.auditory.corpus.number}}</td>
+          <td *ngIf="view">
+            <input class="input" [(ngModel)]="s.auditory.corpus.number" name="{{s.auditory.corpus.number}}">
+          </td>
         </tr>
         <tr>
           <td class="day" [rowSpan]="thursday.length + 1">Чт</td>
@@ -95,6 +140,10 @@
           <td *ngIf="!view">{{s.auditory.auditoryNumber}}</td>
           <td *ngIf="view">
             <input class="input" [(ngModel)]="s.auditory.auditoryNumber" name="{{s.auditory.auditoryNumber}}">
+          </td>
+          <td *ngIf="!view">{{s.auditory.corpus.number}}</td>
+          <td *ngIf="view">
+            <input class="input" [(ngModel)]="s.auditory.corpus.number" name="{{s.auditory.corpus.number}}">
           </td>
         </tr>
         <tr>
@@ -114,6 +163,10 @@
           <td *ngIf="view">
             <input class="input" [(ngModel)]="s.auditory.auditoryNumber" name="{{s.auditory.auditoryNumber}}">
           </td>
+          <td *ngIf="!view">{{s.auditory.corpus.number}}</td>
+          <td *ngIf="view">
+            <input class="input" [(ngModel)]="s.auditory.corpus.number" name="{{s.auditory.corpus.number}}">
+          </td>
         </tr>
         <tr>
           <td class="day" [rowSpan]="saturday.length + 1"> Сб</td>
@@ -131,6 +184,10 @@
           <td *ngIf="!view">{{s.auditory.auditoryNumber}}</td>
           <td *ngIf="view">
             <input class="input" [(ngModel)]="s.auditory.auditoryNumber" name="{{s.auditory.auditoryNumber}}">
+          </td>
+          <td *ngIf="!view">{{s.auditory.corpus.number}}</td>
+          <td *ngIf="view">
+            <input class="input" [(ngModel)]="s.auditory.corpus.number" name="{{s.auditory.corpus.number}}">
           </td>
         </tr>
       </table>

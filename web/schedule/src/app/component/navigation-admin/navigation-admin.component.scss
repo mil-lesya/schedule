@@ -1,13 +1,20 @@
+
 .topnav {
   overflow: hidden;
   background-color: #f1f1f1;
   padding: 5px 5px;
-  max-width: 1000px;
   align-items: flex-start;
   margin: 0 auto;
   font-family: Garamond, monospace;
+  position: sticky;
+  top: 0;
 }
 
+.topnav a.exit{
+  float: right;
+  background-color: rgba(185, 133, 195, 0.36);
+
+}
 /* Style the header links */
 .topnav a {
   float: left;
@@ -18,7 +25,7 @@
   font-size: 18px;
   line-height: 25px;
   border-radius: 5px;
-  width: 150px;
+  width: 130px;
   margin: 3px;
 }
 
@@ -35,25 +42,9 @@
 
 }
 
-.topnav a.exit{
-  float: right;
-  background-color: rgba(185, 133, 195, 0.36);
-
-}
 /* Style the active/current link*/
 .topnav a.active {
   background-color: #9c6ea6;
   color: white;
-
 }
-
-@media screen and (max-width: 500px) {
-  .navbar a {
-    float: none;
-    display: block;
-    width: 100%;
-  }
-}
-
-
 

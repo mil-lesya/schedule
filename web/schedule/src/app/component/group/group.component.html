@@ -10,9 +10,7 @@
         <th>Отчество</th>
       </tr>
       <tr class="row" *ngFor="let s of students; let i = index" (click)="setPasses(s.id, s.personalCard.name)">
-        <td  >
-            {{i + 1}}
-        </td>
+        <td>{{i + 1}}</td>
         <td>{{s.personalCard.surname}}</td>
         <td>{{s.personalCard.name}}</td>
         <td>{{s.personalCard.patronymic}}</td>

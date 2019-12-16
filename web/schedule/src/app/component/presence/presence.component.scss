@@ -3,7 +3,6 @@
   min-height: calc(100vh - 50px);
   overflow: hidden;
   padding: 5px 5px;
-  max-width: 1000px;
   align-items: flex-start;
   margin: 0 auto;
   max-height: 100%;
@@ -43,6 +42,7 @@ button {
 .presence-container {
   text-align: center;
   height: 100%;
+  padding: 20px;
 }
 
 .register-form {
@@ -51,14 +51,12 @@ button {
 
 
 .presence-table {
-
-  width: 100%;
-  margin-top: 4px;
+  width: 80%;
+  margin: 0 auto;
   background: #fbfbfb;
   border-collapse: collapse;
   vertical-align: top;
   max-width: 100%;
-  table-layout: fixed;
   overflow-x: auto;
 
   // optional - looks better for small cell values

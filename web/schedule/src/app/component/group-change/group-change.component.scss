@@ -3,7 +3,6 @@
   min-height: calc(100vh - 50px);
   overflow: hidden;
   padding: 5px 5px;
-  max-width: 1000px;
   align-items: flex-start;
   margin: 0 auto;
   font-family: Garamond, monospace;
@@ -26,9 +25,11 @@
     }
 
     .clearfix { *zoom: 2;
+      margin: 0 auto;
+      width: 80%;
       background: whitesmoke;
-      max-width: 1000px;
       align-items: flex-start;
+      -webkit-border-radius: 10px;
       .text{
         color: var(--dark);
         font-family: Garamond, monospace;
@@ -78,7 +79,8 @@
   }
 
   .group-table {
-    width: 100%;
+    margin: 0 auto;
+    width: 80%;
     margin-top: 4px;
     background-color: #fbfbfb;
     border-collapse: collapse;

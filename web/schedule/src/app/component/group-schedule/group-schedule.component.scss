@@ -3,7 +3,6 @@
   min-height: calc(100vh - 50px);
   overflow: hidden;
   padding: 5px 5px;
-  max-width: 1000px;
   align-items: flex-start;
   margin: 0 auto;
   font-family: Garamond, monospace;
@@ -21,15 +20,18 @@
       border-radius: 4px;
       padding: 10px;
       width: 20%;
+      margin: 10px;
     }
 
     .clearfix { *zoom: 2;
       background: whitesmoke;
-      max-width: 1000px;
       align-items: flex-start;
+      -webkit-border-radius: 10px;
+      margin: 0 auto;
+      width: 80%;
+
       .text{
         color: var(--dark);
-        padding: 10px;
         font-family: Garamond, monospace;
       }
       .wrapper {
@@ -66,15 +68,20 @@
     align-self: center;
     border-radius: 3px;
     -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
+    -webkit-border-radius: 10px;
     font-size: 20px;
     cursor:pointer;
-    padding: 3%;
     width: 200px;
+    height: 50px;
     font-family: Garamond, monospace;
+    margin: 1%;
+    padding: 10px;
   }
+
   .schedule-table {
-    width: 100%;
+    margin: 0 auto;
+
+    width: 80%;
     margin-top: 4px;
     background-color: #fbfbfb;
 

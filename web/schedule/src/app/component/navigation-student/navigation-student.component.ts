@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-navigation-student',
@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationStudentComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(
+  ) { }
 
   ngOnInit() {
   }

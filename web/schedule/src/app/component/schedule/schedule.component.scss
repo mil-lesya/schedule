@@ -3,26 +3,22 @@
   min-height: calc(100vh - 50px);
   overflow: hidden;
   padding: 5px 5px;
-  max-width: 1000px;
   align-items: flex-start;
   margin: 0 auto;
   font-family: Garamond, monospace;
   height: 100%;
+
   .schedule-container{
     padding: 20px;
   }
 
   .schedule-table {
-    width: 100%;
-    margin-top: 4px;
     background-color: #fbfbfb;
-
     border-collapse: collapse;
     vertical-align: top;
+    margin: 0 auto;
     max-width: 100%;
-
     overflow-x: auto;
-
     // optional - looks better for small cell values
     white-space: nowrap;
     border-spacing: 0;
@@ -30,7 +26,6 @@
     .day {
       font-weight: bold;
       background: rgba(156, 110, 166, 0.71);
-
     }
 
     tr{

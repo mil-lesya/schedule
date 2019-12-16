@@ -3,11 +3,11 @@
 
   display: flex;
   align-items: flex-start;
-  max-width: 1000px;
   min-height: calc(100vh - 50px);
   margin: 0 auto;
+  padding: 8px;
   background-image: url("../../../assets/auth.jpg");
-  padding: 5px 5px;
+
   a{
     border: none;
     padding: 10px;
