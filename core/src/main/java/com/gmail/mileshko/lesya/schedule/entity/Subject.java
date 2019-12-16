@@ -1,7 +1,15 @@
 package com.gmail.mileshko.lesya.schedule.entity;
 
 import javax.persistence.*;
-
+@NamedStoredProcedureQuery(
+        name = "SearchSubject",
+        procedureName = "search_subject",
+        resultClasses = Subject.class,
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, type = void.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, type = String.class)
+        }
+)
 @Entity
 @Table(name="subject")
 public class Subject {

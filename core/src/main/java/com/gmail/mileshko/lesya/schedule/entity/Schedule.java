@@ -13,6 +13,16 @@ import java.util.List;
                 @StoredProcedureParameter(mode = ParameterMode.IN, type = Long.class)
         }
 )
+@NamedStoredProcedureQuery(
+        name = "GetGroupSchedule",
+        procedureName = "get_group_schedule",
+        resultClasses = Schedule.class,
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, type = void.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class)
+        }
+)
 @Entity
 @Table(name = "schedule")
 public class

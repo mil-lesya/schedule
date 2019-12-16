@@ -14,7 +14,7 @@ public class Auditory {
     private String auditoryNumber;
 
     @ManyToOne
-    @JoinColumn(name = "case_id")
+    @JoinColumn(name = "corpus_id")
     private Corpus corpus;
 
 

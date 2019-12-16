@@ -1,5 +1,6 @@
 package com.gmail.mileshko.lesya.schedule.controller;
 
+import com.gmail.mileshko.lesya.schedule.dto.LecturerDto;
 import com.gmail.mileshko.lesya.schedule.dto.NewStudent;
 import com.gmail.mileshko.lesya.schedule.dto.StudentDto;
 import com.gmail.mileshko.lesya.schedule.entity.Student;
@@ -14,6 +15,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import java.util.List;
 
 import static com.gmail.mileshko.lesya.schedule.security.SecurityConstants.HEADER_STRING;
 
@@ -35,6 +38,12 @@ public class StudentController {
         User user = userService.getUser(token);
         Student student = studentService.getStudent(user);
         return Mapper.map(student, StudentDto.class);
+    }
+
+    @GetMapping("lecturer")
+    @PreAuthorize("hasRole('STUDENT')")
+    public List<LecturerDto> searchLecturer(@RequestParam("lecturer") String lecturer) throws NoSuchEntityException {
+       return Mapper.mapAll(studentService.searchLecturer(lecturer), LecturerDto.class);
     }
 
     @PostMapping("new")

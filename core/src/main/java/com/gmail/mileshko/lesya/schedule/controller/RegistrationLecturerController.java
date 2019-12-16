@@ -1,7 +1,6 @@
 package com.gmail.mileshko.lesya.schedule.controller;
 
 import com.gmail.mileshko.lesya.schedule.dto.RegisterLecturerDto;
-import com.gmail.mileshko.lesya.schedule.dto.RegisterStudentDto;
 import com.gmail.mileshko.lesya.schedule.exception.NoSuchEntityException;
 import com.gmail.mileshko.lesya.schedule.exception.RegistrationException;
 import com.gmail.mileshko.lesya.schedule.service.LecturerService;
@@ -24,7 +23,7 @@ public class RegistrationLecturerController {
     }
 
     @PostMapping
-    public void register(@Valid @RequestBody RegisterLecturerDto registerLecturerDto) throws RegistrationException {
+    public void register(@Valid @RequestBody RegisterLecturerDto registerLecturerDto) throws RegistrationException, NoSuchEntityException {
         lecturerService.register(registerLecturerDto);
     }
 }

@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.StoredProcedureQuery;
 import java.util.List;
 
 @Service
@@ -16,29 +19,39 @@ import java.util.List;
 public class ScheduleService {
 
     private final ScheduleRepository scheduleRepository;
-    private final GroupRepository groupRepository;
     private final SubjectRepository subjectRepository;
     private final AuditoryRepository auditoryRepository;
     private final LecturerRepository lecturerRepository;
+    private final CorpusRepository corpusRepository;
+    @PersistenceContext
+    EntityManager em;
 
     @Autowired
-    public ScheduleService(ScheduleRepository scheduleRepository, GroupRepository groupRepository, SubjectRepository subjectRepository, AuditoryRepository auditoryRepository, LecturerRepository lecturerRepository) {
+    public ScheduleService(ScheduleRepository scheduleRepository, SubjectRepository subjectRepository, AuditoryRepository auditoryRepository, LecturerRepository lecturerRepository, CorpusRepository corpusRepository) {
         this.scheduleRepository = scheduleRepository;
-        this.groupRepository = groupRepository;
         this.subjectRepository = subjectRepository;
         this.auditoryRepository = auditoryRepository;
         this.lecturerRepository = lecturerRepository;
+        this.corpusRepository = corpusRepository;
     }
-
 
     public List<Schedule> getSchedule(Student student) {
-        return scheduleRepository.findAllByGroupList(student.getGroup());
+        StoredProcedureQuery query = em.createNamedStoredProcedureQuery("Schedule.GetSchedule");
+        query.setParameter(2, student.getGroup().getId());
+        query.execute();
+        @SuppressWarnings("unchecked")
+        List<Schedule> schedules = query.getResultList();
+        return schedules;
     }
 
-    public List<Schedule> getGroupSchedule(ExpectedGroupDto expectedGroupDto) throws NoSuchEntityException {
-        Group group = groupRepository.findByGroupNumberAndCourse(expectedGroupDto.group, expectedGroupDto.course)
-                .orElseThrow(() -> new NoSuchEntityException("группа не найдена"));
-        return scheduleRepository.findAllByGroupList(group);
+    public List<Schedule> getGroupSchedule(ExpectedGroupDto expectedGroupDto) {
+        StoredProcedureQuery query = em.createNamedStoredProcedureQuery("GetGroupSchedule");
+        query.setParameter(2, expectedGroupDto.group);
+        query.setParameter(3, expectedGroupDto.course);
+        query.execute();
+        @SuppressWarnings("unchecked")
+        List<Schedule> schedules = query.getResultList();
+        return schedules;
     }
 
     public void saveSchedule(List<ScheduleDto> schedules) throws NoSuchEntityException {
@@ -49,7 +62,11 @@ public class ScheduleService {
 
             Subject subject = subjectRepository.findByName(scheduleDto.subject.name)
                     .orElseThrow(() -> new NoSuchEntityException("предмет не найден"));
-            Auditory auditory = auditoryRepository.findByAuditoryNumber(scheduleDto.auditory.auditoryNumber)
+
+            Corpus corpus = corpusRepository.findByNumber(scheduleDto.auditory.corpus.number)
+                    .orElseThrow(() -> new NoSuchEntityException("корпуса не существует"));
+
+            Auditory auditory = auditoryRepository.findByAuditoryNumberAndCorpus(scheduleDto.auditory.auditoryNumber, corpus)
                     .orElseThrow(() -> new NoSuchEntityException("аудитория не найдена"));
             Lecturer lecturer = lecturerRepository.findByPassPassNumber(scheduleDto.lecturer.passNumber)
                     .orElseThrow(() -> new NoSuchEntityException("лектор не найден"));

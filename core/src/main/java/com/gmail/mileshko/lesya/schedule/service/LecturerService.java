@@ -2,9 +2,8 @@ package com.gmail.mileshko.lesya.schedule.service;
 
 
 import com.gmail.mileshko.lesya.schedule.dto.RegisterLecturerDto;
-import com.gmail.mileshko.lesya.schedule.entity.Lecturer;
-import com.gmail.mileshko.lesya.schedule.entity.Pass;
-import com.gmail.mileshko.lesya.schedule.entity.User;
+import com.gmail.mileshko.lesya.schedule.entity.*;
+import com.gmail.mileshko.lesya.schedule.exception.NoSuchEntityException;
 import com.gmail.mileshko.lesya.schedule.exception.RegistrationException;
 import com.gmail.mileshko.lesya.schedule.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,44 +17,56 @@ public class LecturerService {
     private final LecturerRepository lecturerRepository;
     private final PassRepository passRepository;
     private final AuditoryRepository auditoryRepository;
+    private final CorpusRepository corpusRepository;
     private final DepartmentRepository departmentRepository;
     private final UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
 
 
     @Autowired
-    public LecturerService(LecturerRepository lecturerRepository, PassRepository passRepository, AuditoryRepository auditoryRepository, DepartmentRepository departmentRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public LecturerService(LecturerRepository lecturerRepository, PassRepository passRepository, AuditoryRepository auditoryRepository, CorpusRepository corpusRepository, DepartmentRepository departmentRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.lecturerRepository = lecturerRepository;
         this.passRepository = passRepository;
         this.auditoryRepository = auditoryRepository;
+        this.corpusRepository = corpusRepository;
         this.departmentRepository = departmentRepository;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void register(RegisterLecturerDto registerLecturerDto) throws RegistrationException {
+    public void register(RegisterLecturerDto registerLecturerDto) throws RegistrationException, NoSuchEntityException {
         if (userRepository.findByLogin(registerLecturerDto.passNumber).isPresent())
             throw new RegistrationException("пользователь с таким номером пропуска уже существует.");
 
         User user = new User();
         user.setLogin(registerLecturerDto.passNumber);
-        user.setEmail(registerLecturerDto.email);
         user.setPassword(passwordEncoder.encode(registerLecturerDto.password));
-        userRepository.save(user);
 
         Lecturer lecturer = new Lecturer();
         Pass pass = passRepository.findByPassNumber(registerLecturerDto.passNumber)
-                .orElseThrow(() -> new RegistrationException("нет преподавателя с таким номером пропуска"));
+                .orElseThrow(() -> new NoSuchEntityException("пропуск с таким номером не cуществует"));
         lecturer.setPass(pass);
         lecturer.setName(registerLecturerDto.name);
         lecturer.setSurname(registerLecturerDto.surname);
         lecturer.setPatronymic(registerLecturerDto.patronymic);
         lecturer.setPhoneNumber(registerLecturerDto.phoneNumber);
-        lecturer.setDepartment(
-                departmentRepository.findByAuditory(auditoryRepository.findByAuditoryNumber(registerLecturerDto.auditory)
-                .orElseThrow(() -> new RegistrationException("нет аудитории с таким номером")))
-                        .orElseThrow(() -> new RegistrationException("кафедры не существует")));
+        lecturer.setEmail(registerLecturerDto.email);
+
+        Corpus corpus = corpusRepository.findByNumber(registerLecturerDto.corpus)
+                .orElseThrow(()-> new NoSuchEntityException("корпуса не существует"));
+        Auditory auditory = auditoryRepository.findByAuditoryNumberAndCorpus(registerLecturerDto.auditory, corpus)
+                .orElseThrow(() -> new NoSuchEntityException("нет аудитории с таким номером"));
+
+        lecturer.setDepartment(departmentRepository.findByAuditory(auditory)
+                        .orElseThrow(() -> new NoSuchEntityException("кафедры не существует")));
         lecturer.setUser(user);
+
         lecturerRepository.save(lecturer);
+        userRepository.save(user);
+    }
+
+    public Lecturer getLecturer(User user) throws NoSuchEntityException {
+        return lecturerRepository.findByUser(user)
+                .orElseThrow(()-> new NoSuchEntityException("студент не найден"));
     }
 }

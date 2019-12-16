@@ -2,10 +2,7 @@ package com.gmail.mileshko.lesya.schedule.service;
 
 import com.gmail.mileshko.lesya.schedule.dto.NewStudent;
 import com.gmail.mileshko.lesya.schedule.dto.RegisterStudentDto;
-import com.gmail.mileshko.lesya.schedule.entity.Group;
-import com.gmail.mileshko.lesya.schedule.entity.PersonalCard;
-import com.gmail.mileshko.lesya.schedule.entity.Student;
-import com.gmail.mileshko.lesya.schedule.entity.User;
+import com.gmail.mileshko.lesya.schedule.entity.*;
 import com.gmail.mileshko.lesya.schedule.exception.NoSuchEntityException;
 import com.gmail.mileshko.lesya.schedule.exception.RegistrationException;
 import com.gmail.mileshko.lesya.schedule.repository.*;
@@ -17,6 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
 import javax.persistence.StoredProcedureQuery;
+import java.util.List;
 
 @Service
 public class StudentService {
@@ -106,5 +104,14 @@ public class StudentService {
     public Student getStudentById(Long id) throws NoSuchEntityException {
         return studentRepository.findById(id)
                 .orElseThrow(()-> new NoSuchEntityException("студент не найден"));
+    }
+
+    public List<Lecturer> searchLecturer(String lecturer) {
+        StoredProcedureQuery query = em.createNamedStoredProcedureQuery("SearchLecturer");
+        query.setParameter(2, lecturer);
+        query.execute();
+        @SuppressWarnings("unchecked")
+        List<Lecturer> lecturers = query.getResultList();
+        return lecturers;
     }
 }
