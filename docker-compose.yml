@@ -1,0 +1,29 @@
+version: '2'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres-db
+    volumes:
+    - ./postgres/volume:/var/lib/postgresql/data:delegated
+    ports:
+    - 5432:5432
+    environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=Ol18mi
+    - POSTGRES_DB=schedule
+  schedule-server:
+    image: millesya200/schedule:latest
+    container_name: schedule
+    depends_on:
+    - postgres
+    environment:
+    - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/schedule
+    ports:
+    - 8080:8080
+  schedule-client:
+    image: schedule-web:latest
+    container_name: schedule-web
+    depends_on:
+    - schedule-server
+    ports:
+    - 4200:80
