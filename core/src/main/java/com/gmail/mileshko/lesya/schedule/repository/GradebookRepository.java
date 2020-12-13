@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 public interface GradebookRepository extends CrudRepository<Gradebook, Long> {
+    Optional<Gradebook> findByGradebookNumber(String gradebookNumber);
 }

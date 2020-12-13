@@ -8,5 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.Optional;
 
+@Repository
 public interface ClassRepository extends CrudRepository<Class, Long> {
+    Optional<Class> findByDateAndSchedule(LocalDate Date, Schedule schedule);
 }

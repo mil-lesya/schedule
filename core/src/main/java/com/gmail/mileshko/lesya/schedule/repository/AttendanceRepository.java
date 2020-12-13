@@ -9,4 +9,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AttendanceRepository extends CrudRepository<Attendance, Long> {
+    List<Attendance> findAllByStudentAndPresence(Student student, boolean presence);
 }

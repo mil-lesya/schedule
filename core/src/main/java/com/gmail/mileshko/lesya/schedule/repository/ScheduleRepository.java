@@ -9,7 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public interface ScheduleRepository extends CrudRepository<Schedule, Long> {
-    List<Schedule> findAllByGroupId(Long groupId);
+    List<Schedule> findAllByGroup(Group group);
+    Optional<Schedule> findBySubjectNameAndWeekAndClassNumber(String subjectName, Week week, Integer classNumber);
     Optional<Schedule> findByClassNumberAndWeek(Integer classNumber, Week week);
 }

@@ -40,7 +40,6 @@ public class AttendanceController {
     }
 
     @GetMapping("student")
-    @PreAuthorize("hasRole('STUDENT')")
     public List<AttendanceDto> getStudentAttendance(@RequestParam("studentId") Long id) throws NoSuchEntityException {
         Student student = studentService.getStudentById(id);
         return Mapper.mapAll(attendanceService.getAttendance(student), AttendanceDto.class);

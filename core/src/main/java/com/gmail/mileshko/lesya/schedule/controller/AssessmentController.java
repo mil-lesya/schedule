@@ -1,6 +1,7 @@
 package com.gmail.mileshko.lesya.schedule.controller;
 
 import com.gmail.mileshko.lesya.schedule.dto.NewAssessmentDto;
+import com.gmail.mileshko.lesya.schedule.exception.NoSuchEntityException;
 import com.gmail.mileshko.lesya.schedule.service.AssessmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,13 +24,13 @@ public class AssessmentController {
 
     @PostMapping("delete")
     @PreAuthorize("hasRole('LECTURER')")
-    public void deleteAssessments(@RequestBody Long assessmentId) {
+    public void deleteAssessments(@RequestBody Long assessmentId) throws NoSuchEntityException {
         assessmentService.deleteAssessment(assessmentId);
     }
 
     @PostMapping("add")
     @PreAuthorize("hasRole('LECTURER')")
-    public void addAssessment(@Valid @RequestBody NewAssessmentDto newAssessmentDto) {
+    public void addAssessment(@Valid @RequestBody NewAssessmentDto newAssessmentDto) throws NoSuchEntityException {
         assessmentService.addAssessment(newAssessmentDto);
     }
 }

@@ -10,17 +10,16 @@ export class ErrorService {
   }
 
   raise(httpError: HttpErrorResponse) {
-    console.log(typeof httpError.error);
     console.log(httpError.error);
-    if (httpError.status === 400) {
+    console.log(httpError.error.status);
+    if (httpError.error.status === 400) {
       JSON.parse(httpError.error).errors.forEach(e => {
         alert(`ошибка: ${e.defaultMessage}`);
         console.log(`error: ${e.defaultMessage}`);
       });
     }
-    if (httpError.status === 500) {
-      alert(`ошибка: ${JSON.parse(httpError.error).message}`);
-      console.log(JSON.parse(httpError.error).message);
+    if (httpError.error.status === 500) {
+      alert(`ошибка: ${httpError.error.message}`);
     }
   }
 

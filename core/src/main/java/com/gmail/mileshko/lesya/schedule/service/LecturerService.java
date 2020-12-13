@@ -20,7 +20,7 @@ public class LecturerService {
     private final CorpusRepository corpusRepository;
     private final DepartmentRepository departmentRepository;
     private final UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
 
     @Autowired

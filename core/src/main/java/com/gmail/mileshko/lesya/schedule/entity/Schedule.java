@@ -4,25 +4,7 @@ import com.gmail.mileshko.lesya.schedule.entity.enums.Week;
 
 import javax.persistence.*;
 import java.util.List;
-@NamedStoredProcedureQuery(
-        name = "Schedule.GetSchedule",
-        procedureName = "take_group_schedule",
-        resultClasses = Schedule.class,
-        parameters = {
-                @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, type = void.class),
-                @StoredProcedureParameter(mode = ParameterMode.IN, type = Long.class)
-        }
-)
-@NamedStoredProcedureQuery(
-        name = "GetGroupSchedule",
-        procedureName = "get_group_schedule",
-        resultClasses = Schedule.class,
-        parameters = {
-                @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, type = void.class),
-                @StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class),
-                @StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class)
-        }
-)
+
 @Entity
 @Table(name = "schedule")
 public class

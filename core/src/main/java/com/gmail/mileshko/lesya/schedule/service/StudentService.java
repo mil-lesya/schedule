@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
-import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
 import javax.persistence.StoredProcedureQuery;
 import java.util.List;
@@ -22,48 +21,59 @@ public class StudentService {
     private final GroupRepository groupRepository;
     private final PersonalCardRepository personalCardRepository;
     private final UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
+    private final GradebookRepository gradebookRepository;
+    private final RoleRepository roleRepository;
+
     @PersistenceContext
     EntityManager em;
 
     @Autowired
-    public StudentService(StudentRepository studentRepository, GroupRepository groupRepository, PersonalCardRepository personalCardRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public StudentService(StudentRepository studentRepository, GroupRepository groupRepository, PersonalCardRepository personalCardRepository, UserRepository userRepository, PasswordEncoder passwordEncoder, GradebookRepository gradebookRepository, RoleRepository roleRepository) {
         this.studentRepository = studentRepository;
         this.groupRepository = groupRepository;
         this.personalCardRepository = personalCardRepository;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.gradebookRepository = gradebookRepository;
+        this.roleRepository = roleRepository;
     }
 
-    public void register(RegisterStudentDto registerStudentDto) throws RegistrationException {
+    public void register(RegisterStudentDto registerStudentDto) throws RegistrationException, NoSuchEntityException {
+
         if (userRepository.findByLogin(registerStudentDto.gradebookNumber).isPresent())
             throw new RegistrationException("пользователь с таким номером зачётки уже существует.");
 
-        StoredProcedureQuery query = em.createStoredProcedureQuery("register_student");
-        query.registerStoredProcedureParameter("login", String.class,ParameterMode.IN);
-        query.registerStoredProcedureParameter("password", String.class,ParameterMode.IN);
-        query.registerStoredProcedureParameter("address", String.class,ParameterMode.IN);
-        query.registerStoredProcedureParameter("email", String.class,ParameterMode.IN);
-        query.registerStoredProcedureParameter("pname", String.class,ParameterMode.IN);
-        query.registerStoredProcedureParameter("parent_contact", String.class,ParameterMode.IN);
-        query.registerStoredProcedureParameter("patronymic", String.class,ParameterMode.IN);
-        query.registerStoredProcedureParameter("phone_number", String.class,ParameterMode.IN);
-        query.registerStoredProcedureParameter("surname", String.class,ParameterMode.IN);
-        query.registerStoredProcedureParameter("group_number", Integer.class,ParameterMode.IN);
-        query.registerStoredProcedureParameter("course", Integer.class,ParameterMode.IN);
-        query.registerStoredProcedureParameter("first", Integer.class, ParameterMode.OUT);
-        query.setParameter("login", registerStudentDto.gradebookNumber);
-        query.setParameter("password", passwordEncoder.encode(registerStudentDto.password));
-        query.setParameter("address", registerStudentDto.address);
-        query.setParameter("email", registerStudentDto.email);
-        query.setParameter("pname", registerStudentDto.name);
-        query.setParameter("parent_contact", registerStudentDto.parentContact);
-        query.setParameter("patronymic", registerStudentDto.patronymic);
-        query.setParameter("phone_number", registerStudentDto.phoneNumber);
-        query.setParameter("surname", registerStudentDto.surname);
-        query.setParameter("group_number", registerStudentDto.groupNumber);
-        query.setParameter("course", registerStudentDto.course);
-        Object result = query.getOutputParameterValue("first");
+        Role role = roleRepository.findByRole("STUDENT")
+                .orElseThrow(()-> new NoSuchEntityException("роль STUDENT не найдена"));
+
+        User user = new User();
+        user.setLogin(registerStudentDto.gradebookNumber);
+        user.setPassword(passwordEncoder.encode(registerStudentDto.password));
+        user.setRole(role);
+        userRepository.save(user);
+
+        Student student = new Student();
+
+        PersonalCard personalCard = new PersonalCard(
+                registerStudentDto.surname,
+                registerStudentDto.name,
+                registerStudentDto.patronymic,
+                registerStudentDto.phoneNumber,
+                registerStudentDto.parentContact,
+                registerStudentDto.address,
+                registerStudentDto.email);
+
+        student.setGradebook(gradebookRepository.findByGradebookNumber(registerStudentDto.gradebookNumber)
+                .orElseThrow(() -> new RegistrationException("зачётка не найдена")));
+        student.setGroup(groupRepository.findByGroupNumberAndCourse(registerStudentDto.groupNumber, registerStudentDto.course)
+                .orElseThrow(() -> new RegistrationException("группа не найдена")));
+        student.setPersonalCard(personalCard);
+        personalCardRepository.save(personalCard);
+        student.setUser(user);
+
+        studentRepository.save(student);
+
     }
 
     public Boolean isHeadman(Student student) {
@@ -75,12 +85,15 @@ public class StudentService {
                 .orElseThrow(() -> new NoSuchEntityException("студент не найден"));
 
         studentRepository.delete(student);
+
     }
 
     public void appointHeadman(Long headmanId) throws NoSuchEntityException {
         Student student = studentRepository.findById(headmanId)
                 .orElseThrow(() -> new NoSuchEntityException("студент не найден"));
-        student.getGroup().setHeadman(student);
+        Group group = student.getGroup();
+        group.setHeadman(student);
+        groupRepository.save(group);
     }
 
     public void changeGroup(NewStudent newStudent) throws NoSuchEntityException {
@@ -93,7 +106,6 @@ public class StudentService {
 
         student.setGroup(group);
         studentRepository.save(student);
-
     }
 
     public Student getStudent(User user) throws NoSuchEntityException {
@@ -112,6 +124,7 @@ public class StudentService {
         query.execute();
         @SuppressWarnings("unchecked")
         List<Lecturer> lecturers = query.getResultList();
+
         return lecturers;
     }
 }
